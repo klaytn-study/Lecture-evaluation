@@ -5,44 +5,56 @@ import "./ERC721/ERC721Enumerable.sol";
 
 contract Klaystagram is ERC721, ERC721Enumerable {
 
-    event PhotoUploaded (uint256 indexed tokenId, bytes photo, string title, string location, string description, uint256 timestamp);
+    event EvaluationUploaded (uint256 indexed tokenId, address writer, uint256 star, string content, uint256 timestamp);
 
-    mapping (uint256 => PhotoData) private _photoList;
+    mapping (uint256 => CourseData) private _courseList;
+    mapping (uint256 => EvaluationData[]) private _evaluationList;
+    mapping (address => Userr) private _userList;
 
-    struct PhotoData {
-        uint256 tokenId;                       // Unique token id
-        address[] ownerHistory;                // History of all previous owners
-        bytes photo;                           // Image source encoded in uint 8 array format
-        string title;                          // Title of photo
-        string location;                       // Location where photo is taken
-        string description;                    // Short description about the photo
-        uint256 timestamp;                     // Uploaded time
+    struct User {
+        address userAddress;
+        string email;
+    }
+
+    struct CourseData {
+        uint256 id;
+        string name;
+        string professor;
+    }
+
+    struct EvaluationData {
+        uint256 tokenId;
+        address writer;
+        uint256 star;
+        string content;
+        uint256 timestamp;
+    }
+
+    function findUser(address _address) public view returns(bool) {
+        return _userList[_address];
     }
 
   /**
    * @notice _mint() is from ERC721.sol
    */
-    function uploadPhoto(bytes photo, string title, string location, string description) public {
+    function uploadEvaluation(uint courseId, uint256 star, string content) public {
         uint256 tokenId = totalSupply() + 1;
 
         _mint(msg.sender, tokenId);
 
         address[] memory ownerHistory;
 
-        PhotoData memory newPhotoData = PhotoData({
+        EvaluationData memory newEvaluationData = EvaluationData({
             tokenId : tokenId,
-            ownerHistory : ownerHistory,
-            photo : photo,
-            title: title,
-            location : location,
-            description : description,
+            writer : msg.sender,
+            star : star,
+            content : content,
             timestamp : now
         });
 
-        _photoList[tokenId] = newPhotoData;
-        _photoList[tokenId].ownerHistory.push(msg.sender);
+        _evaluationList[courseId].push(newEvaluationData);
 
-        emit PhotoUploaded(tokenId, photo, title, location, description, now);
+        emit EvaluationUploaded(tokenId, msg.sender, star, content, now);
     }
 
   /**
