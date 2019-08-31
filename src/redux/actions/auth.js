@@ -4,6 +4,7 @@ import {
   LOGOUT,
   INTEGRATE_WALLET,
   REMOVE_WALLET,
+  SIGNUP,
 } from './actionTypes'
 
 export const integrateWallet = (privateKey) => (dispatch) => {
@@ -24,6 +25,13 @@ export const removeWallet = () => (dispatch) => {
   sessionStorage.removeItem('walletInstance')
   return dispatch({
     type: REMOVE_WALLET,
+  })
+}
+
+export const signup = (privateKey, email) => (dispatch) => {
+  dispatch(integrateWallet(privateKey))
+  return dispatch({
+    type: SIGNUP,
   })
 }
 
