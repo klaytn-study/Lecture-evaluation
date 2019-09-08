@@ -5,7 +5,7 @@ import "./ERC721/ERC721Enumerable.sol";
 
 contract Klaystagram is ERC721, ERC721Enumerable {
 
-    event EvaluationUploaded (uint256 indexed tokenId, address writer, uint256 star, string content, uint256 timestamp);
+    event EvaluationUploaded (uint256 indexed tokenId, address writer, string content, uint256 timestamp);
 
     // mapping (uint256 => CourseData) private _courseList;
     mapping (uint256 => EvaluationData[]) private _evaluationList;
@@ -40,7 +40,8 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     }
 
     function findUser(address _address) public view returns(bool) {
-        return _userList[_address];
+        if (_userList[_address].userAddress == 0) return false;
+        else return true;
     }
 
     function getCourseNum() public view returns(uint) {
@@ -60,8 +61,8 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint idx) public view returns() {
-        require(_evaluationList[_courseId].length > idx, "올바르지 않은 인덱스 입니다.");
+    function getEvaluation(uint _courseId, uint _idx) public view returns(string memory, uint) {
+        require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
         return (
             _evaluationList[_courseId][_idx].content,
             _evaluationList[_courseId][_idx].timestamp
@@ -76,7 +77,7 @@ contract Klaystagram is ERC721, ERC721Enumerable {
 
         _mint(msg.sender, tokenId);
 
-        address[] memory ownerHistory;
+        // address[] memory ownerHistory;
 
         EvaluationData memory newEvaluationData = EvaluationData({
             tokenId : tokenId,
@@ -89,37 +90,4 @@ contract Klaystagram is ERC721, ERC721Enumerable {
 
         emit EvaluationUploaded(tokenId, msg.sender, _content, now);
     }
-
-  /**
-   * @notice safeTransferFrom function checks whether receiver is able to handle ERC721 tokens
-   *  and then it will call transferFrom function defined below
-   */
-    function transferOwnership(uint256 tokenId, address to) public returns(uint, address, address, address) {
-        safeTransferFrom(msg.sender, to, tokenId);
-        uint ownerHistoryLength = _photoList[tokenId].ownerHistory.length;
-        return (
-            _photoList[tokenId].tokenId, 
-            //original owner
-            _photoList[tokenId].ownerHistory[0],
-            //previous owner, length cannot be less than 2
-            _photoList[tokenId].ownerHistory[ownerHistoryLength-2],
-            //current owner
-            _photoList[tokenId].ownerHistory[ownerHistoryLength-1]);
-    }
-
-  /**
-   * @notice Recommand using transferOwnership, which uses safeTransferFrom function
-   * @dev Overided transferFrom function to make sure that every time ownership transfers
-   *  new owner address gets pushed into ownerHistory array
-   */
-    function transferFrom(address from, address to, uint256 tokenId) public {
-        super.transferFrom(from, to, tokenId);
-        _photoList[tokenId].ownerHistory.push(to);
-    }
-
-    function getTotalPhotoCount () public view returns (uint) {
-        return totalSupply();
-    }
-
-
 }
