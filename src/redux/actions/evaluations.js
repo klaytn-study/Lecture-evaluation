@@ -22,3 +22,33 @@ export const getEvaluation = (courseId) => (dispatch) => {
       })
       .then((evaluations) => dispatch(setEvaluation(evaluationParser(evaluations))))
 }
+
+export const uploadEvaluation = (courseId, content) => (dispatch) => {
+  KlaystagramContract.methods.uploadEvaluation(courseId, content).send({
+    from: getWallet().address,
+    gas: '200000000',
+  })
+  .once('transactionHash', (txHash) => {
+    ui.showToast({
+      status: 'pending',
+      message: `Sending a transaction... (uploadPhoto)`,
+      txHash,
+    })
+  })
+  .once('receipt', (receipt) => {
+    ui.showToast({
+      status: receipt.status ? 'success' : 'fail',
+      message: `Received receipt! It means your transaction is
+      in klaytn block (#${receipt.blockNumber}) (uploadPhoto)`,
+      link: receipt.transactionHash,
+    })
+    const tokenId = receipt.events.PhotoUploaded.returnValues[0]
+    dispatch(updateFeed(tokenId))
+  })
+  .once('error', (error) => {
+    ui.showToast({
+      status: 'error',
+      message: error.toString(),
+    })
+  })
+}

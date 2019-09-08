@@ -71,7 +71,7 @@ contract Klaystagram is ERC721, ERC721Enumerable {
   /**
    * @notice _mint() is from ERC721.sol
    */
-    function uploadEvaluation(uint courseId, uint256 star, string content) public {
+    function uploadEvaluation(uint _courseId, string _content) public {
         uint256 tokenId = totalSupply() + 1;
 
         _mint(msg.sender, tokenId);
@@ -81,14 +81,13 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         EvaluationData memory newEvaluationData = EvaluationData({
             tokenId : tokenId,
             writer : msg.sender,
-            star : star,
-            content : content,
+            content : _content,
             timestamp : now
         });
 
-        _evaluationList[courseId].push(newEvaluationData);
+        _evaluationList[_courseId].push(newEvaluationData);
 
-        emit EvaluationUploaded(tokenId, msg.sender, star, content, now);
+        emit EvaluationUploaded(tokenId, msg.sender, _content, now);
     }
 
   /**
@@ -122,16 +121,5 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         return totalSupply();
     }
 
-    function getPhoto (uint tokenId) public view 
-    returns(uint256, address[], bytes, string, string, string, uint256) {
-        require(_photoList[tokenId].tokenId != 0, "Photo does not exist");
-        return (
-            _photoList[tokenId].tokenId, 
-            _photoList[tokenId].ownerHistory, 
-            _photoList[tokenId].photo, 
-            _photoList[tokenId].title, 
-            _photoList[tokenId].location, 
-            _photoList[tokenId].description,
-            _photoList[tokenId].timestamp);
-    }
+
 }

@@ -4,9 +4,9 @@ const mailConfig = require('../constants/emailConfig');
 
 export function sendEmail(email) {
     const number = Math.floor(Math.random() * 9000) + 1000;
-    const from = '명지대 강의평가 시스템';
+    const from = '평강평강';
     const to = email;
-    const subject = '명지대 강의평가 사이트 회원가입 인증';
+    const subject = '평강평강 회원가입 인증';
     const html = '<p>인증번호는 ' + number + ' 입니다.\n';
 
     const mailOptions = {
