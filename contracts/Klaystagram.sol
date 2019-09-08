@@ -7,16 +7,17 @@ contract Klaystagram is ERC721, ERC721Enumerable {
 
     event EvaluationUploaded (uint256 indexed tokenId, address writer, uint256 star, string content, uint256 timestamp);
 
-    mapping (uint256 => CourseData) private _courseList;
+    // mapping (uint256 => CourseData) private _courseList;
     mapping (uint256 => EvaluationData[]) private _evaluationList;
-    mapping (address => Userr) private _userList;
+    mapping (address => User) private _userList;
+    Course[] courseList;
 
     struct User {
         address userAddress;
         string email;
     }
 
-    struct CourseData {
+    struct Course {
         uint256 id;
         string name;
         string professor;
@@ -25,14 +26,35 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     struct EvaluationData {
         uint256 tokenId;
         address writer;
-        uint256 star;
         string content;
         uint256 timestamp;
+    }
+
+    constructor() public {
+        Course memory a = Course(5668, "금융정책의 이해", "김경제");
+        Course memory b = Course(5778, "운영체제", "최데테");
+        Course memory c = Course(5125, "행정학개론", "이행정");
+        courseList.push(a);
+        courseList.push(b);
+        courseList.push(c);
     }
 
     function findUser(address _address) public view returns(bool) {
         return _userList[_address];
     }
+
+    function getCourseNum() public view returns(uint) {
+        return courseList.length;
+    }
+
+    function getCourse (uint _idx) public view returns(uint, string memory, string memory) {
+        require(courseList.length > _idx, "올바르지 않은 강의 번호 입니다.");
+        return (
+            courseList[_idx].id,
+            courseList[_idx].name,
+            courseList[_idx].professor
+        );
+    } 
 
   /**
    * @notice _mint() is from ERC721.sol
