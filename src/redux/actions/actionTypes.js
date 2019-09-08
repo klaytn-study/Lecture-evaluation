@@ -10,4 +10,6 @@ export const SHOW_TOAST = 'SHOW_TOAST'
 export const HIDE_TOAST = 'HIDE_TOAST'
 
 export const SET_FEED = 'SET_FEED'
+export const SET_COURSE = 'SET_COURSE'
+export const SET_EVALUATION = 'SET_EVALUATION'
 

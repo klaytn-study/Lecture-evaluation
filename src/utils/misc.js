@@ -14,29 +14,33 @@ export const last = (array) => {
   return length ? array[length - 1] : undefined
 }
 
-export const feedParser = (feed) => {
-  const photoKeys = {
+export const courseParser = (course) => {
+  const courseKeys = {
     0: 'id',
-    1: 'ownerHistory',
-    2: 'data',
-    3: 'name',
-    4: 'location',
-    5: 'caption',
-    6: 'timestamp',
+    1: 'name',
+    2: 'professor',
   }
 
-  /**
-   * 1. If feed is one object of photo,
-   * rename just one photo object's keys
-   */
-  if (!isArray(feed)) {
-    return renameKeys(feed, photoKeys)
+  if (!isArray(course)) {
+    return renameKeys(course, courseKeys)
   }
-  /**
-   * 2. If feed is array of photos,
-   * Iterate feed array to rename all of photo objects' keys
-   */
-  const parsedFeed = feed.map((photo) => renameKeys(photo, photoKeys))
 
-  return parsedFeed
+  const parsedCourse = course.map((course) => renameKeys(course, courseKeys))
+
+  return parsedCourse
+}
+
+export const evaluationParser = (evaluation) => {
+  const evaluationKeys = {
+    0: 'content',
+    1: 'timestamp',
+  }
+
+  if (!isArray(evaluation)) {
+    return renameKeys(evaluation, evaluationKeys)
+  }
+
+  const parsedEvalutaion = evaluation.map((evaluation) => renameKeys(evaluation, evaluationKeys))
+
+  return parsedEvalutaion
 }

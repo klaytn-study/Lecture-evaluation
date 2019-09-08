@@ -47,6 +47,10 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         return courseList.length;
     }
 
+    function getEvaluationNum(uint _courseId) public view returns(uint) {
+        return _evaluationList[_courseId].length;
+    }
+
     function getCourse (uint _idx) public view returns(uint, string memory, string memory) {
         require(courseList.length > _idx, "올바르지 않은 강의 번호 입니다.");
         return (
@@ -55,6 +59,14 @@ contract Klaystagram is ERC721, ERC721Enumerable {
             courseList[_idx].professor
         );
     } 
+
+    function getEvaluation(uint _courseId, uint idx) public view returns() {
+        require(_evaluationList[_courseId].length > idx, "올바르지 않은 인덱스 입니다.");
+        return (
+            _evaluationList[_courseId][_idx].content,
+            _evaluationList[_courseId][_idx].timestamp
+        );
+    }
 
   /**
    * @notice _mint() is from ERC721.sol
