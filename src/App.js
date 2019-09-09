@@ -51,7 +51,7 @@ class App extends Component {
         <Modal />
         <Toast />
         {isLoggedIn && <Nav />}
-        {isLoggedIn ? <FeedPage /> : <AuthPage />}
+        {isLoggedIn ? <AuthPage /> : <AuthPage />}
         <Footer />
       </div>
     )

@@ -6,7 +6,7 @@ import PhotoHeader from 'components/PhotoHeader'
 import PhotoInfo from 'components/PhotoInfo'
 import CopyrightInfo from 'components/CopyrightInfo'
 import TransferOwnershipButton from 'components/TransferOwnershipButton'
-import { drawImageFromBytes} from 'utils/imageUtils'
+// import { drawImageFromBytes} from 'utils/imageUtils'
 import { last } from 'utils/misc'
 
 import * as photoActions from 'redux/actions/photos'
