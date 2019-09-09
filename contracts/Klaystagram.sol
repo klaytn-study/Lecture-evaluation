@@ -10,6 +10,8 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     mapping (address => User) private _userList;
     Course[] courseList;
 
+    event GoodBadUploaded(uint indexed tokenId, address writer);
+
     struct User {
         address userAddress;
         string email;
@@ -45,24 +47,38 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         return courseList[tokenId].good, courseList[tokenId].bad;
     }
 
+ /**
+   * @notice _mint() is from ERC721.sol
+   */
     function evalGood(uint256 tokenId) public {
         if(!courseList[tokenId].good){
             courseList[tokenId].good = 1;
         } else {
             courseList[tokenId].good += 1;
         }
+
+        uint256 token = totalSupply() + 1;  
+        _mint(msg.sender, token);
+
+        emit GoodBadUploaded(token, msg.sender);
     }
 
+/**
+   * @notice _mint() is from ERC721.sol
+   */
     function evalBad(uint256 tokenId) public {
         if(!courseList[tokenId].bad){
             courseList[tokenId].bad = 1;
         } else {
             courseList[tokenId].bad += 1;
         }
+
+        uint256 token = totalSupply() + 1;  
+        _mint(msg.sender, token);
+
+        emit GoodBadUploaded(token, msg.sender);
     }
 
-
-    
     function addUser(address _address, string email) public {
         _userList[_address] = User(_address, email);
     }
