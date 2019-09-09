@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../pages/SearchPage.scss'
 
 class SearchBar extends Component {
     constructor(props){
@@ -10,16 +11,16 @@ class SearchBar extends Component {
         };
     }
     onSubmit(event){
-        //event.preventDefault();
-        // this.setState({term: ''});
+        event.preventDefault();
+        this.setState({term:''});
     }
     render(){
         return (
             <form className='search-bar'>
                 <div className='input-group mb-3'>
                     <input 
-                        // onChange={event => this.setState({term: event.target.value})}
-                        type='text' className='form-control' placeholder='교수이름, 교과목이름'
+                        onChange={event => this.setState({term: event.target.value})}
+                        type='text' className='form-control-search' placeholder='교수이름, 교과목이름'
                         value={this.state.term}
                     />
                     <div className='input-group-append'>
@@ -38,7 +39,6 @@ class SearchPage extends Component {
     render(){
         return (
             <div>
-                <h2>search page</h2>
                 <SearchBar/>
             </div>
         );
