@@ -26,6 +26,8 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         address writer;
         string content;
         uint256 timestamp;
+        uint256 good;
+        uint256 bad;
     }
 
     constructor() public {
@@ -36,6 +38,30 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         courseList.push(b);
         courseList.push(c);
     }
+
+    function getEvalGoodBad(uint tokenId) public view returns (uint, uint){
+        if(!courseList[tokenId].good) couresList[tokenId].good = 0;
+        if(!courseList[tokenId].bad) courseList[tokenId].bad = 0;
+        return courseList[tokenId].good, courseList[tokenId].bad;
+    }
+
+    function evalGood(uint256 tokenId) public {
+        if(!courseList[tokenId].good){
+            courseList[tokenId].good = 1;
+        } else {
+            courseList[tokenId].good += 1;
+        }
+    }
+
+    function evalBad(uint256 tokenId) public {
+        if(!courseList[tokenId].bad){
+            courseList[tokenId].bad = 1;
+        } else {
+            courseList[tokenId].bad += 1;
+        }
+    }
+
+
     
     function addUser(address _address, string email) public {
         _userList[_address] = User(_address, email);
