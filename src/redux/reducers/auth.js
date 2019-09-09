@@ -1,4 +1,5 @@
 import {
+  SIGNUP,
   LOGIN,
   LOGOUT,
   INTEGRATE_WALLET,
