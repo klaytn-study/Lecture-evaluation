@@ -1,111 +1,62 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import moment from 'moment'
-import Loading from 'components/Loading'
-import PhotoHeader from 'components/PhotoHeader'
-import PhotoInfo from 'components/PhotoInfo'
-import CopyrightInfo from 'components/CopyrightInfo'
-import TransferOwnershipButton from 'components/TransferOwnershipButton'
-// import { drawImageFromBytes} from 'utils/imageUtils'
-import { last } from 'utils/misc'
+import React from 'react';
+import SearchInfo from './SearchInfo';
 
-import * as photoActions from 'redux/actions/photos'
 
-import './Feed.scss'
+export default class Feed extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            keyword: '',
+            searchData: [{
+                name: '수학',
+                prof: 'Hong'
+            }, {
+                name: 'Science',
+                prof: 'Ellie'
+            }, {
+                name: 'English',
+                prof: 'David'
+            }]
+        };
 
-class Feed extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isLoading: !props.feed,
+        this.handleChange = this.handleChange.bind(this);
     }
-  }
 
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    const isUpdatedFeed = (nextProps.feed !== prevState.feed) && (nextProps.feed !== null)
-    if (isUpdatedFeed) {
-      return { isLoading: false }
+    handleChange(e) {
+        this.setState({
+            keyword: e.target.value
+        });
     }
-    return null
-  }
 
-  componentDidMount() {
-    const { feed, getFeed } = this.props
-    if (!feed) getFeed()
-  }
-
-  render() {
-    const { feed, userAddress } = this.props
-
-    if (this.state.isLoading) return <Loading />
-
-    return (
-      <div className="Feed">
-        {feed.length !== 0
-          ? feed.map(({
-            id,
-            ownerHistory,
-            data,
-            name,
-            location,
-            caption,
-            timestamp,
-          }) => {
-            const originalOwner = ownerHistory[0]
-            const currentOwner = last(ownerHistory).toLowerCase()
-            // const imageUrl = drawImageFromBytes(data)
-            const imageUrl = null
-            const issueDate = moment(timestamp * 1000).fromNow()
-            return (
-              <div className="FeedPhoto" key={id}>
-                <PhotoHeader
-                  currentOwner={currentOwner}
-                  location={location}
-                />
-                <div className="FeedPhoto__image">
-                  <img src={imageUrl} alt={name} />
-                </div>
-                <div className="FeedPhoto__info">
-                  <PhotoInfo
-                    name={name}
-                    issueDate={issueDate}
-                    caption={caption}
-                  />
-                  <CopyrightInfo
-                    className="FeedPhoto__copyrightInfo"
-                    id={id}
-                    issueDate={issueDate}
-                    originalOwner={originalOwner}
-                    currentOwner={currentOwner}
-                  />
-                  {
-                    userAddress === currentOwner && (
-                      <TransferOwnershipButton
-                        className="FeedPhoto__transferOwnership"
-                        id={id}
-                        issueDate={issueDate}
-                        currentOwner={currentOwner}
-                      />
-                    )
-                  }
-                </div>
-              </div>
-            )
+    render() {
+      const mapToComponents = (data) => {
+          data.sort();
+          data = data.filter(
+              (lecture) => {
+                  return lecture.name.toLowerCase().indexOf(this.state.keyword) > -1;
+              }
+          )
+          return data.map((lecture, i) => {
+            return (<SearchInfo lecture={lecture} key={i}/>);
           })
-          : <span className="Feed__empty">No Photo :D</span>
         }
-      </div>
-    )
-  }
-}
 
-const mapStateToProps = (state) => ({
-  feed: state.photos.feed,
-  userAddress: state.auth.address,
-})
+      return (
+        <div align = "center">
+            <h1 class = "text-center">강평강평</h1>
+                <input 
+                    class = "text-center"
+                    name = "keyword"
+                    placeholder = "강좌검색"
+                    value={this.state.keyword}
+                    onChange={this.handleChange}
+                />
+            <div>{mapToComponents(this.state.searchData)}</div>       
+        </div>
+      )
+    }
+};
 
-const mapDispatchToProps = (dispatch) => ({
-  getFeed: () => dispatch(photoActions.getFeed()),
-})
 
-export default connect(mapStateToProps, mapDispatchToProps)(Feed)
+
