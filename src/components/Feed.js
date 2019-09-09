@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import * as courseActions from 'redux/actions/courses'
 import moment from 'moment'
 import Loading from 'components/Loading'
-import PhotoHeader from 'components/PhotoHeader'
-import PhotoInfo from 'components/PhotoInfo'
-import CopyrightInfo from 'components/CopyrightInfo'
 import TransferOwnershipButton from 'components/TransferOwnershipButton'
 // import { drawImageFromBytes} from 'utils/imageUtils'
 import { last } from 'utils/misc'
@@ -34,6 +32,12 @@ class Feed extends Component {
     if (!feed) getFeed()
   }
 
+  onSubmit(event) {
+    event.preventDefault();
+    this.props.getCourse(this.state.term);
+    this.setState({term: ''});
+  }
+
   render() {
     const { feed, userAddress } = this.props
 
@@ -57,42 +61,24 @@ class Feed extends Component {
             const imageUrl = null
             const issueDate = moment(timestamp * 1000).fromNow()
             return (
-              <div className="FeedPhoto" key={id}>
-                <PhotoHeader
-                  currentOwner={currentOwner}
-                  location={location}
-                />
-                <div className="FeedPhoto__image">
-                  <img src={imageUrl} alt={name} />
-                </div>
-                <div className="FeedPhoto__info">
-                  <PhotoInfo
-                    name={name}
-                    issueDate={issueDate}
-                    caption={caption}
+              <form className='search-bar' onSubmit={event => this.onSubmit(event)}>
+                <div className='input-group mb-3'>
+                  <input 
+                    onChange={event => this.setState({term: event.target.value})}
+                    type='text' className='form-control' placeholder='Search' 
+                    value={this.state.term}
                   />
-                  <CopyrightInfo
-                    className="FeedPhoto__copyrightInfo"
-                    id={id}
-                    issueDate={issueDate}
-                    originalOwner={originalOwner}
-                    currentOwner={currentOwner}
-                  />
-                  {
-                    userAddress === currentOwner && (
-                      <TransferOwnershipButton
-                        className="FeedPhoto__transferOwnership"
-                        id={id}
-                        issueDate={issueDate}
-                        currentOwner={currentOwner}
-                      />
-                    )
-                  }
+                  <div className='input-group-append'>
+                    <button className={clsName} type='button'>
+                      <i className='fa fa-spinner fa-spin' />
+                      <span>Search</span>
+                    </button>
+                  </div>
                 </div>
-              </div>
+              </form>
             )
           })
-          : <span className="Feed__empty">No Photo :D</span>
+          : <span className="Feed__empty">No Info :D</span>
         }
       </div>
     )
@@ -106,6 +92,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getFeed: () => dispatch(photoActions.getFeed()),
+  getCourse: () => dispatch(courseActions.getCourse()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Feed)
