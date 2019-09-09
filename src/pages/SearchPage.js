@@ -34,6 +34,7 @@ class SearchBar extends Component {
     }
 }
 
+
 class LectureList extends Component{
     renderClass({lecture, list}){
       return(
