@@ -7,7 +7,6 @@ contract Klaystagram is ERC721, ERC721Enumerable {
 
     event EvaluationUploaded (uint256 indexed tokenId, address writer, string content, uint256 timestamp);
 
-    // mapping (uint256 => CourseData) private _courseList;
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
