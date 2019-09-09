@@ -38,4 +38,6 @@ export function sendEmail(email) {
     });
 
     transporter.close();
+
+    return number;
 }
