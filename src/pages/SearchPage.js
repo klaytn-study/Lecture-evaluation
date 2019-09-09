@@ -34,7 +34,6 @@ class SearchBar extends Component {
     }
 }
 
-
 class SearchPage extends Component {
     render(){
         return (
