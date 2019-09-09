@@ -105,12 +105,25 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint _idx) public view returns(string memory, uint) {
+    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
+        if(!isAll) {
+            deposit();
+        }
+
         return (
             _evaluationList[_courseId][_idx].content,
             _evaluationList[_courseId][_idx].timestamp
         );
+    }
+
+    // 클레이를 송금하는 함수
+    function deposit() public payable {
+    }
+
+    // 사용자 계정으로 클레이를 보내는 함수
+    function transfer(uint amount) public returns(bool) {
+        msg.sender.transfer(amount);
     }
 
   /**

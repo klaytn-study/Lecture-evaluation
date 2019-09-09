@@ -15,7 +15,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
         if (!evaluationNum) return []
         const evaluations = []
         for (let i = 0; i < evaluationNum; i++) {
-          const evaluation = KlaystagramContract.getEvaluation(courseId, i).call()
+          const evaluation = KlaystagramContract.getEvaluation(courseId, i, false).call()
           evaluations.push(evaluation)
         }
         return Promise.all(evaluations)
@@ -24,7 +24,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
 }
 
 export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
-  KlaystagramContract.getEvaluation(courseId, evaluationId).send({
+  KlaystagramContract.getEvaluation(courseId, evaluationId, true).send({
     from: getWallet().address,
     gas: '2000000',
   })
