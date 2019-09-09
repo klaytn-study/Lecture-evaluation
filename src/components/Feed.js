@@ -45,40 +45,21 @@ class Feed extends Component {
 
     return (
       <div className="Feed">
-        {feed.length !== 0
-          ? feed.map(({
-            id,
-            ownerHistory,
-            data,
-            name,
-            location,
-            caption,
-            timestamp,
-          }) => {
-            const originalOwner = ownerHistory[0]
-            const currentOwner = last(ownerHistory).toLowerCase()
-            // const imageUrl = drawImageFromBytes(data)
-            const imageUrl = null
-            const issueDate = moment(timestamp * 1000).fromNow()
-            return (
-              <form className='search-bar' onSubmit={event => this.onSubmit(event)}>
-                <div className='input-group mb-3'>
-                  <input 
-                    onChange={event => this.setState({term: event.target.value})}
-                    type='text' className='form-control' placeholder='Search' 
-                    value={this.state.term}
-                  />
-                  <div className='input-group-append'>
-                    <button className={clsName} type='button'>
-                      <i className='fa fa-spinner fa-spin' />
-                      <span>Search</span>
-                    </button>
-                  </div>
+        <form className='search-bar' onSubmit={event => this.onSubmit(event)}>
+            <div className='input-group mb-3'>
+                <input 
+                  onChange={event => this.setState({term: event.target.value})}
+                  type='text' className='form-control' placeholder='Search' 
+                  value={this.state.term}
+                />
+                <div className='input-group-append'>
+                  <button className={clsName} type='button'>
+                    <i className='fa fa-spinner fa-spin' />
+                    <span>Search</span>
+                  </button>
                 </div>
-              </form>
-            )
-          })
-          : <span className="Feed__empty">No Info :D</span>
+              </div>
+            </form>
         }
       </div>
     )
