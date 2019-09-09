@@ -6,7 +6,7 @@ import PhotoHeader from 'components/PhotoHeader'
 import PhotoInfo from 'components/PhotoInfo'
 import CopyrightInfo from 'components/CopyrightInfo'
 import TransferOwnershipButton from 'components/TransferOwnershipButton'
-import { drawImageFromBytes} from 'utils/imageUtils'
+// import { drawImageFromBytes} from 'utils/imageUtils'
 import { last } from 'utils/misc'
 
 import * as photoActions from 'redux/actions/photos'
@@ -53,7 +53,8 @@ class Feed extends Component {
           }) => {
             const originalOwner = ownerHistory[0]
             const currentOwner = last(ownerHistory).toLowerCase()
-            const imageUrl = drawImageFromBytes(data)
+            // const imageUrl = drawImageFromBytes(data)
+            const imageUrl = null
             const issueDate = moment(timestamp * 1000).fromNow()
             return (
               <div className="FeedPhoto" key={id}>
