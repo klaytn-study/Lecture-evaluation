@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import imageCompression from 'utils/imageCompression';
+// import imageCompression from 'utils/imageCompression';
 import ui from 'utils/ui'
 import Input from 'components/Input'
 import InputFile from 'components/InputFile'
@@ -59,7 +59,8 @@ class UploadPhoto extends Component {
 
   compressImage = async (imageFile) => {
     try {
-      const compressedFile = await imageCompression(imageFile, MAX_IMAGE_SIZE_MB)
+      // const compressedFile = await imageCompression(imageFile, MAX_IMAGE_SIZE_MB)
+      const compressedFile = null
       this.setState({
         isCompressing: false,
         file: compressedFile,
