@@ -9,8 +9,8 @@ const setEvaluation = (course) => ({
     payload: { course },
   })
 
-export const getEvaluation = (courseId) => (dispatch) => {
-    course = KlaystagramContract.methods.getEvaluationNum(courseId).call()
+export const getEvaluationList = (courseId) => (dispatch) => {
+    KlaystagramContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => {
         if (!evaluationNum) return []
         const evaluations = []
@@ -23,15 +23,15 @@ export const getEvaluation = (courseId) => (dispatch) => {
       .then((evaluations) => dispatch(setEvaluation(evaluationParser(evaluations))))
 }
 
-export const uploadEvaluation = (courseId, content) => (dispatch) => {
-  KlaystagramContract.methods.uploadEvaluation(courseId, content).send({
+export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
+  KlaystagramContract.getEvaluation(courseId, evaluationId).send({
     from: getWallet().address,
-    gas: '200000000',
+    gas: '2000000',
   })
   .once('transactionHash', (txHash) => {
     ui.showToast({
       status: 'pending',
-      message: `Sending a transaction... (uploadPhoto)`,
+      message: `Sending a transaction... (getEvaluation)`,
       txHash,
     })
   })
@@ -39,16 +39,19 @@ export const uploadEvaluation = (courseId, content) => (dispatch) => {
     ui.showToast({
       status: receipt.status ? 'success' : 'fail',
       message: `Received receipt! It means your transaction is
-      in klaytn block (#${receipt.blockNumber}) (uploadPhoto)`,
+      in klaytn block (#${receipt.blockNumber}) (getEvaluation)`,
       link: receipt.transactionHash,
     })
-    const tokenId = receipt.events.PhotoUploaded.returnValues[0]
-    dispatch(updateFeed(tokenId))
+    dispatch(setEvaluation(evaluationParser(evaluation)))
   })
   .once('error', (error) => {
     ui.showToast({
       status: 'error',
       message: error.toString(),
     })
-  })
+  })  
+}
+
+export const uploadEvaluation = (courseId, content) => (dispatch) => {
+  KlaystagramContract.methods.uploadEvaluation(courseId, content).call()
 }
