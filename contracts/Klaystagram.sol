@@ -6,7 +6,6 @@ import "./ERC721/ERC721Enumerable.sol";
 contract Klaystagram is ERC721, ERC721Enumerable {
 
     event EvaluationUploaded (uint256 indexed tokenId, address writer, string content, uint256 timestamp);
-
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
@@ -36,6 +35,10 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         courseList.push(a);
         courseList.push(b);
         courseList.push(c);
+    }
+    
+    function addUser(address _address, string email) public {
+        _userList[_address] = User(_address, email);
     }
 
     function findUser(address _address) public view returns(bool) {
@@ -72,11 +75,10 @@ contract Klaystagram is ERC721, ERC721Enumerable {
    * @notice _mint() is from ERC721.sol
    */
     function uploadEvaluation(uint _courseId, string _content) public {
+        // require(msg.value < )
         uint256 tokenId = totalSupply() + 1;
 
         _mint(msg.sender, tokenId);
-
-        // address[] memory ownerHistory;
 
         EvaluationData memory newEvaluationData = EvaluationData({
             tokenId : tokenId,
