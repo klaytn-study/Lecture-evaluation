@@ -12,40 +12,31 @@ class SignupForm extends Component {
     email: '',
     emailValid: 0,
   }
- 
   generatePrivateKey = () => {
     const { privateKey } = cav.klay.accounts.create()
     this.setState({ privateKey })
   }
-
   inputEmail = (e) => {
     this.setState({ 
       email: e.target.value
     })
   }
-
   inputEmailValid = (e) => {
     this.setState({ 
       [e.target.emailValid]: e.target.type === 'number' ? parseInt(e.target.value) : e.target.value
     })
   }
-
-
   render() {
     const { privateKey } = this.state.privateKey
-    if (this.state.emailValid != number){
-      button = <Button
-          className="SignupForm__button"
-          title="Generate Private key"
-          onClick={this.generatePrivateKey}
-        />
-    }else{
-      console.log("Check your email")
-
+    if (this.state.emailValid != number) {
+      button = (<Button
+        className="SignupForm__button"
+        title="Generate Private key"
+        onClick={this.generatePrivateKey}
+      />)
+    } else {
+      console.log('Check your email')
     }
-
-
-
     return (
       <div className="SignupForm">
         <Input
@@ -63,25 +54,20 @@ class SignupForm extends Component {
           label="Email"
           readOnly
         />
-
         <Input
           className="SignupForm__EmailAuth"
           placeholder="Please enter your verification code"
           value={emailValid || ''}
-          onChange = {this.inputEmaiValid}
+          onChange={this.inputEmaiValid}
           label="EmailAuth"
           readOnly
         />
-
         <Button
           className="SignupForm__EmailAuth"
           title="EmailAuth"
-          onClick = {sendEmail(this.state.email)}
+          onClick={sendEmail(this.state.email)}
         />
-
-
         {button}
-
       </div>
     )
   }
