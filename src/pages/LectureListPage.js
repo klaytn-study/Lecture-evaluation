@@ -5,14 +5,13 @@ import '../pages/LectureListPage.scss'
 class LectureList extends Component{
   renderClass({lecture, list}){
     return(
-        <tr key={lecture.id}>
-            <td>{lecture.name}</td>
-            <td>{list[0].main.professor}</td>
-            <td>{list[0].main.campus}</td>
-
-        </tr>
+      <tr key={lecture.id}>
+        <td>{lecture.name}</td>
+        <td>{list[0].main.professor}</td>
+        <td>{list[0].main.campus}</td>
+      </tr>
     );
-    }
+  }
   handlerError(){
     if(this.props.error){
       return(
