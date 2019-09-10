@@ -30,7 +30,7 @@ class LectureList extends Component{
     console.log(Data)
     console.log(lect)
     return(
-      <Table striped bordered hover>
+      <Table className="form-control-lecture" striped bordered hover >
         <thead>
           <tr>
             <th>Campus</th>
