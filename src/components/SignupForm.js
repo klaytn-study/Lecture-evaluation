@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { cav } from 'klaytn/caver'
 import Input from 'components/Input'
 import Button from 'components/Button'
-import { sendEmail } from 'utils/auth'
+// import { sendEmail } from 'utils/auth'
 
 import './SignupForm.scss'
 
@@ -65,7 +65,7 @@ class SignupForm extends Component {
         <Button
           className="SignupForm__EmailAuth"
           title="EmailAuth"
-          onClick={sendEmail(this.state.email)}
+          // onClick={sendEmail(this.state.email)}
         />
         {button}
       </div>
