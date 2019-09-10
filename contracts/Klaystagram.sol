@@ -9,6 +9,9 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
+    EvaluationData[] evaluationList;
+
+    event GoodBadUploaded(uint indexed tokenId, address writer);
 
     struct User {
         address userAddress;
@@ -40,29 +43,43 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     }
 
     function getEvalGoodBad(uint tokenId) public view returns (uint, uint){
-        if(!courseList[tokenId].good) couresList[tokenId].good = 0;
-        if(!courseList[tokenId].bad) courseList[tokenId].bad = 0;
-        return courseList[tokenId].good, courseList[tokenId].bad;
+        if(!evaluationList[tokenId].good) evaluationList[tokenId].good = 0;
+        if(!evaluationList[tokenId].bad) evaluationList[tokenId].bad = 0;
+        return (evaluationList[tokenId].good, evaluationList[tokenId].bad);
     }
 
+ /**
+   * @notice _mint() is from ERC721.sol
+   */
     function evalGood(uint256 tokenId) public {
-        if(!courseList[tokenId].good){
-            courseList[tokenId].good = 1;
+        if(evaluationList[tokenId].good){
+            evaluationList[tokenId].good += 1;
         } else {
-            courseList[tokenId].good += 1;
+            evaluationList[tokenId].good += 1;
         }
+
+        uint256 token = totalSupply() + 1;  
+        _mint(msg.sender, token);
+
+        emit GoodBadUploaded(token, msg.sender);
     }
 
+/**
+   * @notice _mint() is from ERC721.sol
+   */
     function evalBad(uint256 tokenId) public {
-        if(!courseList[tokenId].bad){
-            courseList[tokenId].bad = 1;
+        if(!evaluationList[tokenId].bad){
+            evaluationList[tokenId].bad = 1;
         } else {
-            courseList[tokenId].bad += 1;
+            evaluationList[tokenId].bad += 1;
         }
+
+        uint256 token = totalSupply() + 1;  
+        _mint(msg.sender, token);
+
+        emit GoodBadUploaded(token, msg.sender);
     }
 
-
-    
     function addUser(address _address, string email) public {
         _userList[_address] = User(_address, email);
     }
@@ -89,12 +106,25 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint _idx) public view returns(string memory, uint) {
+    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
+        if(!isAll) {
+            deposit();
+        }
+
         return (
             _evaluationList[_courseId][_idx].content,
             _evaluationList[_courseId][_idx].timestamp
         );
+    }
+
+    // 클레이를 송금하는 함수
+    function deposit() public payable {
+    }
+
+    // 사용자 계정으로 클레이를 보내는 함수
+    function transfer(uint amount) public returns(bool) {
+        msg.sender.transfer(amount);
     }
 
   /**

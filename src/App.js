@@ -9,6 +9,9 @@ import Toast from 'components/Toast'
 
 import * as authActions from 'redux/actions/auth'
 
+import SearchPage from 'pages/SearchPage'
+import LectureListPage from 'pages/LectureListPage'
+
 import './App.scss'
 
 class App extends Component {
@@ -51,7 +54,8 @@ class App extends Component {
         <Modal />
         <Toast />
         {isLoggedIn && <Nav />}
-        {isLoggedIn ? <FeedPage /> : <AuthPage />}
+        {isLoggedIn ? <SearchPage /> : <AuthPage />}
+        {isLoggedIn ? <LectureListPage /> : <AuthPage />}
         <Footer />
       </div>
     )

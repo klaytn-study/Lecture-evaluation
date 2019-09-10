@@ -6,6 +6,9 @@ import App from './App'
 
 import './index.scss'
 
+import { createStore } from 'redux';
+import reducers from './redux/reducers';
+
 const rootElement = document.getElementById('root')
 
 ReactDOM.render(
