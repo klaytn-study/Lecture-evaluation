@@ -24,7 +24,7 @@ class SearchBar extends Component {
           <input
             onChange={event => this.setState({term: event.target.value})}
             type="text"
-            className="form-control-search"
+            className="form-control-search input-group"
             placeholder="교수이름, 교과목이름"
             value={this.state.term}
           />

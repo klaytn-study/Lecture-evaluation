@@ -20,3 +20,23 @@ exports.list__major=[
   {optValue: 322, optLabel: '화학공학과', univVal: 32},
   {optValue: 323, optLabel: '생명공학과', univVal: 32},
 ]
+
+exports.list__lecture__course=[
+  {campus: '인문',lecturename: '글쓰기', professor: '김서연'},
+  {campus: '인문',lecturename: '환경과 인간', professor: '신지수'},
+  {campus: '인문',lecturename: '영어회화', professor: '메튜'},
+  {campus: '인문',lecturename: '영어', professor: '여인숙'},
+  {campus: '인문',lecturename: '기독교 문화', professor: '김갑철'},
+  {campus: '인문',lecturename: '철학과 인간', professor: '장세희'},
+ 
+  {campus: '자연',lecturename: '선형대수학', professor: '박혜정'},
+  {campus: '자연',lecturename: '기초미적분학', professor: '문은호'},
+  {campus: '자연',lecturename: '물리학1', professor: '문혜진'},
+  {campus: '자연',lecturename: '일반화학', professor: '이안나'},
+  {campus: '자연',lecturename: '교양테니스', professor: '정종삼'},
+  {campus: '자연',lecturename: '스포츠와 리더십', professor: '김시유'},
+  
+
+  
+ 
+]

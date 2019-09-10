@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import '../pages/LectureListPage.scss'
+import { Table } from 'react-bootstrap'
+
+import Data from '../components/data';
 
 class LectureList extends Component{
   renderClass({lecture, list}){
@@ -23,21 +26,44 @@ class LectureList extends Component{
   }
 
   render(){
+    const lect = Data.list__lecture__course
+    console.log(Data)
+    console.log(lect)
     return(
-      <div className='LectureList'>
-        {this.handlerError()}
-        <table className='table table-hover'></table>
-          <thead>
-            <tr>
-              <th>Campusss</th>
-              <th>Lecture</th>
-              <th>Professor</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Campus</th>
+            <th>Lecture Name</th>
+            <th>Professor</th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            lect.map(({ campus, lecturename, professor }) => (
+              <tr>
+                <td>{campus}</td>
+                <td>{lecturename}</td>
+                <td>{professor}</td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </Table>
+      // <div className='LectureList'>
+      //   {this.handlerError()}
+      //   <table className='table table-hover'></table>
+      //     <thead>
+      //       <tr>
+      //         <th>Campusss</th>
+      //         <th>Lecture</th>
+      //         <th>Professor</th>
+      //       </tr>
+      //     </thead>
+      //     <tbody>
 
-          </tbody>
-      </div>
+      //     </tbody>
+      // </div>
     );
   }
 }
