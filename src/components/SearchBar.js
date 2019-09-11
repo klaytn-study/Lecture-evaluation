@@ -24,17 +24,6 @@ class SearchBar extends Component {
     }
   
     render() {
-        const mapToComponents = (data) => {
-            data.sort();
-            data = data.filter(
-                (lecture) => {
-                    return lecture.name.toLowerCase().indexOf(this.state.keyword) > -1;
-                }
-            )
-            return data.map((lecture, i) => {
-              return (<SearchInfo lecture={lecture} key={i}/>);
-            })
-          }
   
       return (
         <form className="search-bar">
@@ -52,8 +41,7 @@ class SearchBar extends Component {
               </button>
             </div>
           </div>
-          <p/>
-          <div>{mapToComponents(this.state.searchData)}</div>     
+          <p/>    
         </form>
         
       )
