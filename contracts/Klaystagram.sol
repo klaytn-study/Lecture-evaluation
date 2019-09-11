@@ -9,9 +9,9 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
+    
     EvaluationData[] evaluationList;
-
-    event GoodBadUploaded(uint indexed tokenId, address writer);
+    //event GoodBadUploaded(uint indexed tokenId, address writer);
 
     struct User {
         address userAddress;
@@ -42,43 +42,22 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         courseList.push(c);
     }
 
-    function getEvalGoodBad(uint tokenId) public view returns (uint, uint){
-        if(!evaluationList[tokenId].good) evaluationList[tokenId].good = 0;
-        if(!evaluationList[tokenId].bad) evaluationList[tokenId].bad = 0;
-        return (evaluationList[tokenId].good, evaluationList[tokenId].bad);
+    function getEvalGoodBad(uint _courseId, uint idx) public view returns (uint, uint) {
+        return (
+            _evaluationList[_courseId][idx].good,
+            _evaluationList[_courseId][idx].bad
+        );
     }
 
- /**
-   * @notice _mint() is from ERC721.sol
-   */
-    function evalGood(uint256 tokenId) public {
-        if(evaluationList[tokenId].good){
-            evaluationList[tokenId].good += 1;
-        } else {
-            evaluationList[tokenId].good += 1;
-        }
-
-        uint256 token = totalSupply() + 1;  
-        _mint(msg.sender, token);
-
-        emit GoodBadUploaded(token, msg.sender);
+    function addEvalGood(uint _courseId, uint idx) public {
+        _evaluationList[_courseId][idx].good += 1;
     }
 
-/**
-   * @notice _mint() is from ERC721.sol
-   */
-    function evalBad(uint256 tokenId) public {
-        if(!evaluationList[tokenId].bad){
-            evaluationList[tokenId].bad = 1;
-        } else {
-            evaluationList[tokenId].bad += 1;
-        }
-
-        uint256 token = totalSupply() + 1;  
-        _mint(msg.sender, token);
-
-        emit GoodBadUploaded(token, msg.sender);
+    function addEvalBad(uint _courseId, uint idx) public {
+        _evaluationList[_courseId][idx].bad += 1;
     }
+
+ 
 
     function addUser(address _address, string email) public {
         _userList[_address] = User(_address, email);
@@ -140,7 +119,9 @@ contract Klaystagram is ERC721, ERC721Enumerable {
             tokenId : tokenId,
             writer : msg.sender,
             content : _content,
-            timestamp : now
+            timestamp : now,
+            good: 0,
+            bad: 0
         });
 
         _evaluationList[_courseId].push(newEvaluationData);
