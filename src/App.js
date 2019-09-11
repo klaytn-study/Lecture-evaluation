@@ -55,7 +55,7 @@ class App extends Component {
         <Toast />
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <SearchPage /> : <AuthPage />}
-        {isLoggedIn ? <LectureListPage /> : <AuthPage />}
+        {isLoggedIn && <LectureListPage />}
         <Footer />
       </div>
     )
