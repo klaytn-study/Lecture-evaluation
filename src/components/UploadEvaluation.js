@@ -5,12 +5,14 @@ import Input from 'components/Input'
 import Textarea from 'components/Textarea'
 import Button from 'components/Button'
 import DropdownBtn from 'components/DropdownBtn'
+import InputStar from 'components/InputStar'
 
 import * as photoActions from 'redux/actions/photos'
 import Data from './data'
 
 class UploadEvaluation extends Component {
   state = {
+    score: 0,
     campus: '',
     university: '',
     major: '',
@@ -71,11 +73,11 @@ class UploadEvaluation extends Component {
   
 
   render() {
-    const { campus, university, major, lectureName, professorName, evaluation, univList, majorList } = this.state
+    const { campus, score, university, major, lectureName, professorName, evaluation, univList, majorList } = this.state
     return (
       <form className="UploadEvaluation" onSubmit={this.handleSubmit}>
         <div className="row">
-          <div className="col-4">
+          <div className="col-3">
             <DropdownBtn
               className="Evaluation__campus"
               name="campus"
@@ -85,7 +87,7 @@ class UploadEvaluation extends Component {
               onChange={this.onChange}
             />
           </div>
-          <div className="col-4">
+          <div className="col-3">
             <DropdownBtn
               className="Evaluation__university"
               name="university"
@@ -95,7 +97,7 @@ class UploadEvaluation extends Component {
               onChange={this.onChange}
             />
           </div>
-          <div className="col-4">
+          <div className="col-3">
             <DropdownBtn
               className="Evaluation__major"
               name="major"
@@ -103,6 +105,15 @@ class UploadEvaluation extends Component {
               value={major}
               item={majorList}
               onChange={this.onChange}
+            />
+          </div>
+          <div className="col-3">
+            <InputStar
+              className="Evaluation__star"
+              name="score"
+              label="score"
+              value={score}
+              onChange={this.handleInputChange}
             />
           </div>
         </div>
