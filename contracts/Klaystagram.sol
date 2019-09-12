@@ -9,9 +9,8 @@ contract Klaystagram is ERC721, ERC721Enumerable {
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
-    EvaluationData[] evaluationList;
 
-    event GoodBadUploaded(uint indexed tokenId, address writer);
+    mapping (uint256 => Eval2Eval[]) private _eval2evalList;
 
     struct User {
         address userAddress;
@@ -33,6 +32,12 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         uint256 bad;
     }
 
+    struct Eval2Eval {
+        uint256 tokenId;
+        address writer;
+        bool isEval;
+    }
+
     constructor() public {
         Course memory a = Course(5668, "금융정책의 이해", "김경제");
         Course memory b = Course(5778, "운영체제", "최데테");
@@ -42,42 +47,43 @@ contract Klaystagram is ERC721, ERC721Enumerable {
         courseList.push(c);
     }
 
-    function getEvalGoodBad(uint tokenId) public view returns (uint, uint){
-        if(!evaluationList[tokenId].good) evaluationList[tokenId].good = 0;
-        if(!evaluationList[tokenId].bad) evaluationList[tokenId].bad = 0;
-        return (evaluationList[tokenId].good, evaluationList[tokenId].bad);
+    function getEvalGoodBad(uint _courseId, uint idx) public view returns (uint, uint) {
+        return (
+            _evaluationList[_courseId][idx].good,
+            _evaluationList[_courseId][idx].bad
+        );
     }
 
- /**
-   * @notice _mint() is from ERC721.sol
-   */
-    function evalGood(uint256 tokenId) public {
-        if(evaluationList[tokenId].good){
-            evaluationList[tokenId].good += 1;
-        } else {
-            evaluationList[tokenId].good += 1;
-        }
+    function addEvalGood(uint _courseId, uint idx) public {
+        require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 좋아요 누르기 금지긔");
+        require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        uint256 token = totalSupply() + 1;  
-        _mint(msg.sender, token);
+        Eval2Eval memory newEval = Eval2Eval({
+            tokenId: _courseId,
+            writer: msg.sender,
+            isEval: true
+        });
 
-        emit GoodBadUploaded(token, msg.sender);
+        _eval2evalList[_courseId].push(newEval);
+
+        _evaluationList[_courseId][idx].good += 1;
+        transfer(1);
     }
 
-/**
-   * @notice _mint() is from ERC721.sol
-   */
-    function evalBad(uint256 tokenId) public {
-        if(!evaluationList[tokenId].bad){
-            evaluationList[tokenId].bad = 1;
-        } else {
-            evaluationList[tokenId].bad += 1;
-        }
+    function addEvalBad(uint _courseId, uint idx) public {
+        require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 싫어요 누르기 금지긔");
+        require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        uint256 token = totalSupply() + 1;  
-        _mint(msg.sender, token);
+        Eval2Eval memory newEval = Eval2Eval({
+            tokenId: _courseId,
+            writer: msg.sender,
+            isEval: true
+        });
 
-        emit GoodBadUploaded(token, msg.sender);
+        _eval2evalList[_courseId].push(newEval);
+
+        _evaluationList[_courseId][idx].bad += 1;
+        transfer(1);
     }
 
     function addUser(address _address, string email) public {
@@ -120,6 +126,7 @@ contract Klaystagram is ERC721, ERC721Enumerable {
 
     // 클레이를 송금하는 함수
     function deposit() public payable {
+        require(msg.value > 0, "deposit error");
     }
 
     // 사용자 계정으로 클레이를 보내는 함수
@@ -140,7 +147,9 @@ contract Klaystagram is ERC721, ERC721Enumerable {
             tokenId : tokenId,
             writer : msg.sender,
             content : _content,
-            timestamp : now
+            timestamp : now,
+            good: 0,
+            bad: 0
         });
 
         _evaluationList[_courseId].push(newEvaluationData);

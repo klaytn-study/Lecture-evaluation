@@ -17,3 +17,9 @@
     - getEvaluation(int courseId, int evaluationId)
   - 평가 작성하기
     - uploadEvaluation(int courseId, string content)
+  - 평가 좋아요 / 싫어요 가져오기
+    - getEvalGoodBad(int courseId, int idx) -> int good, int bad 리턴
+  - 평가에 좋아요 누르기
+    - addEvalGood
+  - 평가에 싫어요 누르기
+    - addEvalBad
