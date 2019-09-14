@@ -35,8 +35,42 @@ exports.list__lecture__course=[
   {campus: '자연',lecturename: '일반화학', professor: '이안나'},
   {campus: '자연',lecturename: '교양테니스', professor: '정종삼'},
   {campus: '자연',lecturename: '스포츠와 리더십', professor: '김시유'},
-  
+  {campus: '인문',lecturename: '글쓰기', professor: '김서연'},
+  {campus: '인문',lecturename: '환경과 인간', professor: '신지수'},
+  {campus: '인문',lecturename: '영어회화', professor: '메튜'},
+  {campus: '인문',lecturename: '영어', professor: '여인숙'},
+  {campus: '인문',lecturename: '기독교 문화', professor: '김갑철'},
+  {campus: '인문',lecturename: '철학과 인간', professor: '장세희'},
+ 
+  {campus: '자연',lecturename: '선형대수학', professor: '박혜정'},
+  {campus: '자연',lecturename: '기초미적분학', professor: '문은호'},
+  {campus: '자연',lecturename: '물리학1', professor: '문혜진'},
+  {campus: '자연',lecturename: '일반화학', professor: '이안나'},
+  {campus: '자연',lecturename: '교양테니스', professor: '정종삼'},
+  {campus: '자연',lecturename: '스포츠와 리더십', professor: '김시유'},
 
   
+  {campus: '인문',lecturename: '글쓰기', professor: '김서연'},
+  {campus: '인문',lecturename: '환경과 인간', professor: '신지수'},
+  {campus: '인문',lecturename: '영어회화', professor: '메튜'},
+  {campus: '인문',lecturename: '영어', professor: '여인숙'},
+  {campus: '인문',lecturename: '기독교 문화', professor: '김갑철'},
+  {campus: '인문',lecturename: '철학과 인간', professor: '장세희'},
+  
  
+]
+exports.list__detailLec__course=[
+  {index: '1', comment_tittle: '이 강의 추천합니다.', date: '2019-09-04'},
+  {index: '2', comment_tittle: '학점을 잘 줘요', date: '2019-09-04'},
+  {index: '3', comment_tittle: '조금 졸리는 강의', date: '2019-09-03'},
+  {index: '4', comment_tittle: '교수님이 친절하신 강의 ', date: '2019-09-03'},
+  {index: '5', comment_tittle: '추천', date: '2019-09-03'},
+  {index: '6', comment_tittle: '교수님이 학점을 정말 짜게 주십니다 재수강 각임', date: '2019-09-02'},
+  {index: '7', comment_tittle: '이 강의 추천합니다.', date: '2019-09-02'},
+  {index: '8', comment_tittle: '학점을 잘 줘요', date: '2019-09-02'},
+  {index: '9', comment_tittle: '조금 졸리는 강의', date: '2019-09-02'},
+  {index: '10', comment_tittle: '교수님이 친절하신 강의 ', date: '2019-09-02'},
+  {index: '11', comment_tittle: '추천합니다', date: '2019-09-02'},
+  {index: '12', comment_tittle: '과제를 일주일에 한 번씩 내주십니다. 과제 양이 많아서 힘든 강의', date: '2019-09-02'},
+
 ]

@@ -11,7 +11,7 @@ import * as authActions from 'redux/actions/auth'
 
 import SearchPage from 'pages/SearchPage'
 import LectureListPage from 'pages/LectureListPage'
-
+import DetailLecPage from 'pages/DetailLecPage'
 import './App.scss'
 
 class App extends Component {
@@ -56,6 +56,7 @@ class App extends Component {
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <SearchPage /> : <AuthPage />}
         {isLoggedIn ? <LectureListPage /> : <AuthPage />}
+        {isLoggedIn ? <DetailLecPage /> : <AuthPage />}
         <Footer />
       </div>
     )
