@@ -1,0 +1,80 @@
+.Print {
+  position: relative;
+}
+
+.Print__label {
+  display: block;
+  font-size: 12px;
+  font-weight: bold;
+  color: $brown-grey;
+  margin-bottom: 8px;
+  margin-top: 5px;
+}
+.Print__lecture {
+  width: 100%;
+  font-weight: bold;
+  margin-top: 5px;
+}
+.Print__pofessor {
+  display: block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.eval {
+  width: 100%;
+  // height: 400px;
+  max-height: 400px;
+  overflow-y: auto;
+  font-size: 14px;
+  border: 1px solid $light-grey;
+  padding: 22px 24px;
+  border-radius: 5px;
+  margin-bottom: 8px;
+}
+
+.Button__campus {
+  -webkit-appearance: none;
+  // width: 100%;
+  background-color: $light-grey;
+  color: $brown-grey;
+  border-radius: 15px;
+  text-align: center;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  padding: 4px;
+  border: 1px solid $light-grey;
+  cursor: pointer;
+}
+
+.Detail__datail {
+  padding: 7px;
+}
+
+.Pirnt__score {
+  padding: 20px;
+  border-left: 1px solid $light-grey;
+}
+
+.Button__good, .Button__soso, .Button__bad {
+  -webkit-appearance: none;
+  // width: 100%;
+  background-color: $light-grey;
+  color: $brown-grey;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  margin: 15px 15px 0px 15px;
+  padding: 4px;
+  border: 1px solid $light-grey;
+  cursor: pointer;
+
+  &:active {
+    background-color: $dark-brown;
+    color: $white;
+  }
+}
