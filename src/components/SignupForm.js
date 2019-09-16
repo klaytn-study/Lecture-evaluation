@@ -27,6 +27,7 @@ class SignupForm extends Component {
     this.setState({
       emailValid: num,
     })
+    
   }
 
   // 입력 이메일 상태 실시간으로 반영
@@ -60,49 +61,61 @@ class SignupForm extends Component {
     const { email, userInput, privateKey } = this.state
     return (
       <div className="SignupForm">
-        <Input
-          className="SignupForm__input"
-          placeholder="Generate Private Key to Sign up"
-          value={privateKey || ''}
-          label="Private key"
-          readOnly
-        />
-        <Input
-          className="SignupForm__inputEmail"
-          placeholder="Please enter your Email"
-          value={email || ''}
-          onChange={this.handleEmailChange}
-          label="Email"
-        />
-
-        <Input
-          className="SignupForm__UserInput"
-          placeholder="Please enter your verification code"
-          value={userInput || ''}
-          onChange ={this.handleECodeChange}
-          label="UserInput"
-        />
-
-        <Button
-          className="SignupForm__SendCode"
-          title="Send Verification Code"
-          onClick= {this.handleClick}
-        />
-
-        <Button
-          className="SignupForm__CheckCode"
-          title="Check Code"
-          onClick ={this.handleSubmit}
-        />
-
-        <Button
-          className="SignupForm__Final"
-          title="Sign in"
-          onClick={this.generatePrivateKey}
-          disabled="true"
-        />
-
-
+        <div className="row">
+          <div className="col-9">
+            <Input
+              className="SignupForm__inputEmail"
+              placeholder="Please enter your Email"
+              value={email || ''}
+              onChange={this.handleEmailChange}
+              label="Email"
+            />
+          </div>
+          <div className="col-3">
+            <Button
+                className="SignupForm__SendCode"
+                title="인증코드 전송"
+                onClick= {this.handleClick}
+              />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-9">
+            <Input
+                className="SignupForm__UserInput"
+                placeholder="Please enter your verification code"
+                value={userInput || ''}
+                onChange ={this.handleECodeChange}
+                label="UserInput"
+              />
+          </div>
+          <div className="col-3">
+            <Button
+                className="SignupForm__CheckCode"
+                title="인증코드 확인"
+                onClick ={this.handleSubmit}
+              />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-9">
+            <Input
+              className="SignupForm__input"
+              placeholder="Generate Private Key to Sign up"
+              value={privateKey || ''}
+              label="Private key"
+              readOnly
+            />
+          </div>
+          <div className="col-3">
+            <Button
+                className="SignupForm__Final"
+                title="PK생성"
+                onClick={this.generatePrivateKey}
+                disabled="true"
+              />
+          </div>
+        </div>
       </div>
     )
   }
