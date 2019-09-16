@@ -1,5 +1,5 @@
 {
-  "name": "klaystagram",
+  "name": "LectureEvaluation",
   "version": "0.0.1",
   "description": "Klaytn-based NFT photo licensing application",
   "main": "truffle-config.js",
@@ -32,6 +32,7 @@
     "react-dom": "^16.3.2",
     "react-redux": "^6.0.0",
     "react-router": "^4.3.1",
+    "react-router-dom": "^5.0.1",
     "react-router-redux": "^4.0.8",
     "redux": "^4.0.1",
     "redux-thunk": "^2.3.0",

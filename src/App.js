@@ -6,12 +6,18 @@ import Footer from 'components/Footer'
 import Nav from 'components/Nav'
 import Modal from 'components/Modal'
 import Toast from 'components/Toast'
+import { BrowserRouter as Router, Route } from 'react-router-dom'; 
+
+// import Home from './pages/Home'
+
+
+
 
 import * as authActions from 'redux/actions/auth'
 
 import SearchPage from 'pages/SearchPage'
-import LectureListPage from 'pages/LectureListPage'
-
+import LectureListPage from './pages/LectureListPage'
+import DetailLecPage from './pages/DetailLecPage'
 import './App.scss'
 
 class App extends Component {
@@ -55,9 +61,21 @@ class App extends Component {
         <Toast />
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <SearchPage /> : <AuthPage />}
-        {isLoggedIn && <LectureListPage />}
+        {/* {isLoggedIn ? <LectureListPage /> : <AuthPage />} */}
+        {/* {isLoggedIn ? <DetailLecPage /> : <AuthPage />} */}
+        
+        <Router>
+
+        <Route exact path="/" component={isLoggedIn && LectureListPage}/>
+        <Route path="/detail" component={isLoggedIn && DetailLecPage}/>
+          {/* <Route exact={true} path="/about" render={() => <h1>About</h1>}/> */}
+
+        </Router>
         <Footer />
       </div>
+            
+
+  
     )
   }
 }

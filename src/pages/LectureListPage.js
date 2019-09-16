@@ -50,6 +50,7 @@ class LectureList extends Component{
           }
         </tbody>
       </Table>
+      
       // <div className='LectureList'>
       //   {this.handlerError()}
       //   <table className='table table-hover'></table>

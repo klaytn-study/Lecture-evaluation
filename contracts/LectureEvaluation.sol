@@ -3,7 +3,7 @@ pragma solidity ^0.4.24;
 import "./ERC721/ERC721.sol";
 import "./ERC721/ERC721Enumerable.sol";
 
-contract Klaystagram is ERC721, ERC721Enumerable {
+contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     event EvaluationUploaded (uint256 indexed tokenId, address writer, string content, uint256 timestamp);
     mapping (uint256 => EvaluationData[]) private _evaluationList;
