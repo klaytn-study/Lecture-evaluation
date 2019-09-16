@@ -1,4 +1,4 @@
-import KlaystagramContract from 'klaytn/KlaystagramContract'
+import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
 import { getWallet } from 'utils/crypto'
 import ui from 'utils/ui'
 import { feedParser } from 'utils/misc'
@@ -13,7 +13,7 @@ const setFeed = (feed) => ({
 })
 
 const updateFeed = (tokenId) => (dispatch, getState) => {
-  KlaystagramContract.methods.getPhoto(tokenId).call()
+  LectureEvaluationContract.methods.getPhoto(tokenId).call()
     .then((newPhoto) => {
       const { photos: { feed } } = getState()
       const newFeed = [feedParser(newPhoto), ...feed]
@@ -35,12 +35,12 @@ const updateOwnerAddress = (tokenId, to) => (dispatch, getState) => {
 // API functions
 
 export const getFeed = () => (dispatch) => {
-  KlaystagramContract.methods.getTotalPhotoCount().call()
+  LectureEvaluationContract.methods.getTotalPhotoCount().call()
     .then((totalPhotoCount) => {
       if (!totalPhotoCount) return []
       const feed = []
       for (let i = totalPhotoCount; i > 0; i--) {
-        const photo = KlaystagramContract.methods.getPhoto(i).call()
+        const photo = LectureEvaluationContract.methods.getPhoto(i).call()
         feed.push(photo)
       }
       return Promise.all(feed)
@@ -63,7 +63,7 @@ export const uploadPhoto = (
      * to recognize hexString as bytes by contract
      */
     const hexString = "0x" + buffer.toString('hex')
-    KlaystagramContract.methods.uploadPhoto(hexString, fileName, location, caption).send({
+    LectureEvaluationContract.methods.uploadPhoto(hexString, fileName, location, caption).send({
       from: getWallet().address,
       gas: '200000000',
     })
@@ -94,7 +94,7 @@ export const uploadPhoto = (
 }
 
 export const transferOwnership = (tokenId, to) => (dispatch) => {
-  KlaystagramContract.methods.transferOwnership(tokenId, to).send({
+  LectureEvaluationContract.methods.transferOwnership(tokenId, to).send({
     from: getWallet().address,
     gas: '20000000',
   })

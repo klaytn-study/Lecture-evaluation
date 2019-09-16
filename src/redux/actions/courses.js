@@ -1,4 +1,4 @@
-import KlaystagramContract from 'klaytn/KlaystagramContract'
+import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
 import { getWallet } from 'utils/crypto'
 import ui from 'utils/ui'
 import { courseParser } from 'utils/misc'
@@ -10,12 +10,12 @@ const setCourse = (course) => ({
   })
 
 export const getCourse = () => (dispatch) => {
-    course = KlaystagramContract.methods.getCourseNum().call()
+    course = LectureEvaluationContract.methods.getCourseNum().call()
       .then((courseNum) => {
         if (!courseNum) return []
         const courses = []
         for (let i = 0; i < courseNum; i++) {
-          const course = KlaystagramContract.getCourse(i).call()
+          const course = LectureEvaluationContract.getCourse(i).call()
           courses.push(course)
         }
         return Promise.all(courses)

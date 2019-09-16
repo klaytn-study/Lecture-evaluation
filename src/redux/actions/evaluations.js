@@ -1,4 +1,4 @@
-import KlaystagramContract from 'klaytn/KlaystagramContract'
+import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
 import { getWallet } from 'utils/crypto'
 import ui from 'utils/ui'
 import { evaluationParser } from 'utils/misc'
@@ -10,12 +10,12 @@ const setEvaluation = (course) => ({
   })
 
 export const getEvaluationList = (courseId) => (dispatch) => {
-    KlaystagramContract.methods.getEvaluationNum(courseId).call()
+  LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => {
         if (!evaluationNum) return []
         const evaluations = []
         for (let i = 0; i < evaluationNum; i++) {
-          const evaluation = KlaystagramContract.getEvaluation(courseId, i, false).call()
+          const evaluation = LectureEvaluationContract.getEvaluation(courseId, i, false).call()
           evaluations.push(evaluation)
         }
         return Promise.all(evaluations)
@@ -24,7 +24,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
 }
 
 export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
-  KlaystagramContract.getEvaluation(courseId, evaluationId, true).send({
+  LectureEvaluationContract.getEvaluation(courseId, evaluationId, true).send({
     from: getWallet().address,
     gas: '2000000',
   })
@@ -53,5 +53,5 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
 }
 
 export const uploadEvaluation = (courseId, content) => (dispatch) => {
-  KlaystagramContract.methods.uploadEvaluation(courseId, content).call()
+  LectureEvaluationContract.methods.uploadEvaluation(courseId, content).call()
 }
