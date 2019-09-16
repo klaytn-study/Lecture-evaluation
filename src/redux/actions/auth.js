@@ -1,4 +1,5 @@
 import { cav } from 'klaytn/caver'
+import KlaystagramContract from 'klaytn/KlaystagramContract'
 import {
   LOGIN,
   LOGOUT,
@@ -30,6 +31,7 @@ export const removeWallet = () => (dispatch) => {
 
 export const signup = (privateKey, email) => (dispatch) => {
   dispatch(integrateWallet(privateKey))
+  KlaystagramContract.methods.addUser(privateKey, email).call()
   return dispatch({
     type: SIGNUP,
   })
@@ -37,9 +39,14 @@ export const signup = (privateKey, email) => (dispatch) => {
 
 export const login = (privateKey) => (dispatch) => {
   dispatch(integrateWallet(privateKey))
-  return dispatch({
-    type: LOGIN,
-  })
+  KlaystagramContract.methods.findUser(privateKey).call()
+    .then((isPresent) => {
+      if(isPresent) {
+        return dispatch({
+          type: LOGIN,
+        })
+      }
+    })
 }
 
 export const logout = () => (dispatch) => {
