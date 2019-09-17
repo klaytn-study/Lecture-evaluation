@@ -12,6 +12,7 @@ class LoginForm extends Component {
   state = {
     privateKey: '',
     warningMessage: '',
+    disabledButton: false,
   }
 
   handleChange = (e) => {
