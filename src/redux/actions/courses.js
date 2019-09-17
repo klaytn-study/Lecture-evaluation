@@ -15,7 +15,7 @@ export const getCourse = () => (dispatch) => {
         if (!courseNum) return []
         const courses = []
         for (let i = 0; i < courseNum; i++) {
-          const course = LectureEvaluationContract.getCourse(i).call()
+          const course = LectureEvaluationContract.methods.getCourse(i).call()
           courses.push(course)
         }
         return Promise.all(courses)
