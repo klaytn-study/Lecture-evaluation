@@ -46,6 +46,7 @@ class LoginForm extends Component {
           className="LoginForm__button"
           title="Log in"
           onClick={this.handleLogin}
+          disabled={this.state.disabledButton}
         />
       </div>
     )
