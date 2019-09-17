@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { cav } from 'klaytn/caver'
 import Input from 'components/Input'
 import Button from 'components/Button'
-// import { sendEmail } from 'utils/auth'
+import { signup } from '../redux/actions/auth'
 
 import './SignupForm.scss'
 
@@ -12,6 +13,7 @@ class SignupForm extends Component {
     email: '',
     emailValid: 0, // 발송되는 코드
     userInput: 0, // 유저가 input하는 코드
+    disabledButton: true,
   }
 
   // 최종적으로 실행되어야 하는 것
@@ -45,15 +47,29 @@ class SignupForm extends Component {
   }
 
   // 사용자가 코드확인 클릭 시 코드가 맞는지 확인
-  handleSubmit = (e) => {
+  handleFinalSubmit = (e) => {
     e.preventDefault();
     if (parseInt(this.state.number) === this.state.answer) {
       // disabled = "false"
       alert('인증되셨습니다')
+      this.setState({
+        disabledButton: false,
+      })
     } else{
       alert('인증코드를 다시 확인해주세요')
+      this.setState({
+        disabledButton: false,
+      })
     }
   }
+
+  handleSubmit = (e) => {
+    e.preventDefault()
+    const { privateKey, email } = this.state
+    this.props.signup(privateKey, email)
+    console.log('성공~~~')
+  }
+
 
   render() {
     // button에 type를 추가시켜서 form형태로 정보를 전송시킬순 없는건가..?
@@ -93,7 +109,7 @@ class SignupForm extends Component {
             <Button
                 className="SignupForm__CheckCode"
                 title="인증코드 확인"
-                onClick ={this.handleSubmit}
+                onClick ={this.handleFinalSubmit}
               />
           </div>
         </div>
@@ -112,13 +128,24 @@ class SignupForm extends Component {
                 className="SignupForm__Final"
                 title="PK생성"
                 onClick={this.generatePrivateKey}
-                disabled="true"
+                disabled={this.state.disabledButton}
               />
           </div>
         </div>
+        <Button
+          className="Signup"
+          title="회원가입"
+          onClick={this.handleSubmit}
+          />
+        
       </div>
     )
   }
 }
 
-export default SignupForm
+const mapDispatchToProps = (dispatch) => ({
+  signup: (privateKey, email) =>
+    dispatch(signup(privateKey, email)),
+})
+
+export default connect(null, mapDispatchToProps)(SignupForm)
