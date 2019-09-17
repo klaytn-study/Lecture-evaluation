@@ -52,6 +52,38 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
   })  
 }
 
+export const uploadGood = (courseId, evaluationId) => (dispatch) => {
+  LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).call()
+
+  this.receiveKlay(0.1);
+}
+
+
+export const uploadBad = (courseId, evaluationId) => (dispatch) => {
+  LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).call()
+
+  this.receiveKlay(0.1);
+}
+
+export const receiveKlay = (amount) => (dispatch) => {
+  LectureEvaluationContract.methods.transfer(amount).send({
+    from: getWallet().address,
+    gas: '2000000',
+  })
+  .once('receipt', (receipt) => {
+    alert(amount + " KLAY 가 지급되었습니다.");
+  })
+  .once('error', (error) => {
+    ui.showToast({
+      status: 'error',
+      message: error.toString(),
+    })
+  })
+}
+
+
 export const uploadEvaluation = (courseId, content) => (dispatch) => {
   LectureEvaluationContract.methods.uploadEvaluation(courseId, content).call()
+
+  this.receiveKlay(0.5);
 }
