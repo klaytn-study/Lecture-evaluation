@@ -66,8 +66,8 @@ class App extends Component {
 
         <div className='App row'>
         
-        {isLoggedIn ? <LectureListPage /> : <AuthPage />}
-        {isLoggedIn ? < LectureDetail/> : <AuthPage />}
+        {isLoggedIn && <LectureListPage />}
+        {isLoggedIn && < LectureDetail/> }
         </div>
         <Footer />
 
