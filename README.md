@@ -20,6 +20,14 @@
   - 평가 좋아요 / 싫어요 가져오기
     - getEvalGoodBad(int courseId, int idx) -> int good, int bad 리턴
   - 평가에 좋아요 누르기
-    - addEvalGood
+    - addEvalGood(int courseId, int idx)
   - 평가에 싫어요 누르기
-    - addEvalBad
+    - addEvalBad(int courseId, int idx
+- 클레이튼
+  - 컨트랙트 잔고 확인
+    - getBalance()
+  - 클레이튼 결제
+    - deposit()
+  - 클레이튼 보상
+    - transfer(int amount) -> bool 리턴
+  
