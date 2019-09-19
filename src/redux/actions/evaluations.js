@@ -2,7 +2,11 @@ import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
 import { getWallet } from 'utils/crypto'
 import ui from 'utils/ui'
 import { evaluationParser } from 'utils/misc'
-import { SET_EVALUATION } from './actionTypes'
+import { 
+  SET_EVALUATION,
+  UPLOAD_GOOD,
+  UPLOAD_BAD,
+ } from './actionTypes'
 
 const setEvaluation = (course) => ({
     type: SET_EVALUATION,
@@ -54,15 +58,19 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
 
 export const uploadGood = (courseId, evaluationId) => (dispatch) => {
   LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).call()
-
   this.receiveKlay(0.1);
+  return dispatch({
+    type: UPLOAD_GOOD,
+  })
 }
 
 
 export const uploadBad = (courseId, evaluationId) => (dispatch) => {
   LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).call()
-
   this.receiveKlay(0.1);
+  return dispatch({
+    type: UPLOAD_BAD,
+  })
 }
 
 export const receiveKlay = (amount) => (dispatch) => {

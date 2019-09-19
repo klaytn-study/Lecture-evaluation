@@ -6,6 +6,7 @@ import photos from './photos'
 import courses from './course'
 import lectures from './lectures_reducer';
 import selected from './selected_reducer';
+import evaluations from './evaluations';
 
 const reducer = combineReducers({
   routing: routerReducer,
@@ -14,7 +15,8 @@ const reducer = combineReducers({
   photos,
   courses,
   lectures,
-  selected
+  selected,
+  evaluations,
 })
 
 export default reducer;
