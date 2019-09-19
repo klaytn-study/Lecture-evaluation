@@ -4,7 +4,10 @@ import auth from './auth'
 import ui from './ui'
 import photos from './photos'
 import courses from './course'
-import evaluations from './evaluations'
+// import evaluations from './evaluations'
+import lectures from './lectures_reducer';
+import selected from './selected_reducer';
+// import evaluations from './evaluations';
 
 const reducer = combineReducers({
   routing: routerReducer,
@@ -12,6 +15,8 @@ const reducer = combineReducers({
   ui,
   photos,
   courses,
+  lectures,
+  selected,
   evaluations,
 })
 

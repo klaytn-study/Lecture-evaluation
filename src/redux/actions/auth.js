@@ -30,8 +30,8 @@ export const removeWallet = () => (dispatch) => {
 }
 
 export const signup = (privateKey, email) => (dispatch) => {
-  dispatch(integrateWallet(privateKey))
-  LectureEvaluationContract.methods.addUser(privateKey, email).call()
+  const walletAddress = cav.klay.accounts.privateKeyToAccount(privateKey).address
+  LectureEvaluationContract.methods.addUser(walletAddress, email).call()
   return dispatch({
     type: SIGNUP,
   })
