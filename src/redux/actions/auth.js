@@ -39,6 +39,7 @@ export const signup = (privateKey, email) => (dispatch) => {
 
 export const login = (privateKey) => (dispatch) => {
   dispatch(integrateWallet(privateKey))
+  // KlaystagramContract.methods.findUser(privateKey).call()
   LectureEvaluationContract.methods.findUser(privateKey).call()
     .then((isPresent) => {
       if(isPresent) {

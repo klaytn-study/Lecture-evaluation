@@ -65,17 +65,12 @@ class App extends Component {
         {/* {isLoggedIn ? <DetailLecPage /> : <AuthPage />} */}
         
         <Router>
-
-        <Route exact path="/" component={isLoggedIn && LectureListPage}/>
-        <Route path="/detail" component={isLoggedIn && DetailLecPage}/>
+          <Route exact path="/" component={isLoggedIn && LectureListPage} />
+          <Route path="/detail" component={isLoggedIn && DetailLecPage} />
           {/* <Route exact={true} path="/about" render={() => <h1>About</h1>}/> */}
-
         </Router>
         <Footer />
       </div>
-            
-
-  
     )
   }
 }
