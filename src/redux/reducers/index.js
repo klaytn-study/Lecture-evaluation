@@ -17,7 +17,7 @@ const reducer = combineReducers({
   courses,
   lectures,
   selected,
-  evaluations,
+  //evaluations,
 })
 
 export default reducer;
