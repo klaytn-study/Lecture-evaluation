@@ -89,28 +89,28 @@ class SignupForm extends Component {
           </div>
           <div className="col-3">
             <Button
-                className="SignupForm__SendCode"
-                title="인증코드 전송"
-                onClick= {this.handleClick}
-              />
+              className="SignupForm__SendCode"
+              title="인증코드 전송"
+              onClick={this.handleClick}
+            />
           </div>
         </div>
         <div className="row">
           <div className="col-9">
             <Input
-                className="SignupForm__UserInput"
-                placeholder="Please enter your verification code"
-                value={userInput || ''}
-                onChange ={this.handleECodeChange}
-                label="UserInput"
-              />
+              className="SignupForm__UserInput"
+              placeholder="Please enter your verification code"
+              value={userInput || ''}
+              onChange={this.handleECodeChange}
+              label="UserInput"
+            />
           </div>
           <div className="col-3">
             <Button
-                className="SignupForm__CheckCode"
-                title="인증코드 확인"
-                onClick ={this.handleFinalSubmit}
-              />
+              className="SignupForm__CheckCode"
+              title="인증코드 확인"
+              onClick ={this.handleFinalSubmit}
+            />
           </div>
         </div>
         <div className="row">
@@ -125,19 +125,18 @@ class SignupForm extends Component {
           </div>
           <div className="col-3">
             <Button
-                className="SignupForm__Final"
-                title="PK생성"
-                onClick={this.generatePrivateKey}
-                disabled={this.state.disabledButton}
-              />
+              className="SignupForm__Final"
+              title="PK생성"
+              onClick={this.generatePrivateKey}
+              disabled={this.state.disabledButton}
+            />
           </div>
         </div>
         <Button
           className="Signup"
           title="회원가입"
           onClick={this.handleSubmit}
-          />
-        
+        />
       </div>
     )
   }

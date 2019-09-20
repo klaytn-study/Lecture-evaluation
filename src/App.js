@@ -10,16 +10,11 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import LectureList from './pages/LectureListPage';
 import LectureDetail from './pages/LectureDetailPage';
 // import Home from './pages/Home'
-
-
-
+import SearchPage from 'pages/SearchPage'
+import LectureListPage from './pages/LectureListPage'
 
 import * as authActions from 'redux/actions/auth'
-
-import SearchPage from 'pages/SearchPage'
-
 import './App.scss'
-import LectureListPage from './pages/LectureListPage'
 
 class App extends Component {
   constructor(props) {
@@ -62,9 +57,9 @@ class App extends Component {
         <Toast />
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <SearchPage /> : <AuthPage />}
-        <div className='App row'>
+        <div className="row">
           {isLoggedIn && <LectureListPage />}
-          {isLoggedIn && < LectureDetail/> }
+          {isLoggedIn && <LectureDetail /> }
         </div>
         <Footer />
         {/* <Router>
