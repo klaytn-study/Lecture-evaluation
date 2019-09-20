@@ -18,10 +18,10 @@ class EvaluationDetail extends Component {
   btnClickEvent = (e) => {
     // const { eval } = this.props
     if (e.target.className.indexOf('good') != -1) {
-      console.log('g', eval.good)
+      // console.log('g', eval.good)
       // eval.good += 1
     } else if (e.target.className.indexOf('bad') != -1) {
-      console.log('b', eval.bad)
+      // console.log('b', eval.bad)
       // eval.bad += 1
     } else {
       console.log('soso')
@@ -46,7 +46,7 @@ class EvaluationDetail extends Component {
               </label>
             </div>
             <div className="col-2 Pirnt__score">
-              별점 {eval.score}
+              {/* 별점 {eval.score} */}
               별점 4.5
             </div>
           </div>
@@ -79,7 +79,7 @@ class EvaluationDetail extends Component {
 
 const mapStateToProps = (state) => ({
   userAddress: state.auth.address,
-  eval: state.evaluations.eval,
+  // eval: state.evaluations.eval,
 })
 
 const mapDispatchToProps = (dispatch) => ({

@@ -54,21 +54,7 @@ class App extends Component {
         <Toast />
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <ListPage /> : <AuthPage />}
-        {/* {isLoggedIn && <ListPage />} */}
-
-        {/* <div className="row">
-
-          {isLoggedIn && <LectureListPage />}
-          {isLoggedIn && <LectureDetail /> }
-        </div> */}
         <Footer />
-        {/* <Router>
-
-        <Route exact path="/" component={isLoggedIn && LectureListPage}/>
-        <Route path="/detail" component={isLoggedIn && DetailLecPage}/>
-
-
-        </Router> */}
       </div>
     )
   }

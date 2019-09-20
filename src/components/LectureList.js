@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { selectLecture } from '../actions';
+// import { getCourse } from '../redux/actions/courses'
 import { bindActionCreators } from 'redux';
+import * as coursesActions from 'redux/actions/courses'
+
 import './LectureList.scss';
 
 class LectureList extends Component {
@@ -27,6 +30,7 @@ class LectureList extends Component {
     // if (!this.props.lectures) {
     //   return <div> No lectures </div>;
     // }
+    console.log(this.props)
     return (
       <div className="lectureList__list col-3">
         <ul className='list-group'>
@@ -39,12 +43,16 @@ class LectureList extends Component {
 
 function mapStateToProps({lectures}) {
   return {
-    lectures
+    lectures,
+    // lectures: state.dajfl.lecture
   };
 }
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectLecture}, dispatch);
-}
+const mapDispatchToProps = (dispatch) => ({
+  // logout: () => dispatch(authActions.logout()),
+  getCourse: () => dispatch(coursesActions.getCourse()),
+  // lectures: bindActionCreators({ selectLecture}, dispatch)
+  // return bindActionCreators({selectLecture}, dispatch);
+})
 export default connect(mapStateToProps, mapDispatchToProps)(LectureList);
 
