@@ -14,7 +14,7 @@ class LectureDetail extends Component {
     }
     return (
       <div className='lectureDetail__list col'>
-        <br></br>
+        
         <div>{this.props.selected.title} {this.props.selected.professor}&nbsp;<h9>검색결과</h9></div>
         <br></br>
         <DetailLec
