@@ -4,7 +4,9 @@ import SearchInfo from './SearchInfo';
 import { connect } from 'react-redux';
 import { selectLecture } from '../actions';
 import { bindActionCreators } from 'redux';
+// import { getCourse } from '../redux/actions/courses'
 import './SearchBar.scss';
+
 
 class SearchBar extends React.Component {
     constructor (props) {
@@ -72,4 +74,5 @@ function mapStateToProps({lectures}) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({selectLecture}, dispatch);
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
