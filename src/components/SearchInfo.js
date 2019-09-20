@@ -1,10 +1,17 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { selectLecture } from '../actions';
+import { bindActionCreators } from 'redux';
 
-export default class SearchInfo extends React.Component {
+class SearchInfo extends React.Component {
     render() {
         return (
-            <div>{this.props.lecture.name} {this.props.lecture.prof}</div>
+            <li>
+                {this.props.lecture.campus} {this.props.lecture.title} {this.props.lecture.professor}
+            </li>
         );
         
     }
 }
+
+export default SearchInfo;

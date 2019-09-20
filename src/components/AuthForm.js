@@ -18,11 +18,11 @@ class AuthForm extends Component {
     return (
       <div className="AuthForm">
         <h2 className="AuthForm__h2">
-          Klaytn-based NFT<br />
-          photo licensing application
+          Klaytn-based<br />
+          Lecture-Evaluation System
         </h2>
         <h1 className="AuthForm__h1">
-          <img src="images/logo-klaystagram.png" alt="Klaystagram" />
+          강평강평
         </h1>
         {loginForm ? <LoginForm /> : <SignupForm />}
         <p className="AuthForm__message">

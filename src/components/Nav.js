@@ -13,10 +13,7 @@ const Nav = ({ logout, address }) => (
   <header className="Nav">
     <div className="Nav__inner">
       <h1 className="Nav__logo">
-        <img
-          src="images/logo-klaystagram.png"
-          alt="Klaystagram"
-        />
+        강평강평
       </h1>
       <div className="Nav__menus">
         <button

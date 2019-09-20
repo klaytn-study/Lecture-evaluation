@@ -13,7 +13,6 @@ class SignupForm extends Component {
     email: '',
     emailValid: 0, // 발송되는 코드
     userInput: 0, // 유저가 input하는 코드
-    disabledButton: true,
   }
 
   // 최종적으로 실행되어야 하는 것
@@ -72,49 +71,10 @@ class SignupForm extends Component {
 
 
   render() {
-    // button에 type를 추가시켜서 form형태로 정보를 전송시킬순 없는건가..?
-    // 해봤는데 form형태로 전송안시켜도 확인되더라 ㄱㅊㄱㅊ음!
     const { email, userInput, privateKey } = this.state
     return (
       <div className="SignupForm">
-        <div className="row">
-          <div className="col-9">
-            <Input
-              className="SignupForm__inputEmail"
-              placeholder="Please enter your Email"
-              value={email || ''}
-              onChange={this.handleEmailChange}
-              label="Email"
-            />
-          </div>
-          <div className="col-3">
-            <Button
-              className="SignupForm__SendCode"
-              title="인증코드 전송"
-              onClick={this.handleClick}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-9">
-            <Input
-              className="SignupForm__UserInput"
-              placeholder="Please enter your verification code"
-              value={userInput || ''}
-              onChange={this.handleECodeChange}
-              label="UserInput"
-            />
-          </div>
-          <div className="col-3">
-            <Button
-              className="SignupForm__CheckCode"
-              title="인증코드 확인"
-              onClick ={this.handleFinalSubmit}
-            />
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-9">
+          <div>
             <Input
               className="SignupForm__input"
               placeholder="Generate Private Key to Sign up"
@@ -123,20 +83,20 @@ class SignupForm extends Component {
               readOnly
             />
           </div>
-          <div className="col-3">
+          <div>
             <Button
               className="SignupForm__Final"
               title="PK생성"
               onClick={this.generatePrivateKey}
-              disabled={this.state.disabledButton}
             />
           </div>
+          <div>
+            <Button
+            className="Signup"
+            title="회원가입"
+            onClick={this.handleSubmit}
+          />
         </div>
-        <Button
-          className="Signup"
-          title="회원가입"
-          onClick={this.handleSubmit}
-        />
       </div>
     )
   }
