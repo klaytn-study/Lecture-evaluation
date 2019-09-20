@@ -10,9 +10,9 @@ import './LectureList.scss';
 class LectureList extends Component {
 
   renderList(lectures) {
-    return lectures.map(lecture => (
+    return lectures.map((lecture, index) => (
       <li 
-        key={lecture.campus, lecture.title, lecture.professor} 
+        key={index} 
         onClick={(e) => {
           this.props.selectLecture(lecture)
         }}

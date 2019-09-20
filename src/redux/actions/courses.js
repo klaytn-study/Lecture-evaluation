@@ -1,6 +1,4 @@
 import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
-import { getWallet } from 'utils/crypto'
-import ui from 'utils/ui'
 import { courseParser } from 'utils/misc'
 import { SET_COURSE } from './actionTypes'
 
