@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-import '../pages/LectureDetailPage.scss';
+import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
 import DetailLec from '../components/LectureDetail1'
 
@@ -13,13 +13,10 @@ class LectureDetail extends Component {
       return <div> 강의를 선택하세요  </div>;
     }
     return (
-      <div className='list-group col-sm-8'>
+      <div className='lectureDetail__list col'>
         <br></br>
         <div>{this.props.selected.title} {this.props.selected.professor}&nbsp;<h9>검색결과</h9></div>
-
-
         <br></br>
-        
         <DetailLec
           lectitle={this.props.selected.title}
           lectpro={this.props.selected.professor}
@@ -36,4 +33,3 @@ function mapStateToProps({selected}) {
 }
 
 export default connect(mapStateToProps)(LectureDetail);
-

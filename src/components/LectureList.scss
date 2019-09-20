@@ -1,0 +1,13 @@
+.list-group-item {
+  position: relative;
+  width: 100%;
+
+  margin: auto;
+}
+
+.lectureList__list > ul > li {
+  &:active {
+    background-color: $dark-brown;
+    color: $white;
+  }
+}

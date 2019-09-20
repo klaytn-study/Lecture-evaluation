@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, FormControl, Button } from 'react-bootstrap'
 import './SearchBar.scss';
 
 class SearchBar extends Component {
@@ -26,7 +27,8 @@ class SearchBar extends Component {
     render() {
   
       return (
-        <form className="search-bar">
+        <form className="search-bar__control">
+
           <div className="input-group mb-3">
             <input
               onChange={this.handleChange}
@@ -36,14 +38,35 @@ class SearchBar extends Component {
               value={this.state.term}
             />
             <div className="input-group-append">
-              <button className="btn btn-primary" type="button">
+              <button className="btn btn-secondary" type="button">
                 <span>search</span>
               </button>
             </div>
           </div>
           <p/>    
         </form>
-        
+
+        // <Form inline>
+        //   <FormControl type="text" placeholder="Search"  />
+        //   <Button variant="outline-primary">Search</Button>
+        // </Form>
+
+        // <Form>
+        //   <InputGroup>
+        //     <Form.Control
+        //       type="text"
+        //       placeholder="교수이름, 교과목이름"
+        //       ref={node => {
+        //         input = node;
+        //       }}
+        //     />
+        //     <InputGroup.Append>
+        //       <Button type="submit">Search</Button>
+        //     </InputGroup.Append>
+        //   </InputGroup>
+
+
+
       )
     }
 }

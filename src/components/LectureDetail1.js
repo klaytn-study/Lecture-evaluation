@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import '../pages/LectureDetailPage.scss';
-import '../pages/LectureDetailPage';
+import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
 
 import Data from './data';
