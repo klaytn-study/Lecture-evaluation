@@ -12,4 +12,8 @@ export const HIDE_TOAST = 'HIDE_TOAST'
 export const SET_FEED = 'SET_FEED'
 export const SET_COURSE = 'SET_COURSE'
 export const SET_EVALUATION = 'SET_EVALUATION'
+export const GET_EVAL = 'GET_EVAL'
 
+
+export const UPLOAD_GOOD = 'UPLOAD_GOOD'
+export const UPLOAD_BAD = 'UPLOAD_BAD'

@@ -8,6 +8,7 @@ import DropdownBtn from 'components/DropdownBtn'
 import InputStar from 'components/InputStar'
 
 import * as photoActions from 'redux/actions/photos'
+import * as evalActions from 'redux/actions/evaluations'
 import Data from './data'
 
 class UploadEvaluation extends Component {
@@ -56,7 +57,8 @@ class UploadEvaluation extends Component {
       } else if (this.state.evaluation.length < 1) {
         alert('아무 평가도 안쓴거임??? 코인 받을 자격이 없네;;;')
       } else {
-        // this.props.uploadEvaluation(campus, university, major, lectureName, professorName, evaluation)
+        // const {  } = this.state
+        // this.props.uploadEvaluation()
         ui.hideModal()
       }
     }
@@ -158,6 +160,7 @@ class UploadEvaluation extends Component {
 const mapDispatchToProps = (dispatch) => ({
   uploadPhoto: (file, fileName, location, caption) =>
     dispatch(photoActions.uploadPhoto(file, fileName, location, caption)),
+  uploadEvaluation: () => dispatch(evalActions.uploadEvaluation()),
 })
 
 export default connect(null, mapDispatchToProps)(UploadEvaluation)

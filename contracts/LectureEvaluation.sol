@@ -47,6 +47,10 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         courseList.push(c);
     }
 
+    function getBalance() public view returns (uint) {
+        return address(this).balance;
+    }
+
     function getEvalGoodBad(uint _courseId, uint idx) public view returns (uint, uint) {
         return (
             _evaluationList[_courseId][idx].good,
@@ -131,7 +135,9 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     // 사용자 계정으로 클레이를 보내는 함수
     function transfer(uint amount) public returns(bool) {
+        require(getBalance() >= amount, '클레이 잔고가 없어요 ,, ㅠㅠ');
         msg.sender.transfer(amount);
+        return true;
     }
 
   /**
