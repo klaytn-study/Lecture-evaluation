@@ -1,17 +1,19 @@
+import { SET_COURSE } from 'redux/actions/actionTypes'
+
 const initialState = {
-    name: null,
+    course: null,
 }
 
 const courseReducer = (state = initialState, action) => {
     switch(action.type){
-        case SEARCH :
+        case SET_COURSE :
             return{
                 ...state,
-                name: action.payload.name,
+                course: action.payload.course,
             }
         default:
             return state;
     }
 }
 
-//export default courseReducer;
+export default courseReducer;
