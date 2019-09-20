@@ -20,8 +20,7 @@ const DetailLec = ({lectitle,lectpro}) => (
     <tbody>
       {
           lect.map(({ index, comment_tittle, date }) => (
-            <tr>
-
+            <tr key={index}>
               <td>{index}</td>
               <td>{comment_tittle}</td>
               <td>{date}</td>
