@@ -14,7 +14,7 @@ class ListPage extends Component {
   render() {
     return (
       <div className="listPage__div">
-        <SearchBar/>
+        <SearchBar items={this.props}/>
         <UploadButton/>
         <div className="row">
           <LectureList />
@@ -25,4 +25,14 @@ class ListPage extends Component {
   }
 }
 
-export default ListPage;
+function mapStateToProps({lectures}) {
+  return {
+    lectures
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({selectLecture}, dispatch);
+}
+export default connect(mapStateToProps, mapDispatchToProps)(ListPage);
+// export default ListPage;
