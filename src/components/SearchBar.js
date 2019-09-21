@@ -5,7 +5,9 @@ import * as cousreActions from 'redux/actions/courses'
 import { connect } from 'react-redux';
 import { selectLecture } from '../actions';
 import { bindActionCreators } from 'redux';
+import { getEvaluationList } from "../redux/actions/evaluations";
 import './SearchBar.scss';
+
 
 class SearchBar extends React.Component {
   // suggestions: 자동완성(아래에 뜨는거)
@@ -17,6 +19,7 @@ class SearchBar extends React.Component {
       isloading: !props.courses,
       suggestions: [],
       text: '',
+      courseId: 0,
       search: [],
     };
   }
@@ -64,6 +67,7 @@ class SearchBar extends React.Component {
         this.setState(() => ({
             text: value.campus + ' ' + value.title + ' ' + value.professor,
             search: value,
+            courseId: value.id,
             suggestions: [],
         }))
         console.log(value)
@@ -103,14 +107,12 @@ class SearchBar extends React.Component {
             <div className="input-group-append">
               <button 
                   className="btn btn-secondary"
-                  onClick={() => this.props.selectLecture(this.state.search)}
+                  onClick={() => this.props.getEvaluationList(this.state.courseId)}
                   type="button">
                 <span>search</span>
               </button>
             </div>
-            <div className = "Autocomplete">
               {this.renderSuggestions()}
-            </div>
           </div>
           <p/>    
         </form>
@@ -124,6 +126,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getCourse: () => dispatch(cousreActions.getCourse()),
+  getEvaluationList: (courseId) => dispatch(getEvaluationList(courseId)),
   // lectures: bindActionCreators({ selectLecture}, dispatch)
   // return bindActionCreators({selectLecture}, dispatch);
 })
