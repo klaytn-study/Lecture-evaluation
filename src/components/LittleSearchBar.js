@@ -1,42 +1,29 @@
 import React, { Component } from 'react';
 import Loading from 'components/Loading'
-import { Form, FormControl, Button } from 'react-bootstrap'
 import * as cousreActions from 'redux/actions/courses'
 import { connect } from 'react-redux';
-import { selectLecture } from '../actions';
-import { bindActionCreators } from 'redux';
 import { getEvaluationList } from "../redux/actions/evaluations";
 import './SearchBar.scss';
+import './LittleSearchBar.scss';
 
-
-class SearchBar extends React.Component {
+class LittleSearchBar extends React.Component {
   // suggestions: 자동완성(아래에 뜨는거)
   // text: 검색창에 보여지는 값
   // search: 실제로 넘어가는 값
   constructor(props) {
     super(props);
     this.state = {
-      isloading: !props.courses,
       suggestions: [],
       text: '',
       courseId: 0,
       search: [],
     };
   }
-
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
-    if (isUpdatedCourse) {
-      return { isLoading: false }
-    }
-    return null
-  }
-
-  componentDidMount() {
-    const { courses, getCourse } = this.props
-    console.log(getCourse())
-    if (!courses) getCourse()
-  }
+  // componentDidMount() {
+  //   const { courses, getCourse } = this.props
+  //   console.log(getCourse())
+  //   if (!courses) getCourse()
+  // }
 
     // 검색창에 사용자가 검색어를 치면
     // text에 실시간으로 검색어를 반영
@@ -54,9 +41,9 @@ class SearchBar extends React.Component {
         suggestions = filteredLectures.map((lecture) => lecture)
       }
       this.setState({suggestions: suggestions, text: val})
-       
-      // this.setState(() => ({ suggestions }));
-
+    }
+    hadleTest(e) {
+      this.props.Test(e)
     }
 
     // 자동완성의 항목이 선택되면
@@ -64,13 +51,14 @@ class SearchBar extends React.Component {
     // search에 선택한 항목의 값을 저장
     // 자동완성 배열 초기화
     suggestionSelcted(value) {
+      console.log(value)
       this.setState(() => ({
         text: value.campus + ' ' + value.name + ' ' + value.professor,
         search: value,
-        courseId: value.id,
+        courseId: value.courseId,
         suggestions: [],
       }))
-      console.log(value)
+      this.hadleTest(value.id)
     }
 
 
@@ -96,25 +84,16 @@ class SearchBar extends React.Component {
     render() {
       return (
         <form className="search-bar__control">
-          <div className="input-group mb-3">
+          <div className="input-group mb-3 littleSearchBar">
             <input
               onChange={this.onTextChanged}
               type="text"
-              className="form-control-search input-group"
-              placeholder="교과목이름"
+              className="form-control-search input-group littleSearchBar"
+              placeholder="교과목이름을 입력하세요"
               value={this.state.text}
             />
-            <div className="input-group-append">
-              <button
-                  className="btn btn-secondary"
-                  onClick={() => this.props.getEvaluationList(this.state.courseId)}
-                  type="button">
-                <span>search</span>
-              </button>
-            </div>
-              {this.renderSuggestions()}
+            {this.renderSuggestions()}
           </div>
-          {/* <p/>     */}
         </form>
       )
     }
@@ -129,4 +108,4 @@ const mapDispatchToProps = (dispatch) => ({
   getEvaluationList: (courseId) => dispatch(getEvaluationList(courseId)),
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
+export default connect(mapStateToProps, mapDispatchToProps)(LittleSearchBar);

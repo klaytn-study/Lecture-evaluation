@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
+import EvaluationDetail from './EvaluationDetail'
 
 import Data from './data';
 
@@ -19,13 +20,22 @@ const DetailLec = ({lectitle,lectpro}) => (
     </thead>
     <tbody>
       {
-          lect.map(({ index, comment_tittle, date }) => (
-            <tr key={index}>
-              <td>{index}</td>
-              <td>{comment_tittle}</td>
-              <td>{date}</td>
-            </tr>
-          ))
+        lect.map(({ index, comment_tittle, date }) => (
+          <tr
+            key={index}
+            onClick={() => ui.showModal({
+              header: 'EvaluationDetail',
+              content: <EvaluationDetail
+                id="5578"
+                evalId="1"
+              />,
+            })}
+          >
+            <td>{index}</td>
+            <td>{comment_tittle}</td>
+            <td>{date}</td>
+          </tr>
+        ))
       }
     </tbody>
   </Table>

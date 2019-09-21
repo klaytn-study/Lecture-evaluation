@@ -40,8 +40,8 @@ class ListPage extends Component {
 
     return (
       <div className="listPage__div">
-        <SearchBar items={this.props.courses}/>
-        <UploadButton/>
+        <SearchBar items={this.props.courses} />
+        <UploadButton />
         <div className="row">
           <LectureList />
           <LectureDetail />

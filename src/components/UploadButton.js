@@ -8,14 +8,17 @@ import EvaluationDetail from './EvaluationDetail'
 const UploadButton = () => (
   <button
     className="UploadButton"
-    onClick={() => ui.showModal({
-      header: 'Upload Evaluation',
-      content: <UploadEvaluation />,
-    })}
     // onClick={() => ui.showModal({
-    //   header: 'EvaluationDetail',
-    //   content: <EvaluationDetail />,
+    //   header: 'Upload Evaluation',
+    //   content: <UploadEvaluation />,
     // })}
+    onClick={() => ui.showModal({
+      header: 'EvaluationDetail',
+      content: <EvaluationDetail
+        id="5578"
+        evalId="1"
+      />,
+    })}
   >
     Upload Eval
   </button>

@@ -1,0 +1,10 @@
+.littleSearchBar input {
+  width: 100%;
+  font-size: 14px;
+  border: 1px solid $light-grey;
+  padding: 15px 24px;
+  border-radius: 5px;
+
+  &::placeholder { color: $middle-grey; }
+}
+

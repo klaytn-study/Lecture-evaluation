@@ -8,16 +8,21 @@ import {
   UPLOAD_BAD,
  } from './actionTypes'
 
-const setEvaluation = (course) => ({
+const setEvaluation = (evalu) => ({
     type: SET_EVALUATION,
-    payload: { course },
+    payload: { evalu },
   })
+const setEvaluationContent = (evalu) => ({
+  type: GET_EVAL,
+  payload: { evalu },
+})
 
 export const getEvaluationList = (courseId) => (dispatch) => {
   LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => {
         if (!evaluationNum) return []
         const evaluations = []
+        console.log('여기는 actions', evaluationNum)
         for (let i = 0; i < evaluationNum; i++) {
           const evaluation = LectureEvaluationContract.methods.getEvaluation(courseId, i, true).call()
           evaluations.push(evaluation)
@@ -92,6 +97,5 @@ export const receiveKlay = (amount) => (dispatch) => {
 
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
   LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
-
   this.receiveKlay(0.5);
 }

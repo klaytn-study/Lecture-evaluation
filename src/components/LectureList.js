@@ -18,22 +18,20 @@ class LectureList extends Component {
     }
   }
 
-  static getDerivedStateFromProps = (nextProps, prevState) => {
-    const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
-    if (isUpdatedCourse) {
-      return { isLoading: false }
-    }
-    return null
-  }
-  componentDidMount() {
-    const { courses, getCourse } = this.props
-    console.log(getCourse())
-    if (!courses) getCourse()
-  }
+  // static getDerivedStateFromProps = (nextProps, prevState) => {
+  //   const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
+  //   if (isUpdatedCourse) {
+  //     return { isLoading: false }
+  //   }
+  //   return null
+  // }
+  // componentDidMount() {
+  //   const { courses, getCourse } = this.props
+  //   console.log(getCourse())
+  //   if (!courses) getCourse()
+  // }
 
   renderList(lectures) {
-    console.log("2??")
-
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
@@ -52,9 +50,7 @@ class LectureList extends Component {
 
   render() {
     const { courses } = this.props
-    console.log('??', courses)
     if (this.state.isLoading) return <Loading />
-    console.log("1??")
     return (
       <div className="lectureList__list col-3">
         <ul className="list-group">

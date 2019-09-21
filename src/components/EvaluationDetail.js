@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import Loading from 'components/Loading'
 import ui from 'utils/ui'
 import './EvaluationDetail.scss'
 
@@ -11,17 +12,27 @@ class EvaluationDetail extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      // isLoading: !props.feed,
+      isLoading: !props.content,
     }
+  }
+  componentDidMount() {
+    const { content, getEvaluationList, getEvalaution } = this.props
+    const num = 5669
+    if (!content) getEvaluationList(5669)
+    if (!content) getEvalaution(this.props.id, this.props.evalId)
+  }
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
+    if (isUpdatedCourse) {
+      return { isLoading: false }
+    }
+    return null
   }
 
   btnClickEvent = (e) => {
-    // const { eval } = this.props
     if (e.target.className.indexOf('good') != -1) {
-      // console.log('g', eval.good)
       // eval.good += 1
     } else if (e.target.className.indexOf('bad') != -1) {
-      // console.log('b', eval.bad)
       // eval.bad += 1
     } else {
       console.log('soso')
@@ -29,7 +40,10 @@ class EvaluationDetail extends Component {
     $('.Button__exp').attr('disabled', true);
   }
   render() {
-    // const { eval } = this.props
+    console.log('this.props --> ', this.props)
+    console.log('content --> ', this.props)
+    if (this.state.isLoading) return <Loading />
+    // const { content } = this.props
     return (
       <div className="EvaluationDetai">
         <button className="Button__campus" disabled="true">인문캠퍼스</button>
@@ -38,15 +52,15 @@ class EvaluationDetail extends Component {
             <div className="col-10">
               <h2 className="Print__lecture" name="lecname">
                 인공지능의 세계
-                {/* {eval.lecture} */}
+                {/* {content.lecture} */}
               </h2>
               <label className="Print__pofessor" name="proname">
                 전종훈 교수님
-                {/* {eval.professor} */}
+                {/* {content.professor} */}
               </label>
             </div>
             <div className="col-2 Pirnt__score">
-              {/* 별점 {eval.score} */}
+              {/* 별점 {content.score} */}
               별점 4.5
             </div>
           </div>
@@ -54,7 +68,7 @@ class EvaluationDetail extends Component {
             강의평가
           </label>
           <div className="eval" name="eval">
-            {/* {eval.content} */}
+            {/* {content.content} */}
             강의가 너무 재미없어요..ㅠㅠ
             시험도 진짜 어렵구요
             이전 수업 안들으면 이 수업은 모듣는다고 생각하시면 됩니다...
@@ -78,12 +92,14 @@ class EvaluationDetail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  userAddress: state.auth.address,
-  // eval: state.evaluations.eval,
+  content: state.evaluations.evalu,
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getEvalution: () => dispatch(evalActions.getEvalution()),
+  getEvalaution: (courseId, evaluationId) => dispatch(evalActions.getEvalutaion(courseId, evaluationId)),
+  getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
+  uploadGood: () => dispatch(evalActions.uploadEvaluation()),
+  uploadBad: () => dispatch(evalActions.uploadEvaluation()),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EvaluationDetail)
