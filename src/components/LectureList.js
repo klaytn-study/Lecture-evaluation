@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import * as cousreActions from 'redux/actions/courses'
 import { getEvaluationList } from "../redux/actions/evaluations";
 import './LectureList.scss';
-import Data from './data'
 
 
 class LectureList extends Component {

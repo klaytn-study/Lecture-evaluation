@@ -122,8 +122,8 @@ const mapStateToProps = (state) => ({
 })
 const mapDispatchToProps = (dispatch) => ({
   getCourse: () => dispatch(cousreActions.getCourse()),
-  uploadEvaluation: (courseId, title, score, evaluation) =>
-    dispatch(evalActions.uploadEvaluation(courseId, title, score, evaluation)),
+  uploadEvaluation: (courseId, title, score, evaluation) => 
+  dispatch(evalActions.uploadEvaluation(courseId, title, score, evaluation)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(UploadEvaluation)

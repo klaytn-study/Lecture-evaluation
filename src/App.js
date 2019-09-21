@@ -1,13 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import AuthPage from 'pages/AuthPage'
-import FeedPage from 'pages/FeedPage'
 import Footer from 'components/Footer'
 import Nav from 'components/Nav'
 import Modal from 'components/Modal'
 import Toast from 'components/Toast'
 import { BrowserRouter as Router, Route } from 'react-router-dom'; 
-// import Home from './pages/Home'
 import ListPage from './pages/ListPage'
 
 import * as authActions from 'redux/actions/auth'

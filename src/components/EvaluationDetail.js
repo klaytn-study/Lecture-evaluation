@@ -15,10 +15,14 @@ class EvaluationDetail extends Component {
     }
   }
   componentDidMount() {
+    console.log('this.props?? --> ', this.props)
     const { content, getEvaluationList, getEvalaution } = this.props
     const num = 5669
     // if (!content) getEvaluationList(5669)
-    if (!content) getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    if (!content) {
+      console.log('여기를 매번 들어오나?')
+      getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    }
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
     const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
@@ -40,7 +44,10 @@ class EvaluationDetail extends Component {
   }
   render() {
     console.log('this.props --> ', this.props)
-    console.log('content --> ', this.props)
+    console.log('content --> ', this.props.content)
+    const { content, getEvaluationList, getEvalaution } = this.props
+    getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+
     if (this.state.isLoading) return <Loading />
     // const { content } = this.props
     return (
