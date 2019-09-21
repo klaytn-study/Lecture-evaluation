@@ -13,28 +13,23 @@ class LectureList extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isLoading: !props.course,
+      isLoading: !props.courses,
     }
   }
-  // componentWillMount() {
-  //   console.log("3??")
-  //   const { getCourse } = this.props
-  //   getCourse()
-  // }
-  componentDidMount() {
-    const { course, getCourse } = this.props
-    console.log(getCourse())
-    if (!course) getCourse()
-  }
-  // componentDidMount() {
-  //   console.log("3??")
 
-  //   const { getCourse } = this.props
-  //   getCourse()
-  //   const { course } = this.props
-  //   console.log('course', course)
-  //   console.log('courses', courses)
-  // }
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
+    if (isUpdatedCourse) {
+      return { isLoading: false }
+    }
+    return null
+  }
+  componentDidMount() {
+    const { courses, getCourse } = this.props
+    console.log(getCourse())
+    if (!courses) getCourse()
+  }
+
   renderList(lectures) {
     console.log("2??")
 
