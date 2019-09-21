@@ -23,6 +23,7 @@ class SearchBar extends React.Component {
 
     //검색창에 사용자가 검색어를 치면
     //text에 실시간으로 검색어를 반영
+    //suggestions에 검색어(강의명)가 들어간 강좌들을 넣음
     onTextChanged = (e) => {
       const{ items } = this.props;
       const value = e.target.value;
@@ -40,7 +41,7 @@ class SearchBar extends React.Component {
     }
 
     //자동완성의 항목이 선택되면
-    //text는 강의의 제목을 표시
+    //text는 캠퍼스, 강의명, 교수명을 표시
     //search에 선택한 항목의 값을 저장
     //자동완성 배열 초기화
     suggestionSelcted (value) {
@@ -53,7 +54,7 @@ class SearchBar extends React.Component {
     }
 
 
-    //추천검색어를 어떻게 띄워야하는가...ㅅㅂ이게문제야
+    //자동완성 항목(검색한 단어가 강좌명에 들어가있는 강의들)띄우기
     renderSuggestions () {
         const { suggestions } = this.state;
         if(suggestions.length === 0) {
