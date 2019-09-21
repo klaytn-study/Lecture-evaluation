@@ -120,7 +120,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint, string memory, uint) {
+    function getEvaluation(uint _courseId, uint _idx, bool isAll) public payable returns(string memory, uint, string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
         if(!isAll) {
             deposit();
