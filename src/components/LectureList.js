@@ -43,7 +43,7 @@ class LectureList extends Component {
         className='list-group-item'
       >
         { lecture.campus }<br></br>
-        { lecture.title } &nbsp; 
+        { lecture.name } &nbsp; 
         { lecture.professor }
       </li>
     ));
