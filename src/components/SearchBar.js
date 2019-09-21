@@ -81,7 +81,7 @@ class SearchBar extends React.Component {
               onChange={this.onTextChanged}
               type="text"
               className="form-control-search input-group"
-              placeholder="교수이름, 교과목이름"
+              placeholder="교과목이름"
               value={this.state.text}
             />
             <div className="input-group-append">
