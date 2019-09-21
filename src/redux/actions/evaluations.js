@@ -19,7 +19,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
         if (!evaluationNum) return []
         const evaluations = []
         for (let i = 0; i < evaluationNum; i++) {
-          const evaluation = LectureEvaluationContract.methods.getEvaluation(courseId, i, false).call()
+          const evaluation = LectureEvaluationContract.methods.getEvaluation(courseId, i, true).call()
           evaluations.push(evaluation)
         }
         return Promise.all(evaluations)
@@ -90,8 +90,8 @@ export const receiveKlay = (amount) => (dispatch) => {
 }
 
 
-export const uploadEvaluation = (courseId, content) => (dispatch) => {
-  LectureEvaluationContract.methods.uploadEvaluation(courseId, content).call()
+export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
+  LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
 
   this.receiveKlay(0.5);
 }

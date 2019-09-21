@@ -5,14 +5,14 @@
 
 
 }
+
 .search-bar__control{
     width: 100%;
     margin-top:1em;
     margin-bottom:1em;
 }
 
-.AutoCompleteText{
-    width: 100%;
+.form-control-search input-group{
     border: 1px solid grey;
     box-shadow: 0 0 0 1px rgba(0, 0, 0, .1), 0 2px 4px 1px rgba(0, 0, 0, .18);
     font-family: Arial, Helvetica, sans-serif;
@@ -20,8 +20,7 @@
     color: rgba(0, 0, 0, 0.73);
 }
 
-.AutoCompleteText input {
-    width: 100%;
+.form-control-search input-group input {
     border: none;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 14px;
@@ -30,7 +29,7 @@
     outline: none;
 }
 
-.AutoCompleteText ul {
+.form-control-search input-group ul {
     list-style-type: none;
     text-align: left;
     margin: 0;
@@ -38,16 +37,16 @@
     border-top: 1px solid grey;
 }
 
-.AutoCompleteText ul::before{
+.form-control-search input-group ul::before{
     content: "";
 }
 
-.AutoCompleteText li {
+.form-control-search input-group li {
     padding: 10px 5px;
     cursor: pointer;
 }
 
-.AutoCompleteText li:hover{
+.form-control-search input-group li:hover{
     text-decoration: underline;
     background-color: rgba(128, 128, 128, 0.20);
 }

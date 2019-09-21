@@ -28,7 +28,7 @@ const Footer = () => (
           ))
         }
       </ul>
-      <div className="Footer__copyright">&copy; 2018 Klaystagram</div>
+      <div className="Footer__copyright">&copy; 2019 강평강평</div>
     </div>
   </footer>
 )
