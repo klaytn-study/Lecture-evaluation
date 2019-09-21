@@ -26,7 +26,7 @@ const DetailLec = ({lectitle,lectpro}) => (
             onClick={() => ui.showModal({
               header: 'EvaluationDetail',
               content: <EvaluationDetail
-                id="5578"
+                id="5778"
                 evalId="1"
               />,
             })}

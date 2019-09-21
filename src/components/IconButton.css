@@ -1,0 +1,11 @@
+.IconButton {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.IconButton img {
+  width: 100%;
+}
+/*# sourceMappingURL=IconButton.css.map */

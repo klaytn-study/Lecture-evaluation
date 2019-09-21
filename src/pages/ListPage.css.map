@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "AAAA,AAAA,cAAc,CAAC;EACb,KAAK,EAAE,GAAG;EACV,MAAM,EAAE,GAAG;EACX,MAAM,EAAE,IAAI;CACb",
+    "sources": [
+        "ListPage.scss"
+    ],
+    "names": [],
+    "file": "ListPage.css"
+}
