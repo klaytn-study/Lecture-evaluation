@@ -16,12 +16,12 @@ class EvaluationDetail extends Component {
   }
   componentDidMount() {
     console.log('this.props?? --> ', this.props)
-    const { content, getEvaluationList, getEvalaution } = this.props
+    const { content, getEvaluationList, getEvaluation } = this.props
     const num = 5669
     // if (!content) getEvaluationList(5669)
     if (!content) {
       console.log('여기를 매번 들어오나?')
-      getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
     }
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
@@ -45,8 +45,8 @@ class EvaluationDetail extends Component {
   render() {
     console.log('this.props --> ', this.props)
     console.log('content --> ', this.props.content)
-    const { content, getEvaluationList, getEvalaution } = this.props
-    getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    const { content, getEvaluationList, getEvaluation } = this.props
+    getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
 
     if (this.state.isLoading) return <Loading />
     // const { content } = this.props
@@ -102,7 +102,7 @@ const mapStateToProps = (state) => ({
 })
 
 const mapDispatchToProps = (dispatch) => ({
-  getEvalaution: (courseId, evaluationId) => dispatch(evalActions.getEvalutaion(courseId, evaluationId)),
+  getEvaluation: (courseId, evaluationId) => dispatch(evalActions.getEvaluation(courseId, evaluationId)),
   getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
   uploadGood: () => dispatch(evalActions.uploadEvaluation()),
   uploadBad: () => dispatch(evalActions.uploadEvaluation()),

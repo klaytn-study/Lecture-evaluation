@@ -49,7 +49,7 @@ class App extends Component {
     return (
       <div className="App">
         <Modal />
-        <Toast />
+        {/* <Toast /> */}
         {isLoggedIn && <Nav />}
         {isLoggedIn ? <ListPage /> : <AuthPage />}
         <Footer />

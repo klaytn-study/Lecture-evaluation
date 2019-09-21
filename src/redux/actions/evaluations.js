@@ -33,7 +33,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
 }
 
 export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.getEvaluation(courseId, evaluationId, true).send({
+  LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).send({
     from: getWallet().address,
     gas: '2000000',
   })

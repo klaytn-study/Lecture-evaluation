@@ -1,12 +1,14 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import ui from 'utils/ui'
+import Toast from 'components/Toast'
 
 import './Modal.scss'
 
 const Modal = ({ modal }) => (
   modal && (
     <div className="Modal__wrapper">
+      <Toast />
       <div className="Modal" style={modal.width && { width: `${modal.width}` }}>
         <h2 className="Modal__header">{modal.header}</h2>
         <div className="Modal__body">{modal.content}</div>
