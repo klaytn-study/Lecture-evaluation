@@ -5,7 +5,7 @@ import "./ERC721/ERC721Enumerable.sol";
 
 contract LectureEvaluation is ERC721, ERC721Enumerable {
 
-    event EvaluationUploaded (uint256 indexed tokenId, address writer, string content, uint256 timestamp);
+    event EvaluationUploaded (uint256 indexed tokenId, address writer, string title, uint256 score, string content, uint256 timestamp);
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
@@ -27,6 +27,8 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
     struct EvaluationData {
         uint256 tokenId;
         address writer;
+        string title;
+        uint256 score;
         string content;
         uint256 timestamp;
         uint256 good;
@@ -118,13 +120,15 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint) {
+    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint, string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
         if(!isAll) {
             deposit();
         }
 
         return (
+            _evaluationList[_courseId][_idx].title,
+            _evaluationList[_courseId][_idx].score,
             _evaluationList[_courseId][_idx].content,
             _evaluationList[_courseId][_idx].timestamp
         );
@@ -145,8 +149,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
   /**
    * @notice _mint() is from ERC721.sol
    */
-    function uploadEvaluation(uint _courseId, string _content) public {
-        // require(msg.value < )
+    function uploadEvaluation(uint _courseId, string _title, uint _score, string _content) public {
         uint256 tokenId = totalSupply() + 1;
 
         _mint(msg.sender, tokenId);
@@ -154,6 +157,8 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         EvaluationData memory newEvaluationData = EvaluationData({
             tokenId : tokenId,
             writer : msg.sender,
+            title : _title,
+            score : _score,
             content : _content,
             timestamp : now,
             good: 0,
@@ -162,6 +167,6 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
         _evaluationList[_courseId].push(newEvaluationData);
 
-        emit EvaluationUploaded(tokenId, msg.sender, _content, now);
+        emit EvaluationUploaded(tokenId, msg.sender, _title, _score, _content, now);
     }
 }

@@ -33,8 +33,10 @@ export const courseParser = (course) => {
 
 export const evaluationParser = (evaluation) => {
   const evaluationKeys = {
-    0: 'content',
-    1: 'timestamp',
+    0: 'title',
+    1: 'score',
+    2: 'content',
+    3: 'timestamp',
   }
 
   if (!isArray(evaluation)) {

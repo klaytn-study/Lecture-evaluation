@@ -90,8 +90,8 @@ export const receiveKlay = (amount) => (dispatch) => {
 }
 
 
-export const uploadEvaluation = (courseId, content) => (dispatch) => {
-  LectureEvaluationContract.methods.uploadEvaluation(courseId, content).call()
+export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
+  LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
 
   this.receiveKlay(0.5);
 }
