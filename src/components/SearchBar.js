@@ -7,36 +7,36 @@ import { bindActionCreators } from 'redux';
 import './SearchBar.scss';
 
 class SearchBar extends React.Component {
-    
-    //suggestions: 자동완성(아래에 뜨는거)
-    //text: 검색창에 보여지는 값
-    //search: 실제로 넘어가는 값
-    constructor (props) {
-        super(props);
-        this.state = {
-            suggestions:[],
-            text:'',
-            search: [],
-            
-        };
-    }
+  // suggestions: 자동완성(아래에 뜨는거)
+  // text: 검색창에 보여지는 값
+  // search: 실제로 넘어가는 값
+  constructor(props) {
+    super(props);
+    this.state = {
+      suggestions: [],
+      text: '',
+      search: [],
+    };
+  }
 
-    //검색창에 사용자가 검색어를 치면
+    // 검색창에 사용자가 검색어를 치면
     //text에 실시간으로 검색어를 반영
     //suggestions에 검색어(강의명)가 들어간 강좌들을 넣음
     onTextChanged = (e) => {
-      const{ items } = this.props;
-      const value = e.target.value;
-      let suggestions=[];
+      const { items } = this.props;
+      // const value = e.target.value;
+      let suggestions = [];
+      // this.setState({ text: e.target.value })
+      const val = e.target.value
       const filteredLectures = items.lectures.filter((lecture) => {
-        return lecture.title.indexOf(this.state.text) !== -1;
-        }
-      );
-      console.log(filteredLectures);
-      if(value.length > 0){
+        return lecture.title.indexOf(val) !== -1;
+      });
+      if (val.length > 0) {
         suggestions = filteredLectures.map((lecture) => lecture)
       }
-      this.setState(() => ({ suggestions, text: value }));
+      this.setState({suggestions: suggestions, text: val})
+       
+      // this.setState(() => ({ suggestions }));
 
     }
 
@@ -65,7 +65,7 @@ class SearchBar extends React.Component {
             {suggestions.map((item) => 
             <li 
               onClick={() => this.suggestionSelcted(item)}
-              key={item.campus, item.title, item.professor}>
+              key={item.id}>
               {item.campus} {item.title} {item.professor}
             </li>
             )}
