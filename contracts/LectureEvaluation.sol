@@ -48,6 +48,12 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         courseList.push(a);
         courseList.push(b);
         courseList.push(c);
+
+        uploadEvaluation(5669, "좋지만..", 4, "교수님 기침하실 때마다 쓰러질까봐 무서움");
+        uploadEvaluation(5669, "경제 정복", 5, "완전 기초부터 알려주심..!");
+        uploadEvaluation(5778, "운영체제....", 3, "ㅎㅎ..말모");
+        uploadEvaluation(5778, "좋음", 5, "구라임");
+        uploadEvaluation(5778, "짱좋음", 5, "구라임:)");
     }
 
     function getBalance() public view returns (uint) {
@@ -120,7 +126,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         );
     } 
 
-    function getEvaluation(uint _courseId, uint _idx, bool isAll) public payable returns(string memory, uint, string memory, uint) {
+    function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint, string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
         if(!isAll) {
             deposit();
