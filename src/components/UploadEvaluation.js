@@ -53,6 +53,34 @@ class UploadEvaluation extends Component {
       })
     }
   }
+  handleInputChange = (e) => {
+    this.setState({
+      [e.target.name]: e.target.value,
+    })
+  }
+  chechCourseID = (campus, lecName, professor) => {
+    const { courses } = this.props
+    console.log(courses)
+    var campus_ = ''
+    if (campus == 3) {
+      console.log('자연캠퍼스')
+      campus_ = '자연캠퍼스'
+    } else {
+      console.log('인문캠퍼스')
+      campus_ = '인문캠퍼스'
+    }
+    let id_camp = courses.find((c) => {
+      console.log(c.campus)
+      console.log(campus_)
+      c.campus == campus_
+    })
+    var id_lec = id_camp.find((c) => c.name == lecName)
+    var id = id_lec.find((c) => c.professor == professor)
+    console.log('id camp -> ',id_camp)
+    console.log('id lec -> ',id_lec)
+    console.log('id -> ',id)
+    return id
+  }
   youHave2ChooseOpt = () => {
     console.log(this.state)
     if (this.state.campus <= 1 || this.state.major <= 1 || this.state.university <= 1) {
@@ -67,16 +95,13 @@ class UploadEvaluation extends Component {
       } else if (this.state.evaluation.length < 1) {
         alert('아무 평가도 안쓴거임??? 코인 받을 자격이 없네;;;')
       } else {
+        const id = this.chechCourseID(this.state.campus, this.state.lectureName, this.state.professorName)
+        console.log(id)
         // const {  } = this.state
         // this.props.uploadEvaluation()
         ui.hideModal()
       }
     }
-  }
-  handleInputChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value,
-    })
   }
   handleSubmit = (e) => {
     e.preventDefault()
@@ -85,7 +110,6 @@ class UploadEvaluation extends Component {
   
   render() {
     const { courses } = this.props
-    console.log(courses)
     // console.log(this.state.courses)
     const { campus, score, university, major, lectureName, professorName, evaluation, univList, majorList } = this.state
     return (

@@ -5,6 +5,7 @@ import { selectLecture } from '../actions';
 // import { getCourse } from '../redux/actions/courses'
 import { bindActionCreators } from 'redux';
 import * as cousreActions from 'redux/actions/courses'
+import { getEvaluationList } from "../redux/actions/evaluations";
 import './LectureList.scss';
 import Data from './data'
 
@@ -37,7 +38,7 @@ class LectureList extends Component {
       <li 
         key={index} 
         onClick={(e) => {
-          this.props.selectLecture(lecture)
+          this.props.getEvaluationList(lecture.id)
         }}
         // onClick={this}
         className='list-group-item'
@@ -53,9 +54,6 @@ class LectureList extends Component {
     const { courses } = this.props
     console.log('??', courses)
     if (this.state.isLoading) return <Loading />
-    // if (!this.props.lectures) {
-    //   return <div> No lectures </div>;
-    // }
     console.log("1??")
     return (
       <div className="lectureList__list col-3">
@@ -67,19 +65,12 @@ class LectureList extends Component {
   }
 }
 
-// function mapStateToProps({lectures}) {
-//   return {
-//     lectures,
-//     // lectures: state.dajfl.lecture
-//   };
-// }
 const mapStateToProps = (state) => ({
   courses: state.courses.course,
 })
 const mapDispatchToProps = (dispatch) => ({
   getCourse: () => dispatch(cousreActions.getCourse()),
-  // lectures: bindActionCreators({ selectLecture}, dispatch)
-  // return bindActionCreators({selectLecture}, dispatch);
+  getEvaluationList: (courseId) => dispatch(getEvaluationList(courseId)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(LectureList);
 
