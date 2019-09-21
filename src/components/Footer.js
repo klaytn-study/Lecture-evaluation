@@ -3,11 +3,9 @@ import * as URL from 'constants/url'
 import './Footer.scss'
 
 const footerLinks = [
-  { title: 'Klaytn Official Site', link: URL.KLAYTN_HOMEPAGE },
-  { title: 'Klaytnscope', link: URL.KLAYTN_SCOPE },
-  { title: 'Klaytn Wallet', link: URL.KLAYTN_WALLET },
-  { title: 'Klaytn Docs', link: URL.KLAYTN_DOCS },
-  { title: 'Ground X Official Site', link: URL.GROUNDX_HOMEPAGE },
+  { title: '명지대학교', link: URL.MJU_UNIV },
+  { title: 'E-Class', link: URL.E_CLASS },
+  { title: 'Myiweb', link: URL.MYIWEB },
 ]
 
 const Footer = () => (
