@@ -48,7 +48,7 @@ class SearchBar extends React.Component {
       // this.setState({ text: e.target.value })
       const val = e.target.value
       const filteredLectures = items.filter((lecture) => {
-        return lecture.professor.indexOf(val) !== -1;
+        return lecture.name.indexOf(val) !== -1;
       });
       if (val.length > 0) {
         suggestions = filteredLectures.map((lecture) => lecture)
@@ -65,7 +65,7 @@ class SearchBar extends React.Component {
     //자동완성 배열 초기화
     suggestionSelcted (value) {
         this.setState(() => ({
-            text: value.campus + ' ' + value.title + ' ' + value.professor,
+            text: value.campus + ' ' + value.name + ' ' + value.professor,
             search: value,
             courseId: value.id,
             suggestions: [],
@@ -86,7 +86,7 @@ class SearchBar extends React.Component {
             <li 
               onClick={() => this.suggestionSelcted(item)}
               key={item.id}>
-              {item.campus} {item.title} {item.professor}
+              {item.campus} {item.name} {item.professor}
             </li>
             )}
           </ul> 
