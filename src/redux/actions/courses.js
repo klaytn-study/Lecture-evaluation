@@ -8,7 +8,7 @@ const setCourse = (course) => ({
   })
 
 export const getCourse = () => (dispatch) => {
-    course = LectureEvaluationContract.methods.getCourseNum().call()
+    LectureEvaluationContract.methods.getCourseNum().call()
       .then((courseNum) => {
         if (!courseNum) return []
         const courses = []

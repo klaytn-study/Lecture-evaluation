@@ -7,21 +7,31 @@ import Button from 'components/Button'
 import DropdownBtn from 'components/DropdownBtn'
 import InputStar from 'components/InputStar'
 
-import * as photoActions from 'redux/actions/photos'
-import * as evalActions from 'redux/actions/evaluations'
+import * as cousreActions from 'redux/actions/courses'
+import { uploadEvaluation } from '../redux/actions/evaluations'
 import Data from './data'
 
 class UploadEvaluation extends Component {
-  state = {
-    score: 0,
-    campus: '',
-    university: '',
-    major: '',
-    lectureName: '',
-    professorName: '',
-    evaluation: '',
-    univList: [],
-    majorList: [],
+  constructor(props) {
+    super(props)
+    this.state = {
+      score: 0,
+      campus: '',
+      university: '',
+      major: '',
+      lectureName: '',
+      professorName: '',
+      evaluation: '',
+      univList: [],
+      majorList: [],
+    }
+    // this.state = {
+    //   isLoading: !props.feed,
+    // }
+  }
+  componentDidMount() {
+    const { getCourse } = this.props
+    getCourse()
   }
   onChange = (e) => {
     if (e.target.value == 1) {
@@ -73,8 +83,10 @@ class UploadEvaluation extends Component {
     this.youHave2ChooseOpt()
   }
   
-
   render() {
+    const { courses } = this.props
+    console.log(courses)
+    // console.log(this.state.courses)
     const { campus, score, university, major, lectureName, professorName, evaluation, univList, majorList } = this.state
     return (
       <form className="UploadEvaluation" onSubmit={this.handleSubmit}>
@@ -157,10 +169,13 @@ class UploadEvaluation extends Component {
   }
 }
 
+
+const mapStateToProps = (state) => ({
+  courses: state.courses.course,
+})
 const mapDispatchToProps = (dispatch) => ({
-  uploadPhoto: (file, fileName, location, caption) =>
-    dispatch(photoActions.uploadPhoto(file, fileName, location, caption)),
+  getCourse: () => dispatch(cousreActions.getCourse()),
   uploadEvaluation: () => dispatch(evalActions.uploadEvaluation()),
 })
 
-export default connect(null, mapDispatchToProps)(UploadEvaluation)
+export default connect(mapStateToProps, mapDispatchToProps)(UploadEvaluation)
