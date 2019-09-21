@@ -110,7 +110,6 @@ class UploadEvaluation extends Component {
   
   render() {
     const { courses } = this.props
-    // console.log(this.state.courses)
     const { campus, score, university, major, lectureName, professorName, evaluation, univList, majorList } = this.state
     return (
       <form className="UploadEvaluation" onSubmit={this.handleSubmit}>
