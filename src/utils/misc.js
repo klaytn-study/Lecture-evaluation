@@ -17,8 +17,9 @@ export const last = (array) => {
 export const courseParser = (course) => {
   const courseKeys = {
     0: 'id',
-    1: 'name',
-    2: 'professor',
+    1: 'campus',
+    2: 'name',
+    3: 'professor',
   }
 
   if (!isArray(course)) {

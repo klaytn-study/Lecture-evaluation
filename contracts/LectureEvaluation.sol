@@ -19,6 +19,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     struct Course {
         uint256 id;
+        string campus;
         string name;
         string professor;
     }
@@ -39,9 +40,9 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
     }
 
     constructor() public {
-        Course memory a = Course(5668, "금융정책의 이해", "김경제");
-        Course memory b = Course(5778, "운영체제", "최데테");
-        Course memory c = Course(5125, "행정학개론", "이행정");
+        Course memory a = Course(5668, "인문캠퍼스", "금융정책의 이해", "김경제");
+        Course memory b = Course(5778, "인문캠퍼스","운영체제", "최데테");
+        Course memory c = Course(5125, "자연캠퍼스","행정학개론", "이행정");
         courseList.push(a);
         courseList.push(b);
         courseList.push(c);
@@ -107,10 +108,11 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         return _evaluationList[_courseId].length;
     }
 
-    function getCourse (uint _idx) public view returns(uint, string memory, string memory) {
+    function getCourse (uint _idx) public view returns(uint, string memory, string memory, string memory) {
         require(courseList.length > _idx, "올바르지 않은 강의 번호 입니다.");
         return (
             courseList[_idx].id,
+            courseList[_idx].campus,
             courseList[_idx].name,
             courseList[_idx].professor
         );
