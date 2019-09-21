@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import Loading from 'components/Loading'
 import { Form, FormControl, Button } from 'react-bootstrap'
-
+import * as cousreActions from 'redux/actions/courses'
 import { connect } from 'react-redux';
 import { selectLecture } from '../actions';
 import { bindActionCreators } from 'redux';
@@ -13,10 +14,25 @@ class SearchBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      isloading: !props.courses,
       suggestions: [],
       text: '',
       search: [],
     };
+  }
+
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
+    if (isUpdatedCourse) {
+      return { isLoading: false }
+    }
+    return null
+  }
+
+  componentDidMount() {
+    const { courses, getCourse } = this.props
+    console.log(getCourse())
+    if (!courses) getCourse()
   }
 
     // 검색창에 사용자가 검색어를 치면
@@ -28,8 +44,8 @@ class SearchBar extends React.Component {
       let suggestions = [];
       // this.setState({ text: e.target.value })
       const val = e.target.value
-      const filteredLectures = items.lectures.filter((lecture) => {
-        return lecture.title.indexOf(val) !== -1;
+      const filteredLectures = items.filter((lecture) => {
+        return lecture.professor.indexOf(val) !== -1;
       });
       if (val.length > 0) {
         suggestions = filteredLectures.map((lecture) => lecture)
@@ -92,7 +108,9 @@ class SearchBar extends React.Component {
                 <span>search</span>
               </button>
             </div>
-            {this.renderSuggestions()}
+            <div className = "Autocomplete">
+              {this.renderSuggestions()}
+            </div>
           </div>
           <p/>    
         </form>
@@ -100,13 +118,14 @@ class SearchBar extends React.Component {
     }
 }
 
-function mapStateToProps({lectures}) {
-  return {
-    lectures
-  };
-}
+const mapStateToProps = (state) => ({
+  courses: state.courses.course,
+})
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({selectLecture}, dispatch);
-}
+const mapDispatchToProps = (dispatch) => ({
+  getCourse: () => dispatch(cousreActions.getCourse()),
+  // lectures: bindActionCreators({ selectLecture}, dispatch)
+  // return bindActionCreators({selectLecture}, dispatch);
+})
+
 export default connect(mapStateToProps, mapDispatchToProps)(SearchBar);
