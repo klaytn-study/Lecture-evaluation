@@ -6,7 +6,6 @@ import './EvaluationDetail.scss'
 
 import * as evalActions from 'redux/actions/evaluations'
 
-import Data from './data'
 
 class EvaluationDetail extends Component {
   constructor(props) {
@@ -18,8 +17,8 @@ class EvaluationDetail extends Component {
   componentDidMount() {
     const { content, getEvaluationList, getEvalaution } = this.props
     const num = 5669
-    if (!content) getEvaluationList(5669)
-    if (!content) getEvalaution(this.props.id, this.props.evalId)
+    // if (!content) getEvaluationList(5669)
+    if (!content) getEvalaution(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
     const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
