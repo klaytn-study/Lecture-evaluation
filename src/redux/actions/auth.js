@@ -1,11 +1,9 @@
 import { cav } from 'klaytn/caver'
-import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
 import {
   LOGIN,
   LOGOUT,
   INTEGRATE_WALLET,
   REMOVE_WALLET,
-  SIGNUP,
 } from './actionTypes'
 
 export const integrateWallet = (privateKey) => (dispatch) => {
@@ -29,25 +27,11 @@ export const removeWallet = () => (dispatch) => {
   })
 }
 
-export const signup = (privateKey, email) => (dispatch) => {
-  const walletAddress = cav.klay.accounts.privateKeyToAccount(privateKey).address
-  LectureEvaluationContract.methods.addUser(walletAddress, email).call()
-  return dispatch({
-    type: SIGNUP,
-  })
-}
-
 export const login = (privateKey) => (dispatch) => {
   dispatch(integrateWallet(privateKey))
-  // KlaystagramContract.methods.findUser(privateKey).call()
-  LectureEvaluationContract.methods.findUser(privateKey).call()
-    .then((isPresent) => {
-      if(isPresent) {
-        return dispatch({
-          type: LOGIN,
-        })
-      }
-    })
+  return dispatch({
+    type: LOGIN,
+  })
 }
 
 export const logout = () => (dispatch) => {
