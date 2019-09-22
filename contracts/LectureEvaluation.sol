@@ -142,7 +142,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     // 클레이를 송금하는 함수
     function deposit() public payable {
-        require(msg.value > 0, "deposit error");
+        // require(msg.value > 0, "deposit error");
     }
 
     // 사용자 계정으로 클레이를 보내는 함수
