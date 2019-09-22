@@ -46,7 +46,9 @@ class EvaluationDetail extends Component {
     console.log('this.props --> ', this.props)
     console.log('content --> ', this.props.content)
     const { content, getEvaluationList, getEvaluation } = this.props
-    getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    console.log("cousreID ", parseInt(this.props.id, 10));
+    console.log("evaluationID ", parseInt(this.props.evalId, 10));
+    // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
 
     if (this.state.isLoading) return <Loading />
     // const { content } = this.props

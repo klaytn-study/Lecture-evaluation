@@ -34,9 +34,6 @@ export const getEvaluationList = (courseId) => (dispatch) => {
 }
 
 export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
-  console.log("in function");
-  console.log(courseId);
-  console.log(evaluationId);
   LectureEvaluationContract.methods.deposit().send({
     from: getWallet().address,
     gas: '100000',
@@ -86,8 +83,9 @@ export const uploadBad = (courseId, evaluationId) => (dispatch) => {
   })
 }
 
-export const receiveKlay = () => (dispatch) => {
-  LectureEvaluationContract.methods.transfer(cav.utils.toPeb("0.1", "KLAY")).send({
+const receiveKlay = (amount) => (dispatch) => {
+  console.log("receiveKlay");
+  LectureEvaluationContract.methods.transfer(amount).send({
     from: getWallet().address,
     gas: '2000000',
   })
@@ -104,6 +102,6 @@ export const receiveKlay = () => (dispatch) => {
 
 
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
+  receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
   LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
-  // receiveKlay();
 }
