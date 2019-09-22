@@ -36,18 +36,25 @@ class EvaluationDetail extends Component {
   }
   btnClickEvent = (e) => {
     if (e.target.className.indexOf('good') != -1) {
+      console.log('good')
+      console.log('lec : ' + this.props.id + ' eval : ' + this.props.evalId)
+      this.props.uploadGood(this.props.id, this.props.evalId);
       // eval.good += 1
-    } else if (e.target.className.indexOf('bad') != -1) {
-      // eval.bad += 1
     } else {
-      console.log('soso')
-    }
+      console.log('bad')
+      this.props.uploadBad(this.props.id, this.props.evalId);
+      // eval.bad += 1
+    } 
     $('.Button__exp').attr('disabled', true);
   }
   render() {
     const { content } = this.props
     console.log('this.props --> ', this.props)
-    console.log('content --> ', content)
+    console.log('content --> ', this.props.content)
+    const { content, getEvaluationList, getEvaluation } = this.props
+    console.log("cousreID ", parseInt(this.props.id, 10));
+    console.log("evaluationID ", parseInt(this.props.evalId, 10));
+    // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
 
     if (this.state.isLoading) return <Loading />
     // const { content } = this.props
@@ -83,7 +90,7 @@ class EvaluationDetail extends Component {
           </div>
           <div className="row">
             <button className="col Button__exp good" onClick={this.btnClickEvent}>유용했다!</button>
-            <button className="col Button__exp soso" onClick={this.btnClickEvent}>그냥그래~</button>
+            {/* <button className="col Button__exp soso" onClick={this.btnClickEvent}>그냥그래~</button> */}
             <button className="col Button__exp bad" onClick={this.btnClickEvent}>너무 별로야</button>
           </div>
           <label className="Explanation__label1">
@@ -105,8 +112,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getEvaluation: (courseId, evaluationId) => dispatch(evalActions.getEvaluation(courseId, evaluationId)),
   getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
-  uploadGood: () => dispatch(evalActions.uploadEvaluation()),
-  uploadBad: () => dispatch(evalActions.uploadEvaluation()),
+  uploadGood: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
+  uploadBad: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EvaluationDetail)

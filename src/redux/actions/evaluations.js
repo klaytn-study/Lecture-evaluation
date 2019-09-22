@@ -1,4 +1,5 @@
 import LectureEvaluationContract from 'klaytn/LectureEvaluationContract'
+import { cav } from 'klaytn/caver'
 import { getWallet } from 'utils/crypto'
 import ui from 'utils/ui'
 import { evaluationParser } from 'utils/misc'
@@ -33,9 +34,10 @@ export const getEvaluationList = (courseId) => (dispatch) => {
 }
 
 export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).send({
+  LectureEvaluationContract.methods.deposit().send({
     from: getWallet().address,
-    gas: '2000000',
+    gas: '100000',
+    value: cav.utils.toPeb("0.1", "KLAY")
   })
   .once('transactionHash', (txHash) => {
     ui.showToast({
@@ -51,7 +53,10 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
       in klaytn block (#${receipt.blockNumber}) (getEvaluation)`,
       link: receipt.transactionHash,
     })
-    dispatch(setEvaluation(evaluationParser(evaluation)))
+    LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
+      .then((evaluationNum) => { console.log(evaluationNum)})
+    LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).call()
+      .then((evaluation) => dispatch(setEvaluation(evaluationParser(evaluation))))
   })
   .once('error', (error) => {
     ui.showToast({
@@ -78,7 +83,8 @@ export const uploadBad = (courseId, evaluationId) => (dispatch) => {
   })
 }
 
-export const receiveKlay = (amount) => (dispatch) => {
+const receiveKlay = (amount) => (dispatch) => {
+  console.log("receiveKlay");
   LectureEvaluationContract.methods.transfer(amount).send({
     from: getWallet().address,
     gas: '2000000',
@@ -96,6 +102,6 @@ export const receiveKlay = (amount) => (dispatch) => {
 
 
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
+  receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
   LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
-  this.receiveKlay(0.5);
 }

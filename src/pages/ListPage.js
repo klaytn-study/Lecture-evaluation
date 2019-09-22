@@ -15,8 +15,10 @@ import * as cousreActions from 'redux/actions/courses'
 class ListPage extends Component {
   constructor(props) {
     super(props)
+    this.handleTest = this.handleTest.bind(this)
     this.state = {
       isLoading: !props.courses,
+      courseId: 0,
     }
   }
 
@@ -33,14 +35,21 @@ class ListPage extends Component {
     if (!courses) getCourse()
   }
 
+  handleTest = (courseId) => {
+    this.setState({ courseId: parseInt(courseId, 10) })
+  }
+
   render() {
     const { courses } = this.props
+    console.log(this.state.courseId)
     console.log('??', courses)
     if (this.state.isLoading) return <Loading />
 
     return (
       <div className="listPage__div">
-        <SearchBar items={this.props.courses} />
+        <SearchBar 
+            items={this.props.courses}
+            Test={this.handleTest} />
         <UploadButton />
         <div className="row">
           <LectureList />

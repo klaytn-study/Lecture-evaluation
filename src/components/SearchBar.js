@@ -59,6 +59,11 @@ class SearchBar extends React.Component {
 
     }
 
+
+    handleTest(e) {
+      this.props.Test(e)
+    }
+
     // 자동완성의 항목이 선택되면
     // text는 캠퍼스, 강의명, 교수명을 표시
     // search에 선택한 항목의 값을 저장
@@ -70,7 +75,6 @@ class SearchBar extends React.Component {
         courseId: value.id,
         suggestions: [],
       }))
-      console.log(value)
     }
 
 
@@ -107,7 +111,7 @@ class SearchBar extends React.Component {
             <div className="input-group-append">
               <button
                   className="btn btn-secondary"
-                  onClick={() => this.props.getEvaluationList(this.state.courseId)}
+                  onClick={() => this.handleTest(this.state.courseId)}
                   type="button">
                 <span>search</span>
               </button>
@@ -122,6 +126,7 @@ class SearchBar extends React.Component {
 
 const mapStateToProps = (state) => ({
   courses: state.courses.course,
+  
 })
 
 const mapDispatchToProps = (dispatch) => ({

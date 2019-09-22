@@ -5,7 +5,6 @@ import "./ERC721/ERC721Enumerable.sol";
 
 contract LectureEvaluation is ERC721, ERC721Enumerable {
 
-    event EvaluationUploaded (uint256 indexed tokenId, address writer, string title, uint256 score, string content, uint256 timestamp);
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;
     Course[] courseList;
@@ -25,7 +24,6 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
     }
 
     struct EvaluationData {
-        uint256 tokenId;
         address writer;
         string title;
         uint256 score;
@@ -49,11 +47,16 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         courseList.push(b);
         courseList.push(c);
 
-        uploadEvaluation(5669, "좋지만..", 4, "교수님 기침하실 때마다 쓰러질까봐 무서움");
-        uploadEvaluation(5669, "경제 정복", 5, "완전 기초부터 알려주심..!");
-        uploadEvaluation(5778, "운영체제....", 3, "ㅎㅎ..말모");
-        uploadEvaluation(5778, "좋음", 5, "구라임");
-        uploadEvaluation(5778, "짱좋음", 5, "구라임:)");
+        EvaluationData memory e1 = EvaluationData(msg.sender, "좋음", 3, "구라임", 234234, 1, 1);
+        EvaluationData memory e2 = EvaluationData(msg.sender, "운영체제....", 1, "말모...", 2342, 2, 0);
+        EvaluationData memory e3 = EvaluationData(msg.sender, "짱좋음", 5, "ㅎㅎ퀴즈 짱좋음ㅋ", 2323442, 0, 4);
+        EvaluationData memory e4 = EvaluationData(msg.sender, "경제 정복", 5, "완전 기초부터 알려주심..!", 123, 0, 4);
+        EvaluationData memory e5 = EvaluationData(msg.sender, "좋지만..", 4, "교수님 기침하실 때마다 쓰러질까봐 무서움", 123, 0, 4);
+        _evaluationList[5778].push(e1);
+        _evaluationList[5778].push(e2);
+        _evaluationList[5778].push(e3);
+        _evaluationList[5669].push(e4);
+        _evaluationList[5669].push(e5);
     }
 
     function getBalance() public view returns (uint) {
@@ -128,9 +131,6 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     function getEvaluation(uint _courseId, uint _idx, bool isAll) public view returns(string memory, uint, string memory, uint) {
         require(_evaluationList[_courseId].length > _idx, "올바르지 않은 인덱스 입니다.");
-        if(!isAll) {
-            deposit();
-        }
 
         return (
             _evaluationList[_courseId][_idx].title,
@@ -142,7 +142,6 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     // 클레이를 송금하는 함수
     function deposit() public payable {
-        require(msg.value > 0, "deposit error");
     }
 
     // 사용자 계정으로 클레이를 보내는 함수
@@ -156,23 +155,8 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
    * @notice _mint() is from ERC721.sol
    */
     function uploadEvaluation(uint _courseId, string _title, uint _score, string _content) public {
-        uint256 tokenId = totalSupply() + 1;
-
-        _mint(msg.sender, tokenId);
-
-        EvaluationData memory newEvaluationData = EvaluationData({
-            tokenId : tokenId,
-            writer : msg.sender,
-            title : _title,
-            score : _score,
-            content : _content,
-            timestamp : now,
-            good: 0,
-            bad: 0
-        });
+        EvaluationData memory newEvaluationData = EvaluationData(msg.sender, _title, _score, _content, now, 0, 0);
 
         _evaluationList[_courseId].push(newEvaluationData);
-
-        emit EvaluationUploaded(tokenId, msg.sender, _title, _score, _content, now);
     }
 }
