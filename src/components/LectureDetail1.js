@@ -28,6 +28,8 @@ const DetailLec = ({lectitle,lectpro}) => (
               content: <EvaluationDetail
                 id="5778"
                 evalId="1"
+                lecName="아직 불러지지 않음"
+                professor="누구인지 몰라?"
               />,
             })}
           >
