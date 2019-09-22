@@ -22,23 +22,17 @@ class LectureList extends Component {
     }
   }
 
-  // static getDerivedStateFromProps = (nextProps, prevState) => {
-  //   const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
-  //   if (isUpdatedCourse) {
-  //     return { isLoading: false }
-  //   }
-  //   return null
-  // }
-  // componentDidMount() {
-  //   const { courses, getCourse } = this.props
-  //   console.log(getCourse())
-  //   if (!courses) getCourse()
-  // }
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    const isUpdatedCourse = (nextProps.list !== prevState.list) && (nextProps.list !== null)
+    if (isUpdatedCourse) {
+      return { isLoading: false }
+    }
+    return null
+  }
   getSearchList = (id) => {
     this.props.getEvaluationList(id)
   }
   renderList(lectures) {
-    const { list } = this.props
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
