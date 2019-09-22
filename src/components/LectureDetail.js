@@ -5,30 +5,29 @@ import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
 import DetailLec from '../components/LectureDetail1'
 
-import Data from '../components/data';
-
 class LectureDetail extends Component {
   render() {
-    if (!this.props.selected) {
+    const { listItems } = this.props
+    console.log(listItems)
+    if (!this.props.listItems) {
       return <div> 강의를 선택하세요  </div>;
     }
     return (
       <div className='lectureDetail__list col'>
-        
+{/*         
         <div>{this.props.selected.title} {this.props.selected.professor}&nbsp;<h9>검색결과</h9></div>
-        <br></br>
+        <br></br> */}
         <DetailLec
-          lectitle={this.props.selected.title}
-          lectpro={this.props.selected.professor}
+          items={listItems}
         />
       </div>
     );
   }
 }
 
-function mapStateToProps({selected}) {
+function mapStateToProps(state) {
   return {
-    selected: selected
+    // selected: selected
   };
 }
 
