@@ -16,7 +16,7 @@ const DetailLec = ({ items, lectureName, lecturePro, courseId }) => (
     </thead>
     <tbody>
       {
-        items.map(({ index, title, timestamp }) => (
+        items.map(({ title, timestamp }, index) => (
           <tr
             key={title}
             onClick={() => ui.showModal({

@@ -9,7 +9,8 @@ const evalReducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_EVAL:
       return {
-        evalu: action.payload.evalu,
+        ...state,
+        evaluD: action.payload.evaluD,
       }
     case SET_EVALUATION:
       return {
