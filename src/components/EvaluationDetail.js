@@ -15,24 +15,20 @@ class EvaluationDetail extends Component {
     }
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
-    // const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
-    console.log('nextProps content --> ', nextProps.content)
-    const isUpdatedCourse = (nextProps.content !== prevState.content)
-    console.log('여기매번?')
+    const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
+    // const isUpdatedCourse = (nextProps.content !== prevState.content)
     if (isUpdatedCourse) {
       return { isLoading: false }
     }
     return null
   }
   componentDidMount() {
-    console.log('this.props?? --> ', this.props)
     const { content, getEvaluationList, getEvaluation } = this.props
-    const num = 5669
-    if (!content) getEvaluationList(5669)
-    // if (!content) {
-    //   console.log('content가 아예없어..ㅜ')
-    //   // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-    // }
+    // if (!content) getEvaluationList(5669)
+    if (!content) {
+      console.log('content가 아예없어..ㅜ')
+      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    }
   }
   btnClickEvent = (e) => {
     if (e.target.className.indexOf('good') != -1) {
@@ -48,10 +44,8 @@ class EvaluationDetail extends Component {
     $('.Button__exp').attr('disabled', true);
   }
   render() {
-    const { content } = this.props
-    console.log('this.props --> ', this.props)
     console.log('content --> ', this.props.content)
-    const { content, getEvaluationList, getEvaluation } = this.props
+    const { content, lecName, professor } = this.props
     console.log("cousreID ", parseInt(this.props.id, 10));
     console.log("evaluationID ", parseInt(this.props.evalId, 10));
     // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
@@ -65,28 +59,27 @@ class EvaluationDetail extends Component {
           <div className="row">
             <div className="col-10">
               <h2 className="Print__lecture" name="lecname">
-                인공지능의 세계
-                {/* {content.lecture} */}
+                {lecName}
               </h2>
               <label className="Print__pofessor" name="proname">
-                전종훈 교수님
-                {/* {content.professor} */}
+                {professor}
               </label>
             </div>
             <div className="col-2 Pirnt__score">
-              {/* 별점 {content.score} */}
-              별점 4.5
+              별점 : {content.score}
             </div>
+          </div>
+          <label className="Input__label" htmlFor="title">
+            제목
+          </label>
+          <div className="title" name="title">
+            {content.title}
           </div>
           <label className="Input__label" htmlFor="eval">
             강의평가
           </label>
           <div className="eval" name="eval">
-            {/* {content.content} */}
-            강의가 너무 재미없어요..ㅠㅠ
-            시험도 진짜 어렵구요
-            이전 수업 안들으면 이 수업은 모듣는다고 생각하시면 됩니다...
-            성적도 일정 이상 안나오면 다 D예요...!!
+            {content.content}
           </div>
           <div className="row">
             <button className="col Button__exp good" onClick={this.btnClickEvent}>유용했다!</button>
@@ -111,7 +104,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   getEvaluation: (courseId, evaluationId) => dispatch(evalActions.getEvaluation(courseId, evaluationId)),
-  getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
+  // getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
   uploadGood: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
   uploadBad: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
 })
