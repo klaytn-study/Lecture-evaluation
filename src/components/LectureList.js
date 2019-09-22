@@ -16,33 +16,30 @@ class LectureList extends Component {
     super(props)
     this.state = {
       isLoading: !props.courses,
+      lectureName: "",
+      lecturePro: "",
+      courseId: "",
     }
   }
 
-  // static getDerivedStateFromProps = (nextProps, prevState) => {
-  //   const isUpdatedCourse = (nextProps.courses !== prevState.courses) && (nextProps.courses !== null)
-  //   if (isUpdatedCourse) {
-  //     return { isLoading: false }
-  //   }
-  //   return null
-  // }
-  // componentDidMount() {
-  //   const { courses, getCourse } = this.props
-  //   console.log(getCourse())
-  //   if (!courses) getCourse()
-  // }
-
+  static getDerivedStateFromProps = (nextProps, prevState) => {
+    const isUpdatedCourse = (nextProps.list !== prevState.list) && (nextProps.list !== null)
+    if (isUpdatedCourse) {
+      return { isLoading: false }
+    }
+    return null
+  }
+  getSearchList = (id) => {
+    this.props.getEvaluationList(id)
+  }
   renderList(lectures) {
-    const { list } = this.props
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
         onClick={(e) => {
           this.props.getEvaluationList(lecture.id)
-          console.log(lecture.id)
-          console.log(list)
+          this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id })
         }}
-        // onClick={this}
         className='list-group-item'
       >
         { lecture.campus }<br></br>
@@ -56,6 +53,9 @@ class LectureList extends Component {
     const { courses, list } = this.props
     console.log(list)
     if (this.state.isLoading) return <Loading />
+    if (this.props.courseId) {
+      this.getSearchList(this.props.courseId)
+    }
     return (
       <div className="row">
         <div className="lectureList__list col-4">
@@ -65,10 +65,13 @@ class LectureList extends Component {
         </div>
         <LectureDetail
           className="col-8"
+          lectureName={this.state.lectureName}
+          lecturePro={this.state.lecturePro}
+          courseId={this.state.courseId}
           listItems={list}
         />
       </div>
-    );
+    )
   }
 }
 

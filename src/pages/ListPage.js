@@ -51,7 +51,9 @@ class ListPage extends Component {
             items={this.props.courses}
             Test={this.handleTest} />
         <UploadButton />
-        <LectureList />
+        <LectureList
+          courseId={this.state.courseId}
+        />
       </div>
     );
   }

@@ -7,15 +7,16 @@ import {
   SET_EVALUATION,
   UPLOAD_GOOD,
   UPLOAD_BAD,
+  GET_EVAL,
  } from './actionTypes'
 
 const setEvaluation = (evalu) => ({
     type: SET_EVALUATION,
     payload: { evalu },
   })
-const setEvaluationContent = (evalu) => ({
+const setEvaluationContent = (evaluD) => ({
   type: GET_EVAL,
-  payload: { evalu },
+  payload: { evaluD },
 })
 
 export const getEvaluationList = (courseId) => (dispatch) => {
@@ -56,7 +57,7 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
     LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => { console.log(evaluationNum)})
     LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).call()
-      .then((evaluation) => dispatch(setEvaluation(evaluationParser(evaluation))))
+      .then((evaluation) => dispatch(setEvaluationContent(evaluationParser(evaluation))))
   })
   .once('error', (error) => {
     ui.showToast({

@@ -3,7 +3,6 @@ import ui from 'utils/ui'
 import UploadEvaluation from 'components/UploadEvaluation'
 
 import './UploadButton.scss'
-import EvaluationDetail from './EvaluationDetail'
 
 const UploadButton = () => (
   <button
