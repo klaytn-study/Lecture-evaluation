@@ -14,24 +14,26 @@ class EvaluationDetail extends Component {
       isLoading: !props.content,
     }
   }
-  componentDidMount() {
-    console.log('this.props?? --> ', this.props)
-    const { content, getEvaluationList, getEvaluation } = this.props
-    const num = 5669
-    // if (!content) getEvaluationList(5669)
-    if (!content) {
-      console.log('여기를 매번 들어오나?')
-      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-    }
-  }
   static getDerivedStateFromProps = (nextProps, prevState) => {
-    const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
+    // const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
+    console.log('nextProps content --> ', nextProps.content)
+    const isUpdatedCourse = (nextProps.content !== prevState.content)
+    console.log('여기매번?')
     if (isUpdatedCourse) {
       return { isLoading: false }
     }
     return null
   }
-
+  componentDidMount() {
+    console.log('this.props?? --> ', this.props)
+    const { content, getEvaluationList, getEvaluation } = this.props
+    const num = 5669
+    if (!content) getEvaluationList(5669)
+    // if (!content) {
+    //   console.log('content가 아예없어..ㅜ')
+    //   // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    // }
+  }
   btnClickEvent = (e) => {
     if (e.target.className.indexOf('good') != -1) {
       // eval.good += 1
@@ -43,10 +45,9 @@ class EvaluationDetail extends Component {
     $('.Button__exp').attr('disabled', true);
   }
   render() {
+    const { content } = this.props
     console.log('this.props --> ', this.props)
-    console.log('content --> ', this.props.content)
-    const { content, getEvaluationList, getEvaluation } = this.props
-    getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    console.log('content --> ', content)
 
     if (this.state.isLoading) return <Loading />
     // const { content } = this.props
