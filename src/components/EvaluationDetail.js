@@ -12,39 +12,38 @@ class EvaluationDetail extends Component {
     super(props)
     this.state = {
       isLoading: !props.content,
+      cosid:0,
     }
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
     const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
-    // const isUpdatedCourse = (nextProps.content !== prevState.content)
+    const isUpdatedContent = (nextProps.evalId !== prevState.evalId) && (nextProps.evalId !== null)
     if (isUpdatedCourse) {
+      return { isLoading: false }
+    } else if (!isUpdatedContent) {
+      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
       return { isLoading: false }
     }
     return null
   }
   componentDidMount() {
-    const { content, getEvaluationList, getEvaluation } = this.props
-    // if (!content) getEvaluationList(5669)
-    if (!content) {
-      console.log('content가 아예없어..ㅜ')
-      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-    }
+    const { content, getEvaluation } = this.props
+    getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+
+    // if (!content) getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
   }
   btnClickEvent = (e) => {
     if (e.target.className.indexOf('good') != -1) {
       console.log('good')
       console.log('lec : ' + this.props.id + ' eval : ' + this.props.evalId)
       this.props.uploadGood(this.props.id, this.props.evalId);
-      // eval.good += 1
     } else {
       console.log('bad')
       this.props.uploadBad(this.props.id, this.props.evalId);
-      // eval.bad += 1
     } 
     $('.Button__exp').attr('disabled', true);
   }
   render() {
-    console.log('content --> ', this.props.content)
     const { content, lecName, professor } = this.props
     console.log("cousreID ", parseInt(this.props.id, 10));
     console.log("evaluationID ", parseInt(this.props.evalId, 10));
@@ -99,7 +98,7 @@ class EvaluationDetail extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  content: state.evaluations.evalu,
+  content: state.evaluations.evaluD,
 })
 
 const mapDispatchToProps = (dispatch) => ({

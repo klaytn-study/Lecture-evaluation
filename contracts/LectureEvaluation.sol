@@ -11,6 +11,8 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
     mapping (uint256 => Eval2Eval[]) private _eval2evalList;
 
+    event EvalUploaded(uint256 indexed tokenId, uint courseId, string title, uint score, string content, uint timestamp, uint good, uint bad);
+
     struct User {
         address userAddress;
         string email;
@@ -158,5 +160,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         EvaluationData memory newEvaluationData = EvaluationData(msg.sender, _title, _score, _content, now, 0, 0);
 
         _evaluationList[_courseId].push(newEvaluationData);
+
+        emit EvalUploaded(tokenId, _courseId, _title, _score, _content, now, 0, 0);
     }
 }

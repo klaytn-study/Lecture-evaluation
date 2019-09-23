@@ -7,15 +7,16 @@ import {
   SET_EVALUATION,
   UPLOAD_GOOD,
   UPLOAD_BAD,
+  GET_EVAL,
  } from './actionTypes'
 
 const setEvaluation = (evalu) => ({
     type: SET_EVALUATION,
     payload: { evalu },
   })
-const setEvaluationContent = (evalu) => ({
+const setEvaluationContent = (evaluD) => ({
   type: GET_EVAL,
-  payload: { evalu },
+  payload: { evaluD },
 })
 
 export const getEvaluationList = (courseId) => (dispatch) => {
@@ -56,7 +57,7 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
     LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => { console.log(evaluationNum)})
     LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).call()
-      .then((evaluation) => dispatch(setEvaluation(evaluationParser(evaluation))))
+      .then((evaluation) => dispatch(setEvaluationContent(evaluationParser(evaluation))))
   })
   .once('error', (error) => {
     ui.showToast({
@@ -68,7 +69,7 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
 
 export const uploadGood = (courseId, evaluationId) => (dispatch) => {
   LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).call()
-  this.receiveKlay(0.1);
+  // receiveKlay(0.1);
   return dispatch({
     type: UPLOAD_GOOD,
   })
@@ -77,7 +78,7 @@ export const uploadGood = (courseId, evaluationId) => (dispatch) => {
 
 export const uploadBad = (courseId, evaluationId) => (dispatch) => {
   LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).call()
-  this.receiveKlay(0.1);
+  // receiveKlay(0.1);
   return dispatch({
     type: UPLOAD_BAD,
   })
@@ -102,6 +103,34 @@ const receiveKlay = (amount) => (dispatch) => {
 
 
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
-  receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
-  LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).call()
+
+  console.log('uploadEvaluation called')
+  
+  LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).send({
+    from: getWallet().address,
+    gas: '200000000'
+  })
+      .once('transactionHash', (txHash)=> {
+        ui.showToast({
+          status: 'pending',
+          message: `sending evaluation`,
+          txHash,
+        })
+      .once('receipt', (receipt)=> {
+        ui.showToast({
+          status: receipt.status ? 'success' : 'fail',
+          message: 'receive eval?'
+        })
+        tokenId = receipt.events.EvaluationUploaded.returnValues[0]
+        //dispatch(updateFeed(tokenId))
+      })
+      .once('error', (error)=> {
+        ui.showToast({
+          status: 'error',
+          message: error.toString(),
+        })
+      })
+    })
+
+  // receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
 }
