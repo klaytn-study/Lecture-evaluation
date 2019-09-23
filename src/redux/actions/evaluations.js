@@ -29,6 +29,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
           evaluations.push(evaluation)
         }
         return Promise.all(evaluations)
+
       })
       .then((evaluations) => dispatch(setEvaluation(evaluationParser(evaluations))))
 }
