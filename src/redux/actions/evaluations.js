@@ -5,8 +5,6 @@ import ui from 'utils/ui'
 import { evaluationParser } from 'utils/misc'
 import { 
   SET_EVALUATION,
-  UPLOAD_GOOD,
-  UPLOAD_BAD,
   GET_EVAL,
  } from './actionTypes'
 
@@ -38,7 +36,7 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
   LectureEvaluationContract.methods.deposit().send({
     from: getWallet().address,
     gas: '100000',
-    value: cav.utils.toPeb("0.1", "KLAY")
+    value: cav.utils.toPeb("1", "KLAY")
   })
   .once('transactionHash', (txHash) => {
     ui.showToast({
@@ -68,30 +66,80 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
 }
 
 export const uploadGood = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).call()
-  // receiveKlay(0.1);
-  return dispatch({
-    type: UPLOAD_GOOD,
+  console.log('upload Good called')
+  console.log(courseId)
+  console.log(evaluationId)
+
+  LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).send({
+    from: getWallet().address,
+    gas: '20000000'
   })
+    .once('transactionHash', (txHash)=>{
+      ui.showToast({
+        status:'pending',
+        message: 'sending good',
+        txHash
+      })
+    })
+    .once('receipt', (receipt) => {
+      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      ui.showToast({
+        status: receipt.status ? 'success' : 'fail',
+        message: `Received receipt`,
+        link: receipt.transactionHash
+      })
+    })
+    .once('error', (error) => {
+      ui.showToast({
+        status: 'error',
+        message: error.toString(),
+      })
+    })
+
+    // receiveKlay("0.1");
+    
 }
 
 
 export const uploadBad = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).call()
-  // receiveKlay(0.1);
-  return dispatch({
-    type: UPLOAD_BAD,
+  console.log('upload Good called')
+  console.log(courseId)
+  console.log(evaluationId)
+
+  LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).send({
+    from: getWallet().address,
+    gas: '20000000'
   })
+    .once('transactionHash', (txHash)=>{
+      ui.showToast({
+        status:'pending',
+        message: 'sending bad',
+        txHash
+      })
+    })
+    .once('receipt', (receipt) => {
+      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      ui.showToast({
+        status: receipt.status ? 'success' : 'fail',
+        message: `Received receipt`,
+        link: receipt.transactionHash
+      })
+    })
+    .once('error', (error) => {
+      ui.showToast({
+        status: 'error',
+        message: error.toString(),
+      })
+    })
 }
 
 const receiveKlay = (amount) => {
-  console.log("receiveKlay");
   LectureEvaluationContract.methods.transfer(amount).send({
     from: getWallet().address,
     gas: '2000000',
   })
   .once('receipt', (receipt) => {
-    alert(amount + " KLAY 가 지급되었습니다.");
+    alert(cav.utils.fromPeb(amount, 'KLAY') + " KLAY 가 지급되었습니다.");
   })
   .once('error', (error) => {
     ui.showToast({
@@ -103,13 +151,6 @@ const receiveKlay = (amount) => {
 
 
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
-
-  console.log('uploadEvaluation called')
-  console.log(courseId)
-  console.log(title)
-  console.log(score)
-  console.log(content)
-
   LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).send({
     from: getWallet().address,
     gas: '20000000',
@@ -122,7 +163,7 @@ export const uploadEvaluation = (courseId, title, score, content) => (dispatch) 
       })
     })
     .once('receipt', (receipt) => {
-      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      receiveKlay(cav.utils.toPeb("1", "KLAY"));
       ui.showToast({
         status: receipt.status ? 'success' : 'fail',
         message: `Received receipt! It means your transaction is in klaytn block (upload evaluation)`,
@@ -135,9 +176,4 @@ export const uploadEvaluation = (courseId, title, score, content) => (dispatch) 
         message: error.toString(),
       })
     })
-
-    receiveKlay("0.1");
-
-
-  
 }

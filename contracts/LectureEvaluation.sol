@@ -42,12 +42,22 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
     }
 
     constructor() public {
-        Course memory a = Course(5668, "인문캠퍼스", "금융정책의 이해", "김경제");
-        Course memory b = Course(5778, "인문캠퍼스","운영체제", "최데테");
-        Course memory c = Course(5125, "자연캠퍼스","행정학개론", "이행정");
+        Course memory a = Course(5668, "인문캠퍼스", "금융정책의 이해", "박광민");
+        Course memory b = Course(5778, "인문캠퍼스","운영체제", "김상균");
+        Course memory c = Course(5966, "인문캠퍼스","소설의 이해", "편혜영");
+        Course memory d = Course(5185, "인문캠퍼스","영어회화3", "다니엘");
+        Course memory e = Course(5125, "자연캠퍼스","임베디드시스템", "서일주");
+        Course memory f = Course(977, "자연캠퍼스","바둑교훈학", "정수현");
+        Course memory g = Course(1147, "자연캠퍼스","대지조성계획", "서무현");
+        Course memory h = Course(1033, "자연캠퍼스","오케스트라편곡법", "김시형");
         courseList.push(a);
         courseList.push(b);
         courseList.push(c);
+        courseList.push(d);
+        courseList.push(e);
+        courseList.push(f);
+        courseList.push(g);
+        courseList.push(h);
 
         EvaluationData memory e1 = EvaluationData(msg.sender, "좋음", 3, "구라임", 234234, 1, 1);
         EvaluationData memory e2 = EvaluationData(msg.sender, "운영체제....", 1, "말모...", 2342, 2, 0);
@@ -57,8 +67,8 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         _evaluationList[5778].push(e1);
         _evaluationList[5778].push(e2);
         _evaluationList[5778].push(e3);
-        _evaluationList[5669].push(e4);
-        _evaluationList[5669].push(e5);
+        _evaluationList[5668].push(e4);
+        _evaluationList[5668].push(e5);
     }
 
     function getBalance() public view returns (uint) {

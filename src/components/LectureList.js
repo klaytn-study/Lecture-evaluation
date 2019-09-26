@@ -19,9 +19,6 @@ class LectureList extends Component {
       courseId: '',
       lname: '',
       pname: '',
-      // lectureName: "",
-      // lecturePro: "",
-      // courseId: "",
     }
   }
 
@@ -40,10 +37,10 @@ class LectureList extends Component {
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
-        onClick={(e) => {
+        onClick={(lname, pname, courseId) => {
           this.props.getEvaluationList(lecture.id)
           this.handleTest(lecture.name, lecture.professor, lecture.id)
-          // this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id })
+          // this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id, lName: lecture.lname, pName: lecture.pname })
         }}
         className='list-group-item'
       >
@@ -78,4 +75,3 @@ const mapDispatchToProps = (dispatch) => ({
   getEvaluationList: (courseId) => dispatch(getEvaluationList(courseId)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(LectureList);
-
