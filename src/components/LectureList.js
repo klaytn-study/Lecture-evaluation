@@ -37,7 +37,7 @@ class LectureList extends Component {
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
-        onClick={(lname, pname, courseId) => {
+        onClick={() => {
           this.props.getEvaluationList(lecture.id)
           this.handleTest(lecture.name, lecture.professor, lecture.id)
           // this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id, lName: lecture.lname, pName: lecture.pname })
