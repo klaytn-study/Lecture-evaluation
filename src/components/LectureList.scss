@@ -6,7 +6,17 @@
 }
 
 .lectureList__list > ul > li {
+  outline: none;
+  &:hover {
+    background-color: $dark-brown;
+    color: $white;
+    cursor: pointer;
+  }
   &:active {
+    background-color: $dark-brown;
+    color: $white;
+  }
+  &:focus {
     background-color: $dark-brown;
     color: $white;
   }
