@@ -45,9 +45,8 @@ class LectureList extends Component {
         }}
         className='list-group-item'
       >
-        { lecture.campus }<br></br>
-        { lecture.name } &nbsp; 
-        { lecture.professor }
+        <p className="campus" style={{color: 'gray', fontSize: '10px', }}>{ lecture.campus }</p>
+        <p>{ lecture.name } - { lecture.professor }</p>
       </li>
     ));
   }
