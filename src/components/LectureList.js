@@ -29,9 +29,6 @@ class LectureList extends Component {
     }
     return null
   }
-  getSearchList = (id) => {
-    this.props.getEvaluationList(id)
-  }
   renderList(lectures) {
     return lectures.map((lecture, index) => (
       <li 
@@ -53,24 +50,19 @@ class LectureList extends Component {
     const { courses, list } = this.props
     console.log(list)
     if (this.state.isLoading) return <Loading />
-    if (this.props.courseId) {
-      this.getSearchList(this.props.courseId)
-    }
+    //이부분 고쳐야함
+    // if (this.props.courseId) {
+    //   this.getSearchList(this.props.courseId)
+    // }
+    //
     return (
-      <div className="row">
+
         <div className="lectureList__list col-4">
           <ul className="list-group">
             {this.renderList(courses)}
           </ul>
         </div>
-        <LectureDetail
-          className="col-8"
-          lectureName={this.state.lectureName}
-          lecturePro={this.state.lecturePro}
-          courseId={this.state.courseId}
-          listItems={list}
-        />
-      </div>
+
     )
   }
 }

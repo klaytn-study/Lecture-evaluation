@@ -9,7 +9,7 @@ const DetailLec = ({ items, lectureName, lecturePro, courseId }) => (
   <Table className="form-control-lecture" bordered hover >
     <thead>
       <tr>
-        <th>{lectureName}</th>
+        <th>Index</th>
         <th>Tittle</th>
         <th>Date</th>
       </tr>
