@@ -59,11 +59,11 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         courseList.push(g);
         courseList.push(h);
 
-        EvaluationData memory e1 = EvaluationData(msg.sender, "좋음", 3, "구라임", 234234, 1, 1);
-        EvaluationData memory e2 = EvaluationData(msg.sender, "운영체제....", 1, "말모...", 2342, 2, 0);
-        EvaluationData memory e3 = EvaluationData(msg.sender, "짱좋음", 5, "ㅎㅎ퀴즈 짱좋음ㅋ", 2323442, 0, 4);
-        EvaluationData memory e4 = EvaluationData(msg.sender, "경제 정복", 5, "완전 기초부터 알려주심..!", 123, 0, 4);
-        EvaluationData memory e5 = EvaluationData(msg.sender, "좋지만..", 4, "교수님 기침하실 때마다 쓰러질까봐 무서움", 123, 0, 4);
+        EvaluationData memory e1 = EvaluationData(msg.sender, "좋음", 3, "구라임", 1569505157, 1, 1);
+        EvaluationData memory e2 = EvaluationData(msg.sender, "운영체제....", 1, "말모...", 1569505613, 2, 0);
+        EvaluationData memory e3 = EvaluationData(msg.sender, "짱좋음", 5, "ㅎㅎ퀴즈 짱좋음ㅋ", 1569505553, 0, 4);
+        EvaluationData memory e4 = EvaluationData(msg.sender, "경제 정복", 5, "완전 기초부터 알려주심..!", 1569505519, 0, 4);
+        EvaluationData memory e5 = EvaluationData(msg.sender, "좋지만..", 4, "교수님 기침하실 때마다 쓰러질까봐 무서움", 1569505613, 0, 4);
         _evaluationList[5778].push(e1);
         _evaluationList[5778].push(e2);
         _evaluationList[5778].push(e3);
