@@ -87,7 +87,7 @@ class EvaluationDetail extends Component {
             <button className="col Button__exp bad" onClick={this.btnClickEvent}>너무 별로야</button>
           </div>
           <label className="Explanation__label1">
-            평가를 해주시면 &quot;10 klaytn&quot;을 돌려드려요!
+            평가를 해주시면 &quot;0.5 klay&quot;을 돌려드려요!
           </label>
           <label className="Explanation__label2">
             한번 선택 하시면 되돌릴 수 없어요
