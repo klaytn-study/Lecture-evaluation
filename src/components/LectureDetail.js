@@ -26,10 +26,4 @@ class LectureDetail extends Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // selected: selected
-  };
-}
-
-export default connect(mapStateToProps)(LectureDetail);
+export default LectureDetail;

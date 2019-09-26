@@ -50,11 +50,6 @@ class LectureList extends Component {
     const { courses, list } = this.props
     console.log(list)
     if (this.state.isLoading) return <Loading />
-    //이부분 고쳐야함
-    // if (this.props.courseId) {
-    //   this.getSearchList(this.props.courseId)
-    // }
-    //
     return (
 
         <div className="lectureList__list col-4">

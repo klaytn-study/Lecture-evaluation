@@ -74,6 +74,7 @@ class ListPage extends Component {
           />
           <LectureDetail
             className="col-8"
+            lectureName={this.state.lname}
             lecturePro={this.state.pname}
             courseId={this.state.courseId}
             listItems={list}
