@@ -35,7 +35,8 @@ class LectureList extends Component {
   }
   renderList(lectures) {
     return lectures.map((lecture, index) => (
-      <li 
+      <li
+        tabIndex="1" 
         key={index} 
         onClick={() => {
           this.props.getEvaluationList(lecture.id)
@@ -56,8 +57,10 @@ class LectureList extends Component {
     console.log(list)
     if (this.state.isLoading) return <Loading />
     return (
-        <div className="lectureList__list col-4">
-          <ul className="list-group">
+        <div 
+          className="lectureList__list col-4">
+          <ul 
+            className="list-group">
             {this.renderList(courses)}
           </ul>
         </div>
