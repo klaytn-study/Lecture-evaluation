@@ -1,9 +1,6 @@
 pragma solidity ^0.4.24;
 
-import "./ERC721/ERC721.sol";
-import "./ERC721/ERC721Enumerable.sol";
-
-contract LectureEvaluation is ERC721, ERC721Enumerable {
+contract LectureEvaluation {
 
     mapping (uint256 => EvaluationData[]) private _evaluationList;
     mapping (address => User) private _userList;

@@ -1,9 +1,9 @@
 {
   "name": "LectureEvaluation",
   "version": "0.0.1",
-  "description": "Klaytn-based NFT photo licensing application",
+  "description": "Klaytn-based NFT Lecture Evaluation application",
   "main": "truffle-config.js",
-  "author": "bong.kim@groundx.xyz",
+  "author": "",
   "license": "MIT",
   "directories": {
     "test": "test"
