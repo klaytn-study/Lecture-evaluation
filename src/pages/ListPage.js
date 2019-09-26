@@ -71,6 +71,7 @@ class ListPage extends Component {
         <div className="row">
           <LectureList
             courseId={this.state.courseId}
+            Test={this.handleTest}
           />
           <LectureDetail
             className="col-8"

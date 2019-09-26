@@ -16,9 +16,12 @@ class LectureList extends Component {
     super(props)
     this.state = {
       isLoading: !props.courses,
-      lectureName: "",
-      lecturePro: "",
-      courseId: "",
+      courseId: '',
+      lname: '',
+      pname: '',
+      // lectureName: "",
+      // lecturePro: "",
+      // courseId: "",
     }
   }
 
@@ -29,13 +32,18 @@ class LectureList extends Component {
     }
     return null
   }
+
+  handleTest(lname, pname, courseId) {
+    this.props.Test(lname, pname, courseId)
+  }
   renderList(lectures) {
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
         onClick={(e) => {
           this.props.getEvaluationList(lecture.id)
-          this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id })
+          this.handleTest(lecture.name, lecture.professor, lecture.id)
+          // this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id })
         }}
         className='list-group-item'
       >
@@ -51,7 +59,6 @@ class LectureList extends Component {
     console.log(list)
     if (this.state.isLoading) return <Loading />
     return (
-
         <div className="lectureList__list col-4">
           <ul className="list-group">
             {this.renderList(courses)}
