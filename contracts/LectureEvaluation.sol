@@ -8,7 +8,7 @@ contract LectureEvaluation {
 
     mapping (uint256 => Eval2Eval[]) private _eval2evalList;
 
-    event EvalUploaded(uint256 indexed tokenId, uint courseId, string title, uint score, string content, uint timestamp, uint good, uint bad);
+    // event EvalUploaded(uint256 indexed tokenId, uint courseId, string title, uint score, string content, uint timestamp, uint good, uint bad);
 
     struct User {
         address userAddress;
@@ -81,34 +81,32 @@ contract LectureEvaluation {
 
     function addEvalGood(uint _courseId, uint idx) public {
         require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 좋아요 누르기 금지긔");
-        require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
+        // require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        Eval2Eval memory newEval = Eval2Eval({
-            tokenId: _courseId,
-            writer: msg.sender,
-            isEval: true
-        });
+        // Eval2Eval memory newEval = Eval2Eval({
+        //     tokenId: _courseId,
+        //     writer: msg.sender,
+        //     isEval: true
+        // });
 
-        _eval2evalList[_courseId].push(newEval);
+        // _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].good += 1;
-        // transfer(1);
     }
 
     function addEvalBad(uint _courseId, uint idx) public {
         require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 싫어요 누르기 금지긔");
-        require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
+        // require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        Eval2Eval memory newEval = Eval2Eval({
-            tokenId: _courseId,
-            writer: msg.sender,
-            isEval: true
-        });
+        // Eval2Eval memory newEval = Eval2Eval({
+        //     tokenId: _courseId,
+        //     writer: msg.sender,
+        //     isEval: true
+        // });
 
-        _eval2evalList[_courseId].push(newEval);
+        // _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].bad += 1;
-        // transfer(1);
     }
 
     function addUser(address _address, string email) public {

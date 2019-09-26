@@ -82,7 +82,7 @@ export const uploadGood = (courseId, evaluationId) => (dispatch) => {
       })
     })
     .once('receipt', (receipt) => {
-      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      receiveKlay(cav.utils.toPeb("50", "KLAY"));
       ui.showToast({
         status: receipt.status ? 'success' : 'fail',
         message: `Received receipt`,
@@ -95,14 +95,12 @@ export const uploadGood = (courseId, evaluationId) => (dispatch) => {
         message: error.toString(),
       })
     })
-
-    // receiveKlay("0.1");
     
 }
 
 
 export const uploadBad = (courseId, evaluationId) => (dispatch) => {
-  console.log('upload Good called')
+  console.log('upload Bad called')
   console.log(courseId)
   console.log(evaluationId)
 
@@ -118,7 +116,7 @@ export const uploadBad = (courseId, evaluationId) => (dispatch) => {
       })
     })
     .once('receipt', (receipt) => {
-      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      receiveKlay(cav.utils.toPeb("50", "KLAY"));
       ui.showToast({
         status: receipt.status ? 'success' : 'fail',
         message: `Received receipt`,
