@@ -95,7 +95,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].good += 1;
-        transfer(1);
+        // transfer(1);
     }
 
     function addEvalBad(uint _courseId, uint idx) public {
@@ -111,7 +111,7 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
         _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].bad += 1;
-        transfer(1);
+        // transfer(1);
     }
 
     function addUser(address _address, string email) public {

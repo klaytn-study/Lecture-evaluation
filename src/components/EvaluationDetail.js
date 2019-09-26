@@ -105,8 +105,8 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getEvaluation: (courseId, evaluationId) => dispatch(evalActions.getEvaluation(courseId, evaluationId)),
   // getEvaluationList: (courseId) => dispatch(evalActions.getEvaluationList(courseId)),
-  uploadGood: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
-  uploadBad: (courseId, evaluationId) => dispatch(evalActions.uploadEvaluation(courseId, evaluationId)),
+  uploadGood: (courseId, evaluationId) => dispatch(evalActions.uploadGood(courseId, evaluationId)),
+  uploadBad: (courseId, evaluationId) => dispatch(evalActions.uploadBad(courseId, evaluationId)),
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(EvaluationDetail)
