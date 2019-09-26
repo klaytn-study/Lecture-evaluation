@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
+import moment from 'moment'
 import ui from 'utils/ui'
 import EvaluationDetail from './EvaluationDetail'
 
@@ -18,7 +19,7 @@ const DetailLec = ({ items, lectureName, lecturePro, courseId }) => (
       {
         items.map(({ title, timestamp }, index) => (
           <tr
-            key={title}
+            key={index}
             onClick={() => ui.showModal({
               header: 'EvaluationDetail',
               content: <EvaluationDetail
@@ -31,7 +32,7 @@ const DetailLec = ({ items, lectureName, lecturePro, courseId }) => (
           >
             <td>{index}</td>
             <td>{title}</td>
-            <td>{timestamp}</td>
+            <td>{moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')}</td>
           </tr>
         ))
       }
