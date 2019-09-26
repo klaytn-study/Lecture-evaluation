@@ -1,6 +1,9 @@
 .listPage__div {
   width: 70%;
-  height: 85%;
   margin: auto;
+  // overflow-y: auto;
+}
+.Lecture__list {
   overflow-y: auto;
+  height: 90%;
 }

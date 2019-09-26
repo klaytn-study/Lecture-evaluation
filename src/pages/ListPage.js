@@ -70,6 +70,7 @@ class ListPage extends Component {
         <UploadButton />
         <div className="row">
           <LectureList
+            className="Lecture__list"
             courseId={this.state.courseId}
             Test={this.handleTest}
           />
