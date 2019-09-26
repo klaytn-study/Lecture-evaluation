@@ -17,13 +17,14 @@ class EvaluationDetail extends Component {
   }
   static getDerivedStateFromProps = (nextProps, prevState) => {
     const isUpdatedCourse = (nextProps.content !== prevState.content) && (nextProps.content !== null)
-    const isUpdatedContent = (nextProps.evalId !== prevState.evalId) && (nextProps.evalId !== null)
+    // const isUpdatedContent = (nextProps.evalId !== prevState.evalId) && (nextProps.evalId !== null)
     if (isUpdatedCourse) {
       return { isLoading: false }
-    } else if (!isUpdatedContent) {
-      getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-      return { isLoading: false }
-    }
+    } 
+    // else if (!isUpdatedContent) {
+    //   getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
+    //   return { isLoading: false }
+    // }
     return null
   }
   componentDidMount() {

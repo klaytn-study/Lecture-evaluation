@@ -20,16 +20,12 @@ class LectureDetail extends Component {
           lectureName={lectureName}
           lecturePro={lecturePro}
           courseId={courseId}
+          // lName={lName}
+          // pName={pName}
         />
       </div>
     );
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    // selected: selected
-  };
-}
-
-export default connect(mapStateToProps)(LectureDetail);
+export default LectureDetail;

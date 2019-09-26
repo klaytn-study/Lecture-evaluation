@@ -16,9 +16,9 @@ class LectureList extends Component {
     super(props)
     this.state = {
       isLoading: !props.courses,
-      lectureName: "",
-      lecturePro: "",
-      courseId: "",
+      courseId: '',
+      lname: '',
+      pname: '',
     }
   }
 
@@ -29,13 +29,18 @@ class LectureList extends Component {
     }
     return null
   }
+
+  handleTest(lname, pname, courseId) {
+    this.props.Test(lname, pname, courseId)
+  }
   renderList(lectures) {
     return lectures.map((lecture, index) => (
       <li 
         key={index} 
-        onClick={(e) => {
+        onClick={() => {
           this.props.getEvaluationList(lecture.id)
-          this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id })
+          this.handleTest(lecture.name, lecture.professor, lecture.id)
+          // this.setState({ lectureName: lecture.name, lecturePro: lecture.professor, courseId: lecture.id, lName: lecture.lname, pName: lecture.pname })
         }}
         className='list-group-item'
       >
@@ -50,13 +55,7 @@ class LectureList extends Component {
     const { courses, list } = this.props
     console.log(list)
     if (this.state.isLoading) return <Loading />
-    //이부분 고쳐야함
-    // if (this.props.courseId) {
-    //   this.getSearchList(this.props.courseId)
-    // }
-    //
     return (
-
         <div className="lectureList__list col-4">
           <ul className="list-group">
             {this.renderList(courses)}
@@ -76,4 +75,3 @@ const mapDispatchToProps = (dispatch) => ({
   getEvaluationList: (courseId) => dispatch(getEvaluationList(courseId)),
 })
 export default connect(mapStateToProps, mapDispatchToProps)(LectureList);
-

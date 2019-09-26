@@ -5,8 +5,6 @@ import ui from 'utils/ui'
 import { evaluationParser } from 'utils/misc'
 import { 
   SET_EVALUATION,
-  UPLOAD_GOOD,
-  UPLOAD_BAD,
   GET_EVAL,
  } from './actionTypes'
 
@@ -68,20 +66,71 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
 }
 
 export const uploadGood = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).call()
-  receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
-  return dispatch({
-    type: UPLOAD_GOOD,
+  console.log('upload Good called')
+  console.log(courseId)
+  console.log(evaluationId)
+
+  LectureEvaluationContract.methods.addEvalGood(courseId, evaluationId).send({
+    from: getWallet().address,
+    gas: '20000000'
   })
+    .once('transactionHash', (txHash)=>{
+      ui.showToast({
+        status:'pending',
+        message: 'sending good',
+        txHash
+      })
+    })
+    .once('receipt', (receipt) => {
+      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      ui.showToast({
+        status: receipt.status ? 'success' : 'fail',
+        message: `Received receipt`,
+        link: receipt.transactionHash
+      })
+    })
+    .once('error', (error) => {
+      ui.showToast({
+        status: 'error',
+        message: error.toString(),
+      })
+    })
+
+    // receiveKlay("0.1");
+    
 }
 
 
 export const uploadBad = (courseId, evaluationId) => (dispatch) => {
-  LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).call()
-  receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
-  return dispatch({
-    type: UPLOAD_BAD,
+  console.log('upload Good called')
+  console.log(courseId)
+  console.log(evaluationId)
+
+  LectureEvaluationContract.methods.addEvalBad(courseId, evaluationId).send({
+    from: getWallet().address,
+    gas: '20000000'
   })
+    .once('transactionHash', (txHash)=>{
+      ui.showToast({
+        status:'pending',
+        message: 'sending bad',
+        txHash
+      })
+    })
+    .once('receipt', (receipt) => {
+      receiveKlay(cav.utils.toPeb("100", "KLAY"));
+      ui.showToast({
+        status: receipt.status ? 'success' : 'fail',
+        message: `Received receipt`,
+        link: receipt.transactionHash
+      })
+    })
+    .once('error', (error) => {
+      ui.showToast({
+        status: 'error',
+        message: error.toString(),
+      })
+    })
 }
 
 const receiveKlay = (amount) => {
