@@ -7,7 +7,7 @@ import DetailLec from '../components/LectureDetail1'
 
 class LectureDetail extends Component {
   render() {
-    const { listItems, lectureName, lecturePro, courseId } = this.props
+    const { listItems, lectureName, lecturePro, courseId ,lName,pName} = this.props
     console.log(listItems)
     if (!this.props.listItems) {
       return <div> 강의를 선택하세요  </div>;
@@ -20,6 +20,9 @@ class LectureDetail extends Component {
           lectureName={lectureName}
           lecturePro={lecturePro}
           courseId={courseId}
+          lName={lName}
+          pName={pName}
+
         />
       </div>
     );

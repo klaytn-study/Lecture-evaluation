@@ -26,6 +26,9 @@ const DetailLec = ({ items, lectureName, lecturePro, courseId }) => (
                 evalId={index}
                 lecName={lectureName}
                 professor={lecturePro}
+                lName={lName}
+                pName={pName}
+
               />,
             })}
           >
