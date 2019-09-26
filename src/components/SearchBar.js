@@ -111,6 +111,7 @@ class SearchBar extends React.Component {
               className="form-control-search input-group"
               placeholder="교과목이름"
               value={this.state.text}
+              style={{paddingLeft : '1em'}}
             />
             <div className="input-group-append">
               <button
