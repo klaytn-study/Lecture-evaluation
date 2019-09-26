@@ -19,8 +19,6 @@ const setEvaluationContent = (evaluD) => ({
   payload: { evaluD },
 })
 
-
-
 export const getEvaluationList = (courseId) => (dispatch) => {
   LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => {
@@ -86,7 +84,7 @@ export const uploadBad = (courseId, evaluationId) => (dispatch) => {
   })
 }
 
-const receiveKlay = (amount) => (dispatch) => {
+const receiveKlay = (amount) => {
   console.log("receiveKlay");
   LectureEvaluationContract.methods.transfer(amount).send({
     from: getWallet().address,
@@ -124,6 +122,7 @@ export const uploadEvaluation = (courseId, title, score, content) => (dispatch) 
       })
     })
     .once('receipt', (receipt) => {
+      receiveKlay(cav.utils.toPeb("100", "KLAY"));
       ui.showToast({
         status: receipt.status ? 'success' : 'fail',
         message: `Received receipt! It means your transaction is in klaytn block (upload evaluation)`,
