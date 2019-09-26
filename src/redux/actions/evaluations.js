@@ -24,7 +24,7 @@ export const getEvaluationList = (courseId) => (dispatch) => {
         const evaluations = []
         console.log('여기는 actions', evaluationNum)
         for (let i = 0; i < evaluationNum; i++) {
-          const evaluation = LectureEvaluationContract.methods.getEvaluation(courseId, i, true).call()
+          const evaluation = LectureEvaluationContract.methods.getEvaluation(courseId, i).call()
           evaluations.push(evaluation)
         }
         return Promise.all(evaluations)
@@ -54,7 +54,7 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
     })
     LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => { console.log(evaluationNum)})
-    LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId, true).call()
+    LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId).call()
       .then((evaluation) => dispatch(setEvaluationContent(evaluationParser(evaluation))))
   })
   .once('error', (error) => {

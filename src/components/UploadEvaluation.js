@@ -103,7 +103,7 @@ class UploadEvaluation extends Component {
           value={evaluation}
           label="강의평가"
           onChange={this.handleInputChange}
-          placeholder="강의평가를 작성해주세요. 보다 자세히 적을 수록 많은 사람들의 코인을 "
+          placeholder="강의평가를 작성해주세요."
           required
         />
         <Button
