@@ -19,6 +19,8 @@ const setEvaluationContent = (evaluD) => ({
   payload: { evaluD },
 })
 
+
+
 export const getEvaluationList = (courseId) => (dispatch) => {
   LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => {
@@ -105,32 +107,38 @@ const receiveKlay = (amount) => (dispatch) => {
 export const uploadEvaluation = (courseId, title, score, content) => (dispatch) => {
 
   console.log('uploadEvaluation called')
-  
+  console.log(courseId)
+  console.log(title)
+  console.log(score)
+  console.log(content)
+
   LectureEvaluationContract.methods.uploadEvaluation(courseId, title, score, content).send({
     from: getWallet().address,
-    gas: '200000000'
+    gas: '20000000',
   })
-      .once('transactionHash', (txHash)=> {
-        ui.showToast({
-          status: 'pending',
-          message: `sending evaluation`,
-          txHash,
-        })
-      .once('receipt', (receipt)=> {
-        ui.showToast({
-          status: receipt.status ? 'success' : 'fail',
-          message: 'receive eval?'
-        })
-        tokenId = receipt.events.EvaluationUploaded.returnValues[0]
-        //dispatch(updateFeed(tokenId))
+    .once('transactionHash', (txHash)=>{
+      ui.showToast({
+        status:'pending',
+        message: `sending a transaction .. (upload evaluation)`,
+        txHash,
       })
-      .once('error', (error)=> {
-        ui.showToast({
-          status: 'error',
-          message: error.toString(),
-        })
+    })
+    .once('receipt', (receipt) => {
+      ui.showToast({
+        status: receipt.status ? 'success' : 'fail',
+        message: `Received receipt! It means your transaction is in klaytn block (upload evaluation)`,
+        link: receipt.transactionHash
+      })
+    })
+    .once('error', (error) => {
+      ui.showToast({
+        status: 'error',
+        message: error.toString(),
       })
     })
 
-  // receiveKlay(cav.utils.toPeb("0.5", "KLAY"));
+    receiveKlay("0.1");
+
+
+  
 }

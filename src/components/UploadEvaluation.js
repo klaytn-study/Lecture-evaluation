@@ -56,7 +56,7 @@ class UploadEvaluation extends Component {
       } else {
         const { courseId, title, score, evaluation } = this.state
         this.props.uploadEvaluation(courseId, title, score, evaluation)
-        console.log('보내짐!')
+        // console.log('보내짐!')
         ui.hideModal()
       }
     }

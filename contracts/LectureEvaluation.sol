@@ -161,6 +161,6 @@ contract LectureEvaluation is ERC721, ERC721Enumerable {
 
         _evaluationList[_courseId].push(newEvaluationData);
 
-        emit EvalUploaded(tokenId, _courseId, _title, _score, _content, now, 0, 0);
+        // emit EvalUploaded(tokenId, _courseId, _title, _score, _content, now, 0, 0);
     }
 }
