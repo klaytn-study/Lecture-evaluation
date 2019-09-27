@@ -55,7 +55,10 @@ export const getEvaluation = (courseId, evaluationId) => (dispatch) => {
     LectureEvaluationContract.methods.getEvaluationNum(courseId).call()
       .then((evaluationNum) => { console.log(evaluationNum)})
     LectureEvaluationContract.methods.getEvaluation(courseId, evaluationId).call()
-      .then((evaluation) => dispatch(setEvaluationContent(evaluationParser(evaluation))))
+      .then((evaluation) => {
+        console.log(evaluation)
+        dispatch(setEvaluationContent(evaluationParser(evaluation)))
+      })
   })
   .once('error', (error) => {
     ui.showToast({
