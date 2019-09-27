@@ -41,8 +41,8 @@ class DetailLec extends Component {
               <td>{title}</td>
               <td>{moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')}</td>
               <td>
-                이 평가 유용함!!!: {good}<br/>
-                이 평가 쓰레기임ㅠㅠㅠ: {bad}
+                유용해요 : {good}<br/>
+                별로예요 : {bad}
               </td>
             </tr>
           ))
