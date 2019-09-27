@@ -75,18 +75,25 @@ class EvaluationDetail extends Component {
           <div className="title" name="title">
             {content.title}
           </div>
+
+          <br></br>
+          <div className="row">
+            <div className="col-3 evalGood" name="Good">
+              도움이 됐어요!: {content.good}
+            </div>
+            <div className="col-3 evalGood" name="Bad">
+              이 평가 쓰레기...:{content.bad}
+            </div>
+          </div>
+          <br></br>
+         
           <label className="Input__label" htmlFor="eval">
             강의평가
           </label>
           <div className="eval" name="eval">
             {content.content}
           </div>
-          <div className="evalGood" name="Good">
-            이 평가가 유용했음!: {content.good}
-          </div>
-          <div className="evalBad" name="Bad">
-            이 평가 완전 쓰레기임...:{content.bad}
-          </div>
+          
           <div className="row">
             <button className="col Button__exp good" onClick={this.btnClickEvent}>유용했다!</button>
             {/* <button className="col Button__exp soso" onClick={this.btnClickEvent}>그냥그래~</button> */}
