@@ -19,7 +19,7 @@ class DetailLec extends Component {
           <th>Index</th>
           <th>Tittle</th>
           <th>Date</th>
-          <th>평가</th>
+          <th>구매자평</th>
         </tr>
       </thead>
       <tbody>

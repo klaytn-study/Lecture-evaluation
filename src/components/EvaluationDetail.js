@@ -77,6 +77,9 @@ class EvaluationDetail extends Component {
           </div>
 
           <br></br>
+          <label className="Input__label" htmlFor="EvalGB">
+            이 평가의 신뢰도
+          </label>
           <div className="row">
             <div className="col-3 evalGood" name="Good">
               도움이 됐어요!: {content.good}
