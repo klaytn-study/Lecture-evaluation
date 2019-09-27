@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import './LectureDetail.scss';
 import { Table } from 'react-bootstrap'
 import moment from 'moment'
+import Emoji from './Emoji'
 import ui from 'utils/ui'
 import EvaluationDetail from './EvaluationDetail'
 
@@ -41,6 +42,8 @@ class DetailLec extends Component {
               <td>{title}</td>
               <td>{moment(timestamp * 1000).format('YYYY-MM-DD HH:mm:ss')}</td>
               <td>
+                {/* <Emoji symbol="👍" label="good"/> : {good}<br/>
+                <Emoji symbol="👎" label="bad"/> : {bad} */}
                 유용해요 : {good}<br/>
                 별로예요 : {bad}
               </td>

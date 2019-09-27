@@ -21,22 +21,16 @@ class EvaluationDetail extends Component {
     if (isUpdatedCourse) {
       return { isLoading: false }
     } 
-    // else if (!isUpdatedContent) {
-    //   getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-    //   return { isLoading: false }
-    // }
     return null
   }
   componentDidMount() {
     const { content, getEvaluation } = this.props
     getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
-
-    // if (!content) getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
   }
   btnClickEvent = (e) => {
     if (e.target.className.indexOf('good') != -1) {
       console.log('good')
-      console.log('lec : ' + this.props.id + ' eval : ' + this.props.evalId)
+      this.setState({cgood: content.good+1 , cbad: content.bad+1 })
       this.props.uploadGood(this.props.id, this.props.evalId);
     } else {
       console.log('bad')
@@ -46,12 +40,8 @@ class EvaluationDetail extends Component {
   }
   render() {
     const { content, lecName, professor } = this.props
-    console.log("cousreID ", parseInt(this.props.id, 10));
-    console.log("evaluationID ", parseInt(this.props.evalId, 10));
-    // getEvaluation(parseInt(this.props.id, 10), parseInt(this.props.evalId, 10))
 
     if (this.state.isLoading) return <Loading />
-    // const { content } = this.props
     return (
       <div className="EvaluationDetai">
         <button className="Button__campus" disabled="true">인문캠퍼스</button>
@@ -77,7 +67,7 @@ class EvaluationDetail extends Component {
           </div>
 
           <br></br>
-          <label className="Input__label" htmlFor="EvalGB">
+          {/* <label className="Input__label" htmlFor="EvalGB">
             이 평가의 신뢰도
           </label>
           <div className="row">
@@ -88,7 +78,7 @@ class EvaluationDetail extends Component {
               이 평가 쓰레기...: {content.bad}
             </div>
           </div>
-          <br></br>
+          <br></br> */}
          
           <label className="Input__label" htmlFor="eval">
             강의평가
@@ -98,9 +88,9 @@ class EvaluationDetail extends Component {
           </div>
           
           <div className="row">
-            <button className="col Button__exp good" onClick={this.btnClickEvent}>유용했다!</button>
+            <button className="col Button__exp good" onClick={this.btnClickEvent}>유용했다! {content.good}</button>
             {/* <button className="col Button__exp soso" onClick={this.btnClickEvent}>그냥그래~</button> */}
-            <button className="col Button__exp bad" onClick={this.btnClickEvent}>너무 별로야</button>
+            <button className="col Button__exp bad" onClick={this.btnClickEvent}>너무 별로야 {content.bad}</button>
           </div>
           <label className="Explanation__label1">
             평가를 해주시면 &quot;0.5 klay&quot;을 돌려드려요!

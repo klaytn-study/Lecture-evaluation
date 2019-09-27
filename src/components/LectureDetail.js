@@ -20,8 +20,6 @@ class LectureDetail extends Component {
           lectureName={lectureName}
           lecturePro={lecturePro}
           courseId={courseId}
-          // lName={lName}
-          // pName={pName}
         />
       </div>
     );
