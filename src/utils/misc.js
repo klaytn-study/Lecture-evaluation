@@ -37,6 +37,8 @@ export const evaluationParser = (evaluation) => {
     1: 'score',
     2: 'content',
     3: 'timestamp',
+    4: 'good',
+    5: 'bad',
   }
 
   if (!isArray(evaluation)) {
