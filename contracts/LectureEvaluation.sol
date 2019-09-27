@@ -66,6 +66,8 @@ contract LectureEvaluation {
         _evaluationList[5778].push(e3);
         _evaluationList[5668].push(e4);
         _evaluationList[5668].push(e5);
+
+        // _evaluationList[5778][2].good +=1;
     }
 
     function getBalance() public view returns (uint) {
@@ -83,12 +85,7 @@ contract LectureEvaluation {
         require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 좋아요 누르기 금지긔");
         // require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        // Eval2Eval memory newEval = Eval2Eval({
-        //     tokenId: _courseId,
-        //     writer: msg.sender,
-        //     isEval: true
-        // });
-
+        // Eval2Eval memory newEval = Eval2Eval(_courseId, msg.sender, true);
         // _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].good += 1;
@@ -98,12 +95,7 @@ contract LectureEvaluation {
         require(msg.sender != _evaluationList[_courseId][idx].writer, "내가 쓴 평가에 싫어요 누르기 금지긔");
         // require(_eval2evalList[_courseId][idx].isEval, "이미 평가한 항목입니다.");
 
-        // Eval2Eval memory newEval = Eval2Eval({
-        //     tokenId: _courseId,
-        //     writer: msg.sender,
-        //     isEval: true
-        // });
-
+        // Eval2Eval memory newEval = Eval2Eval(_courseId, msg.sender, true);
         // _eval2evalList[_courseId].push(newEval);
 
         _evaluationList[_courseId][idx].bad += 1;
