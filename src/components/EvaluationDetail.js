@@ -82,7 +82,7 @@ class EvaluationDetail extends Component {
               도움이 됐어요!: {content.good}
             </div>
             <div className="col-3 evalGood" name="Bad">
-              이 평가 쓰레기...:{content.bad}
+              이 평가 쓰레기...: {content.bad}
             </div>
           </div>
           <br></br>
