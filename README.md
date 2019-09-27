@@ -31,6 +31,7 @@
   - 클레이튼 보상
     - transfer(int amount) -> bool 리턴
   
-*windows의 경우 package.json의 scripts부분에 모두 cross-env를 붙여주세요
--예시: (mac) "build:local": "ENV=LOCAL webpack --config webpack.prod.config.js"
+
+*windows의 경우 package.json의 scripts부분에 모두 cross-env를 붙여주세요 </br> 
+-예시: (mac) "build:local": "ENV=LOCAL webpack --config webpack.prod.config.js"</br>
        (windows) "build:local": "cross-env ENV=LOCAL webpack --config webpack.prod.config.js"
