@@ -1,5 +1,9 @@
 # 강평강평
 
+Klaytn tutorials의 Klaystagram을 기반으로 개발하였습니다.
+
+<br/>
+
 - 회원 가입
   - 이메일 보내기
     - sendEmail(string email) -> int number 리턴함
